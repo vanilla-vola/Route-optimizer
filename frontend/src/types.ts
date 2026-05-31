@@ -37,3 +37,49 @@ export interface OptimizeRequest {
   round_trip?: boolean;
   mode?: string;
 }
+
+export interface CompareResultItem {
+  provider_id: string;
+  provider_label: string;
+  status: string;
+  order?: number[] | null;
+  ordered_stops?: OrderedStop[] | null;
+  total_duration_s?: number | null;
+  total_distance_m?: number | null;
+  vs_baseline_duration_pct?: number | null;
+  message?: string;
+  manual_url?: string | null;
+  is_baseline?: boolean;
+}
+
+export interface CompareResponse {
+  stop_count: number;
+  mode: string;
+  round_trip: boolean;
+  profile_source: string;
+  results: CompareResultItem[];
+}
+
+export interface BenchmarkResultItem {
+  algorithm_id: string;
+  algorithm_label: string;
+  paper: string;
+  year: number;
+  category: string;
+  status: string;
+  order?: number[] | null;
+  total_duration_s?: number | null;
+  total_distance_m?: number | null;
+  vs_best_duration_pct?: number | null;
+  notes?: string;
+  error?: string;
+}
+
+export interface BenchmarkResponse {
+  stop_count: number;
+  mode: string;
+  round_trip: boolean;
+  profile_source: string;
+  results: BenchmarkResultItem[];
+  best_algorithm_id?: string | null;
+}

@@ -30,6 +30,8 @@ class Settings(BaseSettings):
     dcir_timezone: str = "Asia/Kolkata"
     dcir_depart_hours: str = "8,13,18"
     dcir_refresh_legs: bool = False
+    ors_api_key: str = ""
+    compare_timeout_s: int = 45
     host: str = "0.0.0.0"
     port: int = 8000
 

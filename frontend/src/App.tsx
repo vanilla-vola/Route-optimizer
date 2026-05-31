@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
-import { checkHealth, optimizeRoute, reverseGeocode } from "./api/client";
+import {
+  benchmarkAlgorithms,
+  checkHealth,
+  compareRoutes,
+  optimizeRoute,
+  reverseGeocode,
+} from "./api/client";
+import { AlgorithmBenchmark } from "./components/AlgorithmBenchmark";
 import { MapPanel } from "./components/MapPanel";
+import { RouteComparison } from "./components/RouteComparison";
 import { RouteSequence } from "./components/RouteSequence";
 import { StopList } from "./components/StopList";
 import { StopSearchBar } from "./components/StopSearchBar";
 import { TransportModeBar } from "./components/TransportModeBar";
-import type { OrderedStop, Stop } from "./types";
+import type { BenchmarkResponse, CompareResponse, OrderedStop, Stop } from "./types";
 import type { TransportModeId } from "./transportModes";
 
 export default function App() {
@@ -19,6 +27,10 @@ export default function App() {
     profileSource?: string | null;
   } | null>(null);
   const [loading, setLoading] = useState(false);
+  const [compareLoading, setCompareLoading] = useState(false);
+  const [benchmarkLoading, setBenchmarkLoading] = useState(false);
+  const [compareResult, setCompareResult] = useState<CompareResponse | null>(null);
+  const [benchmarkResult, setBenchmarkResult] = useState<BenchmarkResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [apiOnline, setApiOnline] = useState<boolean | null>(null);
   const [roundTrip, setRoundTrip] = useState(true);
@@ -33,6 +45,8 @@ export default function App() {
     setRouteOrder(null);
     setOrderedStops(null);
     setSummary(null);
+    setCompareResult(null);
+    setBenchmarkResult(null);
   };
 
   const addStop = (stop: Stop) => {
@@ -111,6 +125,43 @@ export default function App() {
     }
   };
 
+  const handleCompare = async () => {
+    if (stops.length < 2) return;
+    setCompareLoading(true);
+    setError(null);
+    try {
+      const result = await compareRoutes({
+        stops,
+        round_trip: roundTrip,
+        mode: transportMode,
+      });
+      setCompareResult(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Comparison failed");
+    } finally {
+      setCompareLoading(false);
+    }
+  };
+
+  const handleBenchmark = async () => {
+    if (stops.length < 2) return;
+    setBenchmarkLoading(true);
+    setError(null);
+    try {
+      const result = await benchmarkAlgorithms({
+        stops,
+        round_trip: roundTrip,
+        mode: transportMode,
+        time_limit_s: 8,
+      });
+      setBenchmarkResult(result);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Benchmark failed");
+    } finally {
+      setBenchmarkLoading(false);
+    }
+  };
+
   const onRoundTripChange = (value: boolean) => {
     setRoundTrip(value);
     clearRoute();
@@ -168,6 +219,10 @@ export default function App() {
             />
           )}
 
+          {compareResult && <RouteComparison data={compareResult} />}
+
+          {benchmarkResult && <AlgorithmBenchmark data={benchmarkResult} />}
+
           {error && <p className="error">{error}</p>}
 
           <div className="actions">
@@ -178,6 +233,20 @@ export default function App() {
               onClick={() => void handleOptimize()}
             >
               {loading ? "Optimizing…" : "Optimize route"}
+            </button>
+            <button
+              type="button"
+              disabled={stops.length < 2 || compareLoading}
+              onClick={() => void handleCompare()}
+            >
+              {compareLoading ? "Comparing…" : "Compare apps"}
+            </button>
+            <button
+              type="button"
+              disabled={stops.length < 2 || benchmarkLoading}
+              onClick={() => void handleBenchmark()}
+            >
+              {benchmarkLoading ? "Benchmarking…" : "Benchmark algorithms"}
             </button>
             <button type="button" onClick={clearStops} disabled={stops.length === 0}>
               Clear

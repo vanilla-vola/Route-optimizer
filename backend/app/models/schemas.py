@@ -58,3 +58,94 @@ class OptimizeResponse(BaseModel):
     round_trip: bool
     solver: str = "ortools-gls"
     profile_source: Optional[str] = None
+
+
+class AlgorithmInfo(BaseModel):
+    id: str
+    label: str
+    paper: str
+    year: int
+    category: str
+
+
+class CompareProviderInfo(BaseModel):
+    id: str
+    label: str
+    kind: str
+    max_stops: Optional[int] = None
+    requires_key: str = ""
+
+
+class CompareRequest(BaseModel):
+    stops: list[Stop] = Field(..., min_length=2)
+    start_fixed: bool = False
+    end_fixed: bool = False
+    round_trip: bool = True
+    mode: str = TransportMode.DRIVING.value
+    provider_ids: Optional[list[str]] = None
+
+    @field_validator("mode")
+    @classmethod
+    def validate_mode(cls, value: str) -> str:
+        return normalize_mode(value)
+
+
+class CompareResultItem(BaseModel):
+    provider_id: str
+    provider_label: str
+    status: str
+    order: Optional[list[int]] = None
+    ordered_stops: Optional[list[OrderedStop]] = None
+    total_duration_s: Optional[int] = None
+    total_distance_m: Optional[int] = None
+    vs_baseline_duration_pct: Optional[float] = None
+    message: str = ""
+    manual_url: Optional[str] = None
+    is_baseline: bool = False
+
+
+class CompareResponse(BaseModel):
+    stop_count: int
+    mode: str
+    round_trip: bool
+    profile_source: str
+    results: list[CompareResultItem]
+
+
+class BenchmarkRequest(BaseModel):
+    stops: list[Stop] = Field(..., min_length=2)
+    start_fixed: bool = False
+    end_fixed: bool = False
+    round_trip: bool = True
+    mode: str = TransportMode.DRIVING.value
+    algorithm_ids: Optional[list[str]] = None
+    time_limit_s: int = Field(default=8, ge=2, le=30)
+
+    @field_validator("mode")
+    @classmethod
+    def validate_mode(cls, value: str) -> str:
+        return normalize_mode(value)
+
+
+class BenchmarkResultItem(BaseModel):
+    algorithm_id: str
+    algorithm_label: str
+    paper: str
+    year: int
+    category: str
+    status: str
+    order: Optional[list[int]] = None
+    total_duration_s: Optional[int] = None
+    total_distance_m: Optional[int] = None
+    vs_best_duration_pct: Optional[float] = None
+    notes: str = ""
+    error: str = ""
+
+
+class BenchmarkResponse(BaseModel):
+    stop_count: int
+    mode: str
+    round_trip: bool
+    profile_source: str
+    results: list[BenchmarkResultItem]
+    best_algorithm_id: Optional[str] = None
