@@ -150,7 +150,7 @@ async def benchmark_algorithms_endpoint(
         )
 
     try:
-        rows, profile_source = await benchmark_algorithms(
+        rows, profile_source, best_nominal, best_realized = await benchmark_algorithms(
             request.stops,
             settings=settings,
             mode=request.mode,
@@ -164,7 +164,6 @@ async def benchmark_algorithms_endpoint(
         raise HTTPException(status_code=502, detail=str(exc)) from exc
 
     items = [BenchmarkResultItem(**row) for row in rows]
-    best_id = items[0].algorithm_id if items and items[0].status == "ok" else None
 
     return BenchmarkResponse(
         stop_count=len(request.stops),
@@ -172,5 +171,6 @@ async def benchmark_algorithms_endpoint(
         round_trip=request.round_trip,
         profile_source=profile_source,
         results=items,
-        best_algorithm_id=best_id,
+        best_algorithm_id=best_nominal,
+        best_realized_algorithm_id=best_realized,
     )

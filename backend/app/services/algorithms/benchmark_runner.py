@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-import asyncio
 from typing import Optional
 
 from app.config import Settings
 from app.models.schemas import Stop
 from app.services.algorithms.base import AlgorithmInput
+from app.services.algorithms.metrics import realized_duration_s
 from app.services.algorithms.registry import list_algorithms, run_algorithm
 from app.services.coordinates import to_mapbox_coords
 from app.services.matrix import build_matrix
@@ -25,6 +25,49 @@ async def _run_one(
         return algorithm_id, None, str(exc)
 
 
+def _apply_vs_best(
+    rows: list[dict],
+    *,
+    duration_key: str,
+    pct_key: str,
+) -> None:
+    best: Optional[int] = None
+    for row in rows:
+        if row.get("status") != "ok":
+            continue
+        val = row.get(duration_key)
+        if val is None:
+            continue
+        if best is None or val < best:
+            best = val
+
+    if best is None or best <= 0:
+        return
+
+    for row in rows:
+        if row.get("status") != "ok":
+            continue
+        val = row.get(duration_key)
+        if val is None:
+            continue
+        row[pct_key] = round(((val - best) / best) * 100.0, 1)
+
+
+def _best_id_for(rows: list[dict], duration_key: str) -> Optional[str]:
+    best_id: Optional[str] = None
+    best_val: Optional[int] = None
+    for row in rows:
+        if row.get("status") != "ok":
+            continue
+        val = row.get(duration_key)
+        if val is None:
+            continue
+        if best_val is None or val < best_val:
+            best_val = val
+            best_id = row["algorithm_id"]
+    return best_id
+
+
 async def benchmark_algorithms(
     stops: list[Stop],
     *,
@@ -34,8 +77,8 @@ async def benchmark_algorithms(
     start_fixed: bool,
     end_fixed: bool,
     algorithm_ids: Optional[list[str]] = None,
-    time_limit_s: int = 8,
-) -> tuple[list[dict], str]:
+    time_limit_s: int = 12,
+) -> tuple[list[dict], str, Optional[str], Optional[str]]:
     coords = tuple(to_mapbox_coords([{"lat": s.lat, "lng": s.lng} for s in stops]))
     distances, durations = await build_matrix(coords, settings=settings, profile=mode)
     bundle = await build_matrix_bundle(
@@ -59,13 +102,11 @@ async def benchmark_algorithms(
     )
 
     ids = algorithm_ids or [m.id for m in list_algorithms()]
-    raw = await asyncio.gather(*[_run_one(aid, algo_input) for aid in ids])
-
     rows: list[dict] = []
-    best_id: Optional[str] = None
-    best_dur: Optional[int] = None
 
-    for aid, result, error in raw:
+    # Sequential runs — fair CPU time per algorithm (no parallel OR-Tools contention).
+    for aid in ids:
+        _, result, error = await _run_one(aid, algo_input)
         meta = next(m for m in list_algorithms() if m.id == aid)
         if error or result is None:
             rows.append(
@@ -81,10 +122,11 @@ async def benchmark_algorithms(
             )
             continue
 
-        dur = result.total_duration_s
-        if best_dur is None or dur < best_dur:
-            best_dur = dur
-            best_id = meta.id
+        realized = realized_duration_s(
+            result.order,
+            bundle.profile_matrices,
+            round_trip=round_trip,
+        )
 
         rows.append(
             {
@@ -96,18 +138,29 @@ async def benchmark_algorithms(
                 "status": "ok",
                 "order": result.order,
                 "total_duration_s": result.total_duration_s,
+                "realized_duration_s": realized,
                 "total_distance_m": result.total_distance_m,
                 "notes": result.notes,
             }
         )
 
-    if best_dur is not None and best_dur > 0:
-        for row in rows:
-            if row.get("status") == "ok" and row.get("total_duration_s") is not None:
-                pct = ((row["total_duration_s"] - best_dur) / best_dur) * 100.0
-                row["vs_best_duration_pct"] = round(pct, 1)
+    _apply_vs_best(
+        rows,
+        duration_key="total_duration_s",
+        pct_key="vs_best_duration_pct",
+    )
+    _apply_vs_best(
+        rows,
+        duration_key="realized_duration_s",
+        pct_key="vs_best_realized_pct",
+    )
 
     rows.sort(
-        key=lambda r: r.get("total_duration_s") if r.get("total_duration_s") is not None else 10**12
+        key=lambda r: r.get("total_duration_s")
+        if r.get("total_duration_s") is not None
+        else 10**12
     )
-    return rows, bundle.profile_source
+
+    best_nominal = _best_id_for(rows, "total_duration_s")
+    best_realized = _best_id_for(rows, "realized_duration_s")
+    return rows, bundle.profile_source, best_nominal, best_realized

@@ -28,6 +28,7 @@ export interface OptimizeResponse {
   round_trip: boolean;
   solver?: string;
   profile_source?: string | null;
+  realized_duration_s?: number | null;
 }
 
 export interface OptimizeRequest {
@@ -90,8 +91,10 @@ export interface BenchmarkResultItem {
   status: string;
   order?: number[] | null;
   total_duration_s?: number | null;
+  realized_duration_s?: number | null;
   total_distance_m?: number | null;
   vs_best_duration_pct?: number | null;
+  vs_best_realized_pct?: number | null;
   notes?: string;
   error?: string;
 }
@@ -103,4 +106,6 @@ export interface BenchmarkResponse {
   profile_source: string;
   results: BenchmarkResultItem[];
   best_algorithm_id?: string | null;
+  best_realized_algorithm_id?: string | null;
+  ranking_note?: string;
 }

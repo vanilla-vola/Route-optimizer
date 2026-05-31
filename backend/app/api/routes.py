@@ -11,6 +11,7 @@ from app.services.matrix import build_matrix
 from app.services.dcir import LegRefreshConfig, solve_dcir_hybrid
 from app.services.matrix_profiles import build_matrix_bundle
 from app.services.optimizer import solve_route
+from app.services.profiles import build_profile_matrices
 from app.services.geocoding import enrich_stop_names, reverse_geocode, search_places
 from app.services.route_builder import build_optimize_response
 
@@ -66,6 +67,7 @@ async def optimize_route(
     profile = request.mode or settings.matrix_profile
 
     profile_source: Optional[str] = None
+    profile_matrices = None
     try:
         distances, durations = await build_matrix(
             coords,
@@ -83,6 +85,7 @@ async def optimize_route(
             distances = bundle.distances
             durations = bundle.durations
             profile_source = bundle.profile_source
+            profile_matrices = bundle.profile_matrices
 
             leg_refresh = None
             if settings.dcir_refresh_legs and settings.mapbox_access_token:
@@ -113,6 +116,7 @@ async def optimize_route(
                 time_limit_s=settings.solver_time_limit_s,
             )
             solver_name = "ortools-gls"
+            profile_matrices = build_profile_matrices(durations)
     except MatrixError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     except OptimizationError as exc:
@@ -128,5 +132,6 @@ async def optimize_route(
         round_trip=request.round_trip,
         mode=profile,
         solver=solver_name,
-        profile_source=profile_source if settings.use_dcir else None,
+        profile_source=profile_source if settings.use_dcir else "synthetic",
+        profile_matrices=profile_matrices,
     )

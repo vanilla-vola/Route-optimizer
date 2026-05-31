@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/models.dart';
 import '../models/transport_modes.dart';
+import 'route_metrics_panel.dart';
 
 class RouteSequencePanel extends StatelessWidget {
   const RouteSequencePanel({
@@ -10,27 +11,18 @@ class RouteSequencePanel extends StatelessWidget {
     required this.totalDistanceM,
     required this.totalDurationS,
     required this.mode,
+    this.realizedDurationS,
+    this.solver,
+    this.profileSource,
   });
 
   final List<OrderedStopDto> orderedStops;
   final int totalDistanceM;
   final int totalDurationS;
+  final int? realizedDurationS;
   final String mode;
-
-  String _formatDistance(int meters) {
-    if (meters >= 1000) {
-      return '${(meters / 1000).toStringAsFixed(2)} km';
-    }
-    return '$meters m';
-  }
-
-  String _formatDuration(int seconds) {
-    final minutes = seconds / 60;
-    if (minutes >= 60) {
-      return '${(minutes / 60).toStringAsFixed(1)} hr';
-    }
-    return '${minutes.toStringAsFixed(1)} min';
-  }
+  final String? solver;
+  final String? profileSource;
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +42,13 @@ class RouteSequencePanel extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
             ),
-            const SizedBox(height: 4),
-            Text(
-              '${_formatDistance(totalDistanceM)} · ${_formatDuration(totalDurationS)}',
-              style: TextStyle(color: Colors.green.shade900),
+            const SizedBox(height: 8),
+            RouteMetricsPanel(
+              nominalDurationS: totalDurationS,
+              realizedDurationS: realizedDurationS,
+              totalDistanceM: totalDistanceM,
+              solver: solver,
+              profileSource: profileSource,
             ),
             const SizedBox(height: 12),
             Text(

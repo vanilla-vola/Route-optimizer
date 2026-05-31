@@ -6,6 +6,7 @@ import '../models/solver_models.dart';
 import '../providers/app_providers.dart';
 import '../widgets/algorithm_picker.dart';
 import '../widgets/map_panel.dart';
+import '../widgets/metrics_sheets.dart';
 import '../widgets/route_sequence_panel.dart';
 import '../widgets/stop_list.dart';
 import '../widgets/stop_search_bar.dart';
@@ -20,9 +21,14 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   bool _loading = false;
+  bool _benchmarkLoading = false;
+  bool _compareLoading = false;
   String? _error;
   int? _totalDistanceM;
   int? _totalDurationS;
+  int? _realizedDurationS;
+  String? _profileSource;
+  String? _solverLabel;
 
   Future<void> _optimize() async {
     final stops = ref.read(stopsProvider);
@@ -59,6 +65,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       setState(() {
         _totalDistanceM = result.totalDistanceM;
         _totalDurationS = result.totalDurationS;
+        _realizedDurationS = result.realizedDurationS;
+        _profileSource = result.profileSource;
+        _solverLabel = result.solver;
       });
 
       if (mounted) {
@@ -72,6 +81,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         _error = formatApiError(error);
         _totalDistanceM = null;
         _totalDurationS = null;
+        _realizedDurationS = null;
+        _profileSource = null;
+        _solverLabel = null;
       });
       ref.read(routeOrderProvider.notifier).state = null;
       ref.read(orderedStopsProvider.notifier).state = null;
@@ -90,7 +102,71 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       _error = null;
       _totalDistanceM = null;
       _totalDurationS = null;
+      _realizedDurationS = null;
+      _profileSource = null;
+      _solverLabel = null;
     });
+  }
+
+  Future<void> _benchmark() async {
+    final stops = ref.read(stopsProvider);
+    if (stops.length < 2) return;
+
+    setState(() {
+      _benchmarkLoading = true;
+      _error = null;
+    });
+
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Running all algorithms — this usually takes 1–3 minutes…',
+          ),
+          duration: Duration(seconds: 4),
+        ),
+      );
+    }
+
+    try {
+      final result = await ref.read(apiClientProvider).benchmarkAlgorithms(
+            stops,
+            roundTrip: ref.read(roundTripProvider),
+            mode: ref.read(transportModeProvider),
+          );
+      if (mounted) {
+        await showBenchmarkSheet(context, data: result);
+      }
+    } catch (error) {
+      setState(() => _error = formatApiError(error));
+    } finally {
+      if (mounted) setState(() => _benchmarkLoading = false);
+    }
+  }
+
+  Future<void> _compare() async {
+    final stops = ref.read(stopsProvider);
+    if (stops.length < 2) return;
+
+    setState(() {
+      _compareLoading = true;
+      _error = null;
+    });
+
+    try {
+      final result = await ref.read(apiClientProvider).compareRoutes(
+            stops,
+            roundTrip: ref.read(roundTripProvider),
+            mode: ref.read(transportModeProvider),
+          );
+      if (mounted) {
+        await showCompareSheet(context, data: result);
+      }
+    } catch (error) {
+      setState(() => _error = formatApiError(error));
+    } finally {
+      if (mounted) setState(() => _compareLoading = false);
+    }
   }
 
   void _onRoundTripChanged(bool value) {
@@ -100,6 +176,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     setState(() {
       _totalDistanceM = null;
       _totalDurationS = null;
+      _realizedDurationS = null;
+      _profileSource = null;
+      _solverLabel = null;
     });
   }
 
@@ -209,7 +288,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             orderedStops: orderedStops,
                             totalDistanceM: _totalDistanceM!,
                             totalDurationS: _totalDurationS!,
+                            realizedDurationS: _realizedDurationS,
                             mode: mode,
+                            solver: _solverLabel,
+                            profileSource: _profileSource,
                           ),
                         ),
                       if (_error != null)
@@ -235,31 +317,84 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     top: false,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
-                      child: Row(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Expanded(
-                            child: FilledButton.icon(
-                              onPressed:
-                                  stops.length < 2 || _loading ? null : _optimize,
-                              icon: _loading
-                                  ? const SizedBox(
-                                      width: 18,
-                                      height: 18,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                      ),
-                                    )
-                                  : const Icon(Icons.route),
-                              label: Text(
-                                _loading ? 'Optimizing…' : 'Optimize route',
+                          Row(
+                            children: [
+                              Expanded(
+                                child: OutlinedButton.icon(
+                                  onPressed: stops.length < 2 ||
+                                          _compareLoading ||
+                                          _loading
+                                      ? null
+                                      : _compare,
+                                  icon: _compareLoading
+                                      ? const SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          ),
+                                        )
+                                      : const Icon(Icons.compare_arrows, size: 18),
+                                  label: const Text('Compare'),
+                                ),
                               ),
-                            ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: OutlinedButton.icon(
+                                  onPressed: stops.length < 2 ||
+                                          _benchmarkLoading ||
+                                          _loading
+                                      ? null
+                                      : _benchmark,
+                                  icon: _benchmarkLoading
+                                      ? const SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          ),
+                                        )
+                                      : const Icon(Icons.leaderboard, size: 18),
+                                  label: Text(
+                                    _benchmarkLoading
+                                        ? 'Benchmarking…'
+                                        : 'Benchmark',
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 8),
-                          IconButton.filledTonal(
-                            onPressed: stops.isEmpty ? null : _clear,
-                            icon: const Icon(Icons.clear),
-                            tooltip: 'Clear stops',
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: FilledButton.icon(
+                                  onPressed:
+                                      stops.length < 2 || _loading ? null : _optimize,
+                                  icon: _loading
+                                      ? const SizedBox(
+                                          width: 18,
+                                          height: 18,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                          ),
+                                        )
+                                      : const Icon(Icons.route),
+                                  label: Text(
+                                    _loading ? 'Optimizing…' : 'Optimize route',
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              IconButton.filledTonal(
+                                onPressed: stops.isEmpty ? null : _clear,
+                                icon: const Icon(Icons.clear),
+                                tooltip: 'Clear stops',
+                              ),
+                            ],
                           ),
                         ],
                       ),

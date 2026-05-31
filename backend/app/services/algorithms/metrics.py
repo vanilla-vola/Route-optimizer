@@ -2,6 +2,10 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
+from app.services.profiles import tour_cost_breakdown
+
 
 def leg_totals(
     order: list[int],
@@ -24,3 +28,16 @@ def leg_totals(
         distance_m += int(distance_matrix[a][b])
         duration_s += int(duration_matrix[a][b])
     return distance_m, duration_s
+
+
+def realized_duration_s(
+    order: list[int],
+    profile_matrices: Optional[list[list[list[int]]]],
+    *,
+    round_trip: bool,
+) -> Optional[int]:
+    if not profile_matrices:
+        return None
+    return tour_cost_breakdown(
+        order, profile_matrices, round_trip=round_trip
+    ).realized_s

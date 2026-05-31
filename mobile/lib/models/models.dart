@@ -93,6 +93,8 @@ class OptimizeResponseDto {
     required this.mode,
     required this.roundTrip,
     this.solver,
+    this.profileSource,
+    this.realizedDurationS,
   });
 
   final List<int> order;
@@ -103,6 +105,8 @@ class OptimizeResponseDto {
   final String mode;
   final bool roundTrip;
   final String? solver;
+  final String? profileSource;
+  final int? realizedDurationS;
 
   factory OptimizeResponseDto.fromJson(Map<String, dynamic> json) =>
       OptimizeResponseDto(
@@ -118,5 +122,130 @@ class OptimizeResponseDto {
         mode: json['mode'] as String,
         roundTrip: json['round_trip'] as bool,
         solver: json['solver'] as String?,
+        profileSource: json['profile_source'] as String?,
+        realizedDurationS: json['realized_duration_s'] as int?,
+      );
+}
+
+class BenchmarkResultDto {
+  const BenchmarkResultDto({
+    required this.algorithmId,
+    required this.algorithmLabel,
+    required this.status,
+    this.totalDurationS,
+    this.realizedDurationS,
+    this.totalDistanceM,
+    this.vsBestDurationPct,
+    this.vsBestRealizedPct,
+    this.category,
+    this.error,
+  });
+
+  final String algorithmId;
+  final String algorithmLabel;
+  final String status;
+  final int? totalDurationS;
+  final int? realizedDurationS;
+  final int? totalDistanceM;
+  final double? vsBestDurationPct;
+  final double? vsBestRealizedPct;
+  final String? category;
+  final String? error;
+
+  factory BenchmarkResultDto.fromJson(Map<String, dynamic> json) =>
+      BenchmarkResultDto(
+        algorithmId: json['algorithm_id'] as String,
+        algorithmLabel: json['algorithm_label'] as String,
+        status: json['status'] as String,
+        totalDurationS: json['total_duration_s'] as int?,
+        realizedDurationS: json['realized_duration_s'] as int?,
+        totalDistanceM: json['total_distance_m'] as int?,
+        vsBestDurationPct: (json['vs_best_duration_pct'] as num?)?.toDouble(),
+        vsBestRealizedPct: (json['vs_best_realized_pct'] as num?)?.toDouble(),
+        category: json['category'] as String?,
+        error: json['error'] as String?,
+      );
+}
+
+class BenchmarkResponseDto {
+  const BenchmarkResponseDto({
+    required this.results,
+    required this.profileSource,
+    this.bestAlgorithmId,
+    this.bestRealizedAlgorithmId,
+    this.rankingNote,
+  });
+
+  final List<BenchmarkResultDto> results;
+  final String profileSource;
+  final String? bestAlgorithmId;
+  final String? bestRealizedAlgorithmId;
+  final String? rankingNote;
+
+  factory BenchmarkResponseDto.fromJson(Map<String, dynamic> json) =>
+      BenchmarkResponseDto(
+        results: (json['results'] as List? ?? const [])
+            .map((e) => BenchmarkResultDto.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        profileSource: json['profile_source'] as String? ?? 'synthetic',
+        bestAlgorithmId: json['best_algorithm_id'] as String?,
+        bestRealizedAlgorithmId: json['best_realized_algorithm_id'] as String?,
+        rankingNote: json['ranking_note'] as String?,
+      );
+}
+
+class CompareResultDto {
+  const CompareResultDto({
+    required this.providerId,
+    required this.providerLabel,
+    required this.status,
+    this.totalDurationS,
+    this.totalDistanceM,
+    this.vsBaselineDurationPct,
+    this.isBaseline = false,
+    this.message,
+    this.manualUrl,
+  });
+
+  final String providerId;
+  final String providerLabel;
+  final String status;
+  final int? totalDurationS;
+  final int? totalDistanceM;
+  final double? vsBaselineDurationPct;
+  final bool isBaseline;
+  final String? message;
+  final String? manualUrl;
+
+  factory CompareResultDto.fromJson(Map<String, dynamic> json) =>
+      CompareResultDto(
+        providerId: json['provider_id'] as String,
+        providerLabel: json['provider_label'] as String,
+        status: json['status'] as String,
+        totalDurationS: json['total_duration_s'] as int?,
+        totalDistanceM: json['total_distance_m'] as int?,
+        vsBaselineDurationPct:
+            (json['vs_baseline_duration_pct'] as num?)?.toDouble(),
+        isBaseline: json['is_baseline'] as bool? ?? false,
+        message: json['message'] as String?,
+        manualUrl: json['manual_url'] as String?,
+      );
+}
+
+class CompareResponseDto {
+  const CompareResponseDto({
+    required this.results,
+    required this.profileSource,
+  });
+
+  final List<CompareResultDto> results;
+  final String profileSource;
+
+  factory CompareResponseDto.fromJson(Map<String, dynamic> json) =>
+      CompareResponseDto(
+        results: (json['results'] as List? ?? const [])
+            .map((e) => CompareResultDto.fromJson(e as Map<String, dynamic>))
+            .toList(),
+        profileSource: json['profile_source'] as String? ?? 'synthetic',
       );
 }

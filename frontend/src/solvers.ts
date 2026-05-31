@@ -153,6 +153,7 @@ export async function runSolver(
       round_trip: payload.round_trip ?? true,
       solver: item.provider_label,
       profile_source: result.profile_source,
+      realized_duration_s: null,
     };
   }
 
@@ -173,6 +174,7 @@ export async function runSolver(
     round_trip: payload.round_trip ?? true,
     solver: item.algorithm_label,
     profile_source: result.profile_source,
+    realized_duration_s: item.realized_duration_s ?? null,
   };
 }
 

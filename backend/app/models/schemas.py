@@ -58,6 +58,7 @@ class OptimizeResponse(BaseModel):
     round_trip: bool
     solver: str = "ortools-gls"
     profile_source: Optional[str] = None
+    realized_duration_s: Optional[int] = None
 
 
 class AlgorithmInfo(BaseModel):
@@ -121,7 +122,7 @@ class BenchmarkRequest(BaseModel):
     round_trip: bool = True
     mode: str = TransportMode.DRIVING.value
     algorithm_ids: Optional[list[str]] = None
-    time_limit_s: int = Field(default=8, ge=2, le=30)
+    time_limit_s: int = Field(default=12, ge=2, le=30)
 
     @field_validator("mode")
     @classmethod
@@ -138,8 +139,10 @@ class BenchmarkResultItem(BaseModel):
     status: str
     order: Optional[list[int]] = None
     total_duration_s: Optional[int] = None
+    realized_duration_s: Optional[int] = None
     total_distance_m: Optional[int] = None
     vs_best_duration_pct: Optional[float] = None
+    vs_best_realized_pct: Optional[float] = None
     notes: str = ""
     error: str = ""
 
@@ -151,3 +154,7 @@ class BenchmarkResponse(BaseModel):
     profile_source: str
     results: list[BenchmarkResultItem]
     best_algorithm_id: Optional[str] = None
+    best_realized_algorithm_id: Optional[str] = None
+    ranking_note: str = (
+        "Nominal = static matrix duration. Realized = departure-consistent traffic simulation."
+    )

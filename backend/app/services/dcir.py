@@ -122,6 +122,25 @@ async def solve_dcir_hybrid(
         )
 
     nominal_total = tour_duration(best_order, nominal, round_trip=round_trip)
+
+    # Phase 5: nominal GLS polish — ensure we don't sacrifice static matrix quality.
+    polish_budget = remaining()
+    if polish_budget >= 1 and n >= 3:
+        try:
+            polished, _ = solve_route(
+                duration_matrix,
+                start_fixed=start_fixed,
+                end_fixed=end_fixed,
+                round_trip=round_trip,
+                time_limit_s=polish_budget,
+                first_solution_strategy=_FS.PATH_CHEAPEST_ARC,
+            )
+            if tour_duration(polished, nominal, round_trip=round_trip) < nominal_total:
+                best_order = polished
+                nominal_total = tour_duration(polished, nominal, round_trip=round_trip)
+        except Exception:
+            pass
+
     return best_order, nominal_total
 
 
@@ -196,23 +215,30 @@ def _phase2_select(
     round_trip: bool,
     robust_lambda: float,
 ) -> tuple[list[int], TourCostBreakdown]:
-    best_order = pool[0]
-    best_score = float("inf")
-    best_breakdown = tour_cost_breakdown(
-        best_order, profile_matrices, round_trip=round_trip
-    )
+    """Pick best nominal duration; use robust score only as tie-break within 1%."""
+    nominal_matrix = profile_matrices[min(1, len(profile_matrices) - 1)]
+    scored: list[tuple[list[int], TourCostBreakdown, int]] = []
 
     for order in pool:
         breakdown = tour_cost_breakdown(
             order, profile_matrices, round_trip=round_trip
         )
-        score = robust_score(breakdown, lambda_robust=robust_lambda)
-        if score < best_score:
-            best_score = score
-            best_order = order
-            best_breakdown = breakdown
+        nominal_s = tour_duration(order, nominal_matrix, round_trip=round_trip)
+        scored.append((order, breakdown, nominal_s))
 
-    return best_order, best_breakdown
+    scored.sort(key=lambda item: item[2])
+    best_order, best_breakdown, best_nominal = scored[0]
+    threshold = int(best_nominal * 1.01) + 1
+
+    near_best = [item for item in scored if item[2] <= threshold]
+    if len(near_best) == 1:
+        return best_order, best_breakdown
+
+    order, breakdown, _ = min(
+        near_best,
+        key=lambda item: robust_score(item[1], lambda_robust=robust_lambda),
+    )
+    return order, breakdown
 
 
 async def _phase3_dcir_loop(

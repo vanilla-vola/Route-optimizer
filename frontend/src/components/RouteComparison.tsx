@@ -1,40 +1,45 @@
 import type { CompareResponse } from "../types";
+import { formatDistance, formatDuration, formatPct, formatProfileSource } from "../utils/format";
 
 interface RouteComparisonProps {
   data: CompareResponse;
 }
 
-function formatDuration(seconds: number | null | undefined): string {
-  if (seconds == null) return "—";
-  const minutes = seconds / 60;
-  return minutes >= 60 ? `${(minutes / 60).toFixed(1)} hr` : `${minutes.toFixed(1)} min`;
-}
-
-function formatDistance(meters: number | null | undefined): string {
-  if (meters == null) return "—";
-  return meters >= 1000 ? `${(meters / 1000).toFixed(2)} km` : `${meters} m`;
-}
-
-function formatPct(pct: number | null | undefined): string {
-  if (pct == null) return "—";
-  const sign = pct > 0 ? "+" : "";
-  return `${sign}${pct.toFixed(1)}%`;
-}
-
 export function RouteComparison({ data }: RouteComparisonProps) {
+  const baseline = data.results.find((r) => r.is_baseline);
+
   return (
     <div className="compare-panel">
       <h2>Compare apps & services</h2>
       <p className="muted compare-subtitle">
         Same {data.stop_count} stops · {data.mode}
-        {data.round_trip ? " · round trip" : " · one-way"} · profiles: {data.profile_source}
+        {data.round_trip ? " · round trip" : " · one-way"} ·{" "}
+        {formatProfileSource(data.profile_source)}
       </p>
+
+      {baseline?.total_duration_s != null && (
+        <div className="route-metrics route-metrics--compact">
+          <div className="metric-card">
+            <span className="metric-label">Our duration (nominal)</span>
+            <strong className="metric-value">
+              {formatDuration(baseline.total_duration_s)}
+            </strong>
+          </div>
+          <div className="metric-card">
+            <span className="metric-label">Our distance</span>
+            <strong className="metric-value">
+              {formatDistance(baseline.total_distance_m)}
+            </strong>
+          </div>
+        </div>
+      )}
+
       <div className="table-wrap">
         <table className="compare-table">
           <thead>
             <tr>
               <th>Provider</th>
-              <th>Duration</th>
+              <th>Nominal duration</th>
               <th>Distance</th>
               <th>vs Ours</th>
               <th>Status</th>
@@ -45,7 +50,7 @@ export function RouteComparison({ data }: RouteComparisonProps) {
               <tr key={row.provider_id} className={row.is_baseline ? "baseline-row" : ""}>
                 <td>
                   <strong>{row.provider_label}</strong>
-                  {row.is_baseline && <span className="badge">baseline</span>}
+                  {row.is_baseline && <span className="badge">ours</span>}
                 </td>
                 <td>{formatDuration(row.total_duration_s)}</td>
                 <td>{formatDistance(row.total_distance_m)}</td>

@@ -1,34 +1,22 @@
 import type { OrderedStop } from "../types";
 import { TRANSPORT_MODES } from "../transportModes";
+import { RouteMetrics } from "./RouteMetrics";
 
 interface RouteSequenceProps {
   orderedStops: OrderedStop[];
   totalDistanceM: number;
   totalDurationS: number;
+  realizedDurationS?: number | null;
   mode: string;
   solver?: string;
   profileSource?: string | null;
-}
-
-function formatDuration(seconds: number): string {
-  const minutes = seconds / 60;
-  return minutes >= 60 ? `${(minutes / 60).toFixed(1)} hr` : `${minutes.toFixed(1)} min`;
-}
-
-function formatDistance(meters: number): string {
-  return meters >= 1000 ? `${(meters / 1000).toFixed(2)} km` : `${meters} m`;
-}
-
-function formatProfileSource(source: string): string {
-  if (source === "mapbox-depart-at") return "Mapbox traffic profiles (8am / 1pm / 6pm)";
-  if (source === "synthetic") return "Synthetic traffic profiles";
-  return source;
 }
 
 export function RouteSequence({
   orderedStops,
   totalDistanceM,
   totalDurationS,
+  realizedDurationS,
   mode,
   solver,
   profileSource,
@@ -38,20 +26,13 @@ export function RouteSequence({
   return (
     <div className="route-sequence">
       <h2>Best route ({modeLabel})</h2>
-      <p className="route-stats">
-        {formatDistance(totalDistanceM)} · {formatDuration(totalDurationS)}
-      </p>
-      {solver && (
-        <p className="route-meta muted">
-          Solver: <strong>{solver}</strong>
-          {profileSource ? (
-            <>
-              {" "}
-              · {formatProfileSource(profileSource)}
-            </>
-          ) : null}
-        </p>
-      )}
+      <RouteMetrics
+        nominalDurationS={totalDurationS}
+        realizedDurationS={realizedDurationS}
+        totalDistanceM={totalDistanceM}
+        solver={solver}
+        profileSource={profileSource}
+      />
       <p className="route-sequence-label">Visit in this order:</p>
       <ol>
         {orderedStops.map((stop) => (

@@ -32,6 +32,7 @@ export default function App() {
   const [summary, setSummary] = useState<{
     distance: number;
     duration: number;
+    realizedDuration?: number | null;
     solver?: string;
     profileSource?: string | null;
   } | null>(null);
@@ -125,6 +126,7 @@ export default function App() {
       setSummary({
         distance: result.total_distance_m,
         duration: result.total_duration_s,
+        realizedDuration: result.realized_duration_s,
         solver: result.solver,
         profileSource: result.profile_source,
       });
@@ -194,7 +196,7 @@ export default function App() {
         stops,
         round_trip: roundTrip,
         mode: transportMode,
-        time_limit_s: 8,
+        time_limit_s: 12,
       });
       setBenchmarkResult(result);
     } catch (err) {
@@ -263,6 +265,7 @@ export default function App() {
               orderedStops={orderedStops}
               totalDistanceM={summary.distance}
               totalDurationS={summary.duration}
+              realizedDurationS={summary.realizedDuration}
               mode={transportMode}
               solver={summary.solver}
               profileSource={summary.profileSource}
