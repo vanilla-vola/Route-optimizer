@@ -93,6 +93,39 @@ body {
   background: #991b1b;
 }
 
+.algorithm-picker {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  min-width: 12rem;
+  max-width: min(22rem, 42vw);
+}
+
+.algorithm-picker-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.algorithm-picker-select {
+  width: 100%;
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.algorithm-picker-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .layout {
   flex: 1;
   display: grid;

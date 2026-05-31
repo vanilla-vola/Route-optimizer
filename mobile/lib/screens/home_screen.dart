@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../api/api_client.dart';
+import '../models/solver_models.dart';
 import '../providers/app_providers.dart';
+import '../widgets/algorithm_picker.dart';
 import '../widgets/map_panel.dart';
 import '../widgets/route_sequence_panel.dart';
 import '../widgets/stop_list.dart';
@@ -34,14 +36,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     try {
       final roundTrip = ref.read(roundTripProvider);
       final mode = ref.read(transportModeProvider);
-      final result = await ref.read(apiClientProvider).optimizeRoute(
+      final solverId = ref.read(selectedSolverProvider);
+      final groups = ref.read(solverGroupsProvider).value ?? const [];
+      final solver = findSolverOption(groups, solverId) ??
+          const SolverOption(
+            id: defaultSolverId,
+            label: 'Route Optimizer (DCIR-Hybrid)',
+            kind: SolverKind.defaultSolver,
+          );
+      final result = await ref.read(apiClientProvider).runSolver(
             stops,
             roundTrip: roundTrip,
             mode: mode,
+            solver: solver,
           );
 
       ref.read(routeOrderProvider.notifier).state = result.order;
       ref.read(orderedStopsProvider.notifier).state = result.orderedStops;
+      ref.read(solverLabelProvider.notifier).state = result.solver;
 
       setState(() {
         _totalDistanceM = result.totalDistanceM;
@@ -62,6 +74,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       });
       ref.read(routeOrderProvider.notifier).state = null;
       ref.read(orderedStopsProvider.notifier).state = null;
+      ref.read(solverLabelProvider.notifier).state = null;
     } finally {
       setState(() => _loading = false);
     }
@@ -71,6 +84,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.read(stopsProvider.notifier).clear();
     ref.read(routeOrderProvider.notifier).state = null;
     ref.read(orderedStopsProvider.notifier).state = null;
+    ref.read(solverLabelProvider.notifier).state = null;
     setState(() {
       _error = null;
       _totalDistanceM = null;
@@ -99,11 +113,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       }
     });
 
+    ref.listen<String>(selectedSolverProvider, (previous, next) {
+      if (previous == null || previous == next) return;
+      final ordered = ref.read(orderedStopsProvider);
+      final stops = ref.read(stopsProvider);
+      if (ordered != null && stops.length >= 2) {
+        _optimize();
+      }
+    });
+
     final stops = ref.watch(stopsProvider);
     final roundTrip = ref.watch(roundTripProvider);
     final orderedStops = ref.watch(orderedStopsProvider);
     final mode = ref.watch(transportModeProvider);
-    final apiOnline = ref.watch(apiOnlineProvider);
     final hasRoute = orderedStops != null &&
         _totalDistanceM != null &&
         _totalDurationS != null;
@@ -115,28 +137,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           preferredSize: Size.fromHeight(52),
           child: TransportModeBar(),
         ),
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 12),
-            child: Center(
-              child: apiOnline.when(
-                data: (online) => Chip(
-                  label: Text(
-                    online ? 'API online' : 'API offline',
-                    style: const TextStyle(fontSize: 12),
-                  ),
-                  backgroundColor:
-                      online ? Colors.green.shade100 : Colors.red.shade100,
-                ),
-                loading: () => const SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                ),
-                error: (error, stackTrace) =>
-                    const Chip(label: Text('API offline')),
-              ),
-            ),
+            padding: EdgeInsets.only(right: 12),
+            child: Center(child: AlgorithmPicker()),
           ),
         ],
       ),

@@ -3,16 +3,23 @@ import {
   benchmarkAlgorithms,
   checkHealth,
   compareRoutes,
-  optimizeRoute,
   reverseGeocode,
 } from "./api/client";
 import { AlgorithmBenchmark } from "./components/AlgorithmBenchmark";
+import { AlgorithmPicker } from "./components/AlgorithmPicker";
 import { MapPanel } from "./components/MapPanel";
 import { RouteComparison } from "./components/RouteComparison";
 import { RouteSequence } from "./components/RouteSequence";
 import { StopList } from "./components/StopList";
 import { StopSearchBar } from "./components/StopSearchBar";
 import { TransportModeBar } from "./components/TransportModeBar";
+import {
+  DEFAULT_SOLVER_ID,
+  fetchSolverGroups,
+  findSolverOption,
+  runSolver,
+  type SolverGroup,
+} from "./solvers";
 import type { BenchmarkResponse, CompareResponse, OrderedStop, Stop } from "./types";
 import type { TransportModeId } from "./transportModes";
 
@@ -33,12 +40,19 @@ export default function App() {
   const [benchmarkResult, setBenchmarkResult] = useState<BenchmarkResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [apiOnline, setApiOnline] = useState<boolean | null>(null);
+  const [solverGroups, setSolverGroups] = useState<SolverGroup[]>([]);
+  const [solversLoading, setSolversLoading] = useState(true);
+  const [selectedSolverId, setSelectedSolverId] = useState(DEFAULT_SOLVER_ID);
   const [roundTrip, setRoundTrip] = useState(true);
   const [transportMode, setTransportMode] = useState<TransportModeId>("driving-traffic");
   const [mapFocus, setMapFocus] = useState<{ lat: number; lng: number } | null>(null);
 
   useEffect(() => {
     checkHealth().then(setApiOnline);
+    fetchSolverGroups()
+      .then(setSolverGroups)
+      .catch(() => setSolverGroups([]))
+      .finally(() => setSolversLoading(false));
   }, []);
 
   const clearRoute = () => {
@@ -93,10 +107,13 @@ export default function App() {
   const handleOptimize = async (modeOverride?: TransportModeId) => {
     if (stops.length < 2) return;
     const mode = modeOverride ?? transportMode;
+    const solver = findSolverOption(solverGroups, selectedSolverId);
+    if (!solver) return;
+
     setLoading(true);
     setError(null);
     try {
-      const result = await optimizeRoute({
+      const result = await runSolver(solver.id, solver.kind, {
         stops,
         round_trip: roundTrip,
         mode,
@@ -122,6 +139,14 @@ export default function App() {
     setTransportMode(mode);
     if (hadResult && stops.length >= 2) {
       void handleOptimize(mode);
+    }
+  };
+
+  const onSolverChange = (solverId: string) => {
+    const hadResult = orderedStops !== null && summary !== null;
+    setSelectedSolverId(solverId);
+    if (hadResult && stops.length >= 2) {
+      void handleOptimize();
     }
   };
 
@@ -174,9 +199,13 @@ export default function App() {
           <h1>Route Optimizer</h1>
           <p>Search for stops or click the map, then optimize.</p>
         </div>
-        <div className={`status ${apiOnline ? "online" : "offline"}`}>
-          API {apiOnline === null ? "checking…" : apiOnline ? "online" : "offline"}
-        </div>
+        <AlgorithmPicker
+          groups={solverGroups}
+          value={selectedSolverId}
+          onChange={onSolverChange}
+          loading={solversLoading}
+          disabled={apiOnline === false}
+        />
       </header>
 
       <TransportModeBar value={transportMode} onChange={onModeChange} />

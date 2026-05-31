@@ -92,6 +92,7 @@ class OptimizeResponseDto {
     required this.legs,
     required this.mode,
     required this.roundTrip,
+    this.solver,
   });
 
   final List<int> order;
@@ -101,6 +102,7 @@ class OptimizeResponseDto {
   final List<LegDto> legs;
   final String mode;
   final bool roundTrip;
+  final String? solver;
 
   factory OptimizeResponseDto.fromJson(Map<String, dynamic> json) =>
       OptimizeResponseDto(
@@ -110,10 +112,11 @@ class OptimizeResponseDto {
             .toList(),
         totalDistanceM: json['total_distance_m'] as int,
         totalDurationS: json['total_duration_s'] as int,
-        legs: (json['legs'] as List)
+        legs: (json['legs'] as List? ?? const [])
             .map((e) => LegDto.fromJson(e as Map<String, dynamic>))
             .toList(),
         mode: json['mode'] as String,
         roundTrip: json['round_trip'] as bool,
+        solver: json['solver'] as String?,
       );
 }

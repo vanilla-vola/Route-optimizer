@@ -36,6 +36,25 @@ export interface OptimizeRequest {
   end_fixed?: boolean;
   round_trip?: boolean;
   mode?: string;
+  provider_ids?: string[];
+  algorithm_ids?: string[];
+  time_limit_s?: number;
+}
+
+export interface AlgorithmInfo {
+  id: string;
+  label: string;
+  paper: string;
+  year: number;
+  category: string;
+}
+
+export interface CompareProviderInfo {
+  id: string;
+  label: string;
+  kind: string;
+  max_stops?: number | null;
+  requires_key?: string;
 }
 
 export interface CompareResultItem {

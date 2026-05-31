@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../api/api_client.dart';
+import '../models/solver_models.dart';
 import '../models/models.dart';
 
 final apiClientProvider = Provider<ApiClient>((ref) => ApiClient());
@@ -46,6 +47,19 @@ final transportModeProvider = StateProvider<String>((ref) => 'driving-traffic');
 final apiOnlineProvider = FutureProvider<bool>((ref) async {
   return ref.read(apiClientProvider).checkHealth();
 });
+
+final solverGroupsProvider = FutureProvider<List<SolverGroup>>((ref) async {
+  final client = ref.read(apiClientProvider);
+  final providers = await client.listCompareProviders();
+  final algorithms = await client.listAlgorithms();
+  return buildSolverGroups(providers, algorithms);
+});
+
+final selectedSolverProvider =
+    StateProvider<String>((ref) => defaultSolverId);
+
+/// Label of the solver used for the latest optimization (for display).
+final solverLabelProvider = StateProvider<String?>((ref) => null);
 
 /// When set, [MapPanel] pans to this location (e.g. after search selection).
 final mapFocusProvider = StateProvider<LatLng?>((ref) => null);

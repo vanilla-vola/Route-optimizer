@@ -1,5 +1,7 @@
 import type {
+  AlgorithmInfo,
   BenchmarkResponse,
+  CompareProviderInfo,
   CompareResponse,
   OptimizeRequest,
   OptimizeResponse,
@@ -58,6 +60,22 @@ async function postJson<T>(path: string, body: unknown): Promise<T> {
   return response.json() as Promise<T>;
 }
 
+export async function listAlgorithms(): Promise<AlgorithmInfo[]> {
+  const response = await fetch(`${API_BASE}/algorithms`);
+  if (!response.ok) {
+    throw new Error(`Failed to load algorithms (${response.status})`);
+  }
+  return response.json() as Promise<AlgorithmInfo[]>;
+}
+
+export async function listCompareProviders(): Promise<CompareProviderInfo[]> {
+  const response = await fetch(`${API_BASE}/compare-providers`);
+  if (!response.ok) {
+    throw new Error(`Failed to load compare providers (${response.status})`);
+  }
+  return response.json() as Promise<CompareProviderInfo[]>;
+}
+
 export async function compareRoutes(
   payload: OptimizeRequest,
 ): Promise<CompareResponse> {
@@ -67,6 +85,7 @@ export async function compareRoutes(
     end_fixed: payload.end_fixed ?? false,
     round_trip: payload.round_trip ?? true,
     mode: payload.mode ?? "driving-traffic",
+    provider_ids: payload.provider_ids,
   });
 }
 
@@ -80,6 +99,7 @@ export async function benchmarkAlgorithms(
     round_trip: payload.round_trip ?? true,
     mode: payload.mode ?? "driving-traffic",
     time_limit_s: payload.time_limit_s ?? 8,
+    algorithm_ids: payload.algorithm_ids,
   });
 }
 
