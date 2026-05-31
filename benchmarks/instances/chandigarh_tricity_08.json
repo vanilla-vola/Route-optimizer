@@ -1,0 +1,51 @@
+{
+  "id": "chandigarh_tricity_08",
+  "description": "Chandigarh tricity (8 stops)",
+  "city": "Chandigarh",
+  "region": "North India",
+  "pattern": "tricity",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Sector 17",
+      "lat": 30.741,
+      "lng": 76.781
+    },
+    {
+      "name": "Rock Garden",
+      "lat": 30.752,
+      "lng": 76.802
+    },
+    {
+      "name": "PGI",
+      "lat": 30.76,
+      "lng": 76.77
+    },
+    {
+      "name": "Mohali Phase 7",
+      "lat": 30.72,
+      "lng": 76.72
+    },
+    {
+      "name": "Panchkula Sec 5",
+      "lat": 30.69,
+      "lng": 76.86
+    },
+    {
+      "name": "Zirakpur",
+      "lat": 30.64,
+      "lng": 76.82
+    },
+    {
+      "name": "Airport",
+      "lat": 30.6735,
+      "lng": 76.7885
+    },
+    {
+      "name": "IT Park",
+      "lat": 30.73,
+      "lng": 76.74
+    }
+  ]
+}

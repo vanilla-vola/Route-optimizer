@@ -1,0 +1,46 @@
+{
+  "id": "nagpur_hub_07",
+  "description": "Nagpur zero-mile hub (7 stops)",
+  "city": "Nagpur",
+  "region": "Central India",
+  "pattern": "hub",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Zero Mile",
+      "lat": 21.1458,
+      "lng": 79.0882
+    },
+    {
+      "name": "Sitabuldi",
+      "lat": 21.152,
+      "lng": 79.086
+    },
+    {
+      "name": "MIHAN",
+      "lat": 21.09,
+      "lng": 79.05
+    },
+    {
+      "name": "Wardha Road",
+      "lat": 21.12,
+      "lng": 79.1
+    },
+    {
+      "name": "Kamtee",
+      "lat": 21.23,
+      "lng": 79.12
+    },
+    {
+      "name": "Airport",
+      "lat": 21.092,
+      "lng": 79.047
+    },
+    {
+      "name": "Hingna",
+      "lat": 21.11,
+      "lng": 79.0
+    }
+  ]
+}

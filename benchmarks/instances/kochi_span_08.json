@@ -1,0 +1,51 @@
+{
+  "id": "kochi_span_08",
+  "description": "Kochi long span (8 stops)",
+  "city": "Kochi",
+  "region": "South India",
+  "pattern": "span",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Fort Kochi",
+      "lat": 9.965,
+      "lng": 76.243
+    },
+    {
+      "name": "Mattancherry",
+      "lat": 9.958,
+      "lng": 76.255
+    },
+    {
+      "name": "Vyttila",
+      "lat": 9.967,
+      "lng": 76.32
+    },
+    {
+      "name": "Kakkanad",
+      "lat": 10.015,
+      "lng": 76.34
+    },
+    {
+      "name": "InfoPark",
+      "lat": 10.02,
+      "lng": 76.36
+    },
+    {
+      "name": "Aluva",
+      "lat": 10.11,
+      "lng": 76.35
+    },
+    {
+      "name": "Angamaly",
+      "lat": 10.19,
+      "lng": 76.39
+    },
+    {
+      "name": "Airport",
+      "lat": 10.152,
+      "lng": 76.401
+    }
+  ]
+}

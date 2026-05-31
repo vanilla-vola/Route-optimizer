@@ -1,0 +1,51 @@
+{
+  "id": "chennai_coastal_08",
+  "description": "Chennai coastal span (8 stops)",
+  "city": "Chennai",
+  "region": "South India",
+  "pattern": "coastal",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Marina Beach",
+      "lat": 13.05,
+      "lng": 80.2824
+    },
+    {
+      "name": "Central",
+      "lat": 13.0827,
+      "lng": 80.2707
+    },
+    {
+      "name": "T Nagar",
+      "lat": 13.0418,
+      "lng": 80.2341
+    },
+    {
+      "name": "OMR Sholinganallur",
+      "lat": 12.8996,
+      "lng": 80.2209
+    },
+    {
+      "name": "Guindy",
+      "lat": 13.0067,
+      "lng": 80.2206
+    },
+    {
+      "name": "Ambattur",
+      "lat": 13.1143,
+      "lng": 80.1548
+    },
+    {
+      "name": "Tambaram",
+      "lat": 12.9249,
+      "lng": 80.1
+    },
+    {
+      "name": "Ennore",
+      "lat": 13.24,
+      "lng": 80.32
+    }
+  ]
+}

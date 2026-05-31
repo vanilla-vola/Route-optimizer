@@ -1,0 +1,46 @@
+{
+  "id": "chandigarh_07",
+  "description": "Chandigarh compact (7 stops)",
+  "city": "Chandigarh",
+  "region": "North India",
+  "pattern": "compact",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Sector 17",
+      "lat": 30.741,
+      "lng": 76.781
+    },
+    {
+      "name": "Sector 22",
+      "lat": 30.735,
+      "lng": 76.79
+    },
+    {
+      "name": "Sector 35",
+      "lat": 30.72,
+      "lng": 76.77
+    },
+    {
+      "name": "Sector 43",
+      "lat": 30.71,
+      "lng": 76.76
+    },
+    {
+      "name": "Mohali Sec 70",
+      "lat": 30.7,
+      "lng": 76.71
+    },
+    {
+      "name": "Panchkula",
+      "lat": 30.69,
+      "lng": 76.86
+    },
+    {
+      "name": "Zirakpur",
+      "lat": 30.64,
+      "lng": 76.82
+    }
+  ]
+}

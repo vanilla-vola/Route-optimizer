@@ -1,0 +1,71 @@
+{
+  "id": "mumbai_north_12",
+  "description": "Large north Mumbai tour (12 stops)",
+  "city": "Mumbai",
+  "region": "West India",
+  "pattern": "large-north",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Borivali",
+      "lat": 19.2307,
+      "lng": 72.8567
+    },
+    {
+      "name": "Kandivali",
+      "lat": 19.2038,
+      "lng": 72.8597
+    },
+    {
+      "name": "Malad",
+      "lat": 19.186,
+      "lng": 72.8486
+    },
+    {
+      "name": "Goregaon",
+      "lat": 19.1663,
+      "lng": 72.8526
+    },
+    {
+      "name": "Andheri",
+      "lat": 19.1136,
+      "lng": 72.8697
+    },
+    {
+      "name": "Bandra",
+      "lat": 19.0544,
+      "lng": 72.8265
+    },
+    {
+      "name": "Dadar",
+      "lat": 19.0178,
+      "lng": 72.8478
+    },
+    {
+      "name": "Sion",
+      "lat": 19.0436,
+      "lng": 72.8642
+    },
+    {
+      "name": "Ghatkopar",
+      "lat": 19.0865,
+      "lng": 72.9089
+    },
+    {
+      "name": "Mulund",
+      "lat": 19.1713,
+      "lng": 72.9565
+    },
+    {
+      "name": "Thane",
+      "lat": 19.2183,
+      "lng": 72.9781
+    },
+    {
+      "name": "Kalyan",
+      "lat": 19.2437,
+      "lng": 73.1355
+    }
+  ]
+}

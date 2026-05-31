@@ -1,0 +1,46 @@
+{
+  "id": "lucknow_07",
+  "description": "Lucknow urban spread (7 stops)",
+  "city": "Lucknow",
+  "region": "North India",
+  "pattern": "urban",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Hazratganj",
+      "lat": 26.8467,
+      "lng": 80.9462
+    },
+    {
+      "name": "Charbagh",
+      "lat": 26.831,
+      "lng": 80.925
+    },
+    {
+      "name": "Gomti Nagar",
+      "lat": 26.85,
+      "lng": 81.0
+    },
+    {
+      "name": "Aliganj",
+      "lat": 26.89,
+      "lng": 80.95
+    },
+    {
+      "name": "Chinhat",
+      "lat": 26.87,
+      "lng": 81.02
+    },
+    {
+      "name": "Amausi Airport",
+      "lat": 26.7606,
+      "lng": 80.8893
+    },
+    {
+      "name": "Alambagh",
+      "lat": 26.8,
+      "lng": 80.9
+    }
+  ]
+}

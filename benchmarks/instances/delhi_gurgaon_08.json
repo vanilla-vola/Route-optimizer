@@ -1,0 +1,51 @@
+{
+  "id": "delhi_gurgaon_08",
+  "description": "Gurgaon business belt (8 stops)",
+  "city": "Gurgaon",
+  "region": "North India",
+  "pattern": "business-corridor",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Cyber City",
+      "lat": 28.494,
+      "lng": 77.088
+    },
+    {
+      "name": "Golf Course Road",
+      "lat": 28.4595,
+      "lng": 77.0965
+    },
+    {
+      "name": "MG Road Metro",
+      "lat": 28.4796,
+      "lng": 77.08
+    },
+    {
+      "name": "Sohna Road",
+      "lat": 28.403,
+      "lng": 77.068
+    },
+    {
+      "name": "IFFCO Chowk",
+      "lat": 28.472,
+      "lng": 77.072
+    },
+    {
+      "name": "Udyog Vihar",
+      "lat": 28.501,
+      "lng": 77.075
+    },
+    {
+      "name": "Sector 29",
+      "lat": 28.463,
+      "lng": 77.085
+    },
+    {
+      "name": "DLF Phase 1",
+      "lat": 28.477,
+      "lng": 77.095
+    }
+  ]
+}

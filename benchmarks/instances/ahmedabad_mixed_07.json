@@ -1,0 +1,46 @@
+{
+  "id": "ahmedabad_mixed_07",
+  "description": "Ahmedabad mixed urban (7 stops)",
+  "city": "Ahmedabad",
+  "region": "West India",
+  "pattern": "mixed",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Sabarmati Ashram",
+      "lat": 23.06,
+      "lng": 72.58
+    },
+    {
+      "name": "Law Garden",
+      "lat": 23.03,
+      "lng": 72.56
+    },
+    {
+      "name": "SG Highway Bopal",
+      "lat": 23.03,
+      "lng": 72.47
+    },
+    {
+      "name": "GIFT City",
+      "lat": 23.16,
+      "lng": 72.68
+    },
+    {
+      "name": "Maninagar",
+      "lat": 22.998,
+      "lng": 72.601
+    },
+    {
+      "name": "Navrangpura",
+      "lat": 23.04,
+      "lng": 72.56
+    },
+    {
+      "name": "Vastrapur",
+      "lat": 23.04,
+      "lng": 72.53
+    }
+  ]
+}

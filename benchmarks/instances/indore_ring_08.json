@@ -1,0 +1,51 @@
+{
+  "id": "indore_ring_08",
+  "description": "Indore ring (8 stops)",
+  "city": "Indore",
+  "region": "Central India",
+  "pattern": "ring",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Rajwada",
+      "lat": 22.7196,
+      "lng": 75.8577
+    },
+    {
+      "name": "Palasia",
+      "lat": 22.724,
+      "lng": 75.88
+    },
+    {
+      "name": "Vijay Nagar",
+      "lat": 22.753,
+      "lng": 75.89
+    },
+    {
+      "name": "Bhawarkuan",
+      "lat": 22.69,
+      "lng": 75.87
+    },
+    {
+      "name": "Rau",
+      "lat": 22.64,
+      "lng": 75.82
+    },
+    {
+      "name": "Depalpur",
+      "lat": 22.85,
+      "lng": 75.62
+    },
+    {
+      "name": "Mhow",
+      "lat": 22.55,
+      "lng": 75.75
+    },
+    {
+      "name": "Airport",
+      "lat": 22.7218,
+      "lng": 75.8011
+    }
+  ]
+}

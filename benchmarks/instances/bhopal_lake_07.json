@@ -1,0 +1,46 @@
+{
+  "id": "bhopal_lake_07",
+  "description": "Bhopal lake city (7 stops)",
+  "city": "Bhopal",
+  "region": "Central India",
+  "pattern": "lake-city",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "TT Nagar",
+      "lat": 23.2456,
+      "lng": 77.401
+    },
+    {
+      "name": "Upper Lake",
+      "lat": 23.25,
+      "lng": 77.42
+    },
+    {
+      "name": "MP Nagar",
+      "lat": 23.23,
+      "lng": 77.41
+    },
+    {
+      "name": "Bairagarh",
+      "lat": 23.28,
+      "lng": 77.38
+    },
+    {
+      "name": "Airport",
+      "lat": 23.287,
+      "lng": 77.337
+    },
+    {
+      "name": "Habibganj",
+      "lat": 23.22,
+      "lng": 77.44
+    },
+    {
+      "name": "Kolar",
+      "lat": 23.78,
+      "lng": 77.33
+    }
+  ]
+}

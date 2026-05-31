@@ -1,0 +1,46 @@
+{
+  "id": "coimbatore_07",
+  "description": "Coimbatore industrial urban (7 stops)",
+  "city": "Coimbatore",
+  "region": "South India",
+  "pattern": "industrial",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "RS Puram",
+      "lat": 11.005,
+      "lng": 76.945
+    },
+    {
+      "name": "Gandhipuram",
+      "lat": 11.016,
+      "lng": 76.97
+    },
+    {
+      "name": "Peelamedu",
+      "lat": 11.03,
+      "lng": 77.02
+    },
+    {
+      "name": "Singanallur",
+      "lat": 11.01,
+      "lng": 77.03
+    },
+    {
+      "name": "Airport",
+      "lat": 11.03,
+      "lng": 77.04
+    },
+    {
+      "name": "Saibaba Colony",
+      "lat": 11.02,
+      "lng": 76.95
+    },
+    {
+      "name": "Mettupalayam Road",
+      "lat": 11.05,
+      "lng": 76.93
+    }
+  ]
+}

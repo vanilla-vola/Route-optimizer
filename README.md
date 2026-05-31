@@ -116,6 +116,23 @@ docker build -t route-optimizer-api .
 docker run -p 8000:8000 --env-file .env route-optimizer-api
 ```
 
+## Research algorithms
+
+- **DCIR-Hybrid** (`dcir-hybrid`) — default optimizer when `USE_DCIR=true`
+- **PDA-ALNS** (`pda-alns`) — profile-drift ALNS targeting IEEE-level realized-time optimization; see [docs/PDA_ALNS_RESEARCH.md](docs/PDA_ALNS_RESEARCH.md)
+- **DRPT-ALNS** (`drpt-alns`) — distributionally robust Pareto-temporal ALNS for traffic-profile uncertainty; see [docs/DRPT_ALNS_RESEARCH.md](docs/DRPT_ALNS_RESEARCH.md)
+
+**40 benchmark instances** (Indian metros, 6–12 stops, diverse patterns) live under `benchmarks/instances/`. In the web app header, use **Benchmark instance** (left of **Algorithm**): hover **View stops** for coordinates, **Load this instance**, then Benchmark / Compare. See [benchmarks/README.md](benchmarks/README.md).
+
+Batch evaluation:
+
+```bash
+python scripts/run_benchmark_batch.py \
+  --instances-dir benchmarks/instances \
+  --algorithms drpt-alns,dcir-hybrid,pda-alns,ortools-gls,alns \
+  --output results/benchmark.csv
+```
+
 ## Notes
 
 - Maximum **25 stops** (Mapbox matrix limit); configurable via `MAX_STOPS`.

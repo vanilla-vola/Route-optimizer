@@ -29,6 +29,8 @@ class StopsNotifier extends StateNotifier<List<StopDto>> {
   }
 
   void clear() => state = const [];
+
+  void setAll(List<StopDto> stops) => state = List<StopDto>.from(stops);
 }
 
 final stopsProvider = StateNotifierProvider<StopsNotifier, List<StopDto>>((ref) {
@@ -58,6 +60,15 @@ final solverGroupsProvider = FutureProvider<List<SolverGroup>>((ref) async {
 
 final selectedSolverProvider =
     StateProvider<String>((ref) => defaultSolverId);
+
+final benchmarkInstancesProvider =
+    FutureProvider<List<BenchmarkInstanceSummaryDto>>((ref) async {
+  final response = await ref.read(apiClientProvider).listBenchmarkInstances();
+  return response.instances;
+});
+
+final selectedBenchmarkInstanceProvider =
+    StateProvider<String?>((ref) => null);
 
 /// Label of the solver used for the latest optimization (for display).
 final solverLabelProvider = StateProvider<String?>((ref) => null);

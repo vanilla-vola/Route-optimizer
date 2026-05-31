@@ -1,0 +1,46 @@
+{
+  "id": "jaipur_tourist_07",
+  "description": "Jaipur tourist circuit (7 stops)",
+  "city": "Jaipur",
+  "region": "North India",
+  "pattern": "tourist",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Hawa Mahal",
+      "lat": 26.9239,
+      "lng": 75.8267
+    },
+    {
+      "name": "City Palace",
+      "lat": 26.9258,
+      "lng": 75.8236
+    },
+    {
+      "name": "Amer Fort",
+      "lat": 26.9855,
+      "lng": 75.8513
+    },
+    {
+      "name": "JLN Marg",
+      "lat": 26.892,
+      "lng": 75.81
+    },
+    {
+      "name": "Malviya Nagar",
+      "lat": 26.854,
+      "lng": 75.82
+    },
+    {
+      "name": "Sanganer Airport",
+      "lat": 26.8242,
+      "lng": 75.8122
+    },
+    {
+      "name": "Chandpole",
+      "lat": 26.92,
+      "lng": 75.79
+    }
+  ]
+}

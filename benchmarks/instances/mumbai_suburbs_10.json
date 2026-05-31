@@ -1,0 +1,61 @@
+{
+  "id": "mumbai_suburbs_10",
+  "description": "Mumbai suburban ring (10 stops)",
+  "city": "Mumbai",
+  "region": "West India",
+  "pattern": "suburban-ring",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Malad",
+      "lat": 19.186,
+      "lng": 72.8486
+    },
+    {
+      "name": "Goregaon",
+      "lat": 19.1663,
+      "lng": 72.8526
+    },
+    {
+      "name": "Andheri West",
+      "lat": 19.1364,
+      "lng": 72.8296
+    },
+    {
+      "name": "Santacruz",
+      "lat": 19.0843,
+      "lng": 72.836
+    },
+    {
+      "name": "Kurla",
+      "lat": 19.0728,
+      "lng": 72.8826
+    },
+    {
+      "name": "Ghatkopar",
+      "lat": 19.0865,
+      "lng": 72.9089
+    },
+    {
+      "name": "Mulund",
+      "lat": 19.1713,
+      "lng": 72.9565
+    },
+    {
+      "name": "Bhandup",
+      "lat": 19.1406,
+      "lng": 72.936
+    },
+    {
+      "name": "Powai Lake",
+      "lat": 19.1197,
+      "lng": 72.906
+    },
+    {
+      "name": "Vikhroli",
+      "lat": 19.1124,
+      "lng": 72.9389
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "hyderabad_orr_10",
+  "description": "Hyderabad ORR-style span (10 stops)",
+  "city": "Hyderabad",
+  "region": "South India",
+  "pattern": "ring-road",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Gachibowli",
+      "lat": 17.4401,
+      "lng": 78.3489
+    },
+    {
+      "name": "Nanakramguda",
+      "lat": 17.42,
+      "lng": 78.34
+    },
+    {
+      "name": "Financial District",
+      "lat": 17.43,
+      "lng": 78.35
+    },
+    {
+      "name": "Kukatpally",
+      "lat": 17.4948,
+      "lng": 78.3996
+    },
+    {
+      "name": "Miyapur",
+      "lat": 17.4967,
+      "lng": 78.3572
+    },
+    {
+      "name": "LB Nagar",
+      "lat": 17.366,
+      "lng": 78.55
+    },
+    {
+      "name": "Uppal",
+      "lat": 17.401,
+      "lng": 78.558
+    },
+    {
+      "name": "Medchal",
+      "lat": 17.63,
+      "lng": 78.48
+    },
+    {
+      "name": "Shamshabad Airport",
+      "lat": 17.2403,
+      "lng": 78.4294
+    },
+    {
+      "name": "Secunderabad",
+      "lat": 17.4399,
+      "lng": 78.4983
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "delhi_ncr_07",
+  "description": "Delhi NCR cross-region (7 stops)",
+  "city": "Delhi NCR",
+  "region": "North India",
+  "pattern": "cross-city",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Connaught Place",
+      "lat": 28.6315,
+      "lng": 77.2167
+    },
+    {
+      "name": "India Gate",
+      "lat": 28.6129,
+      "lng": 77.2295
+    },
+    {
+      "name": "Akshardham",
+      "lat": 28.6127,
+      "lng": 77.2773
+    },
+    {
+      "name": "Gurgaon Cyber Hub",
+      "lat": 28.494,
+      "lng": 77.088
+    },
+    {
+      "name": "Noida Sec 18",
+      "lat": 28.5708,
+      "lng": 77.3261
+    },
+    {
+      "name": "Dwarka Sec 21",
+      "lat": 28.5525,
+      "lng": 77.0589
+    },
+    {
+      "name": "Aerocity",
+      "lat": 28.5511,
+      "lng": 77.1225
+    }
+  ]
+}

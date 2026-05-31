@@ -1,0 +1,2056 @@
+{
+  "version": 1,
+  "count": 40,
+  "instances": [
+    {
+      "id": "mumbai_cross_07",
+      "description": "Mumbai cross-city corridor (7 stops): BKC to Colaba to Thane",
+      "city": "Mumbai",
+      "region": "West India",
+      "pattern": "cross-city",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Bandra Kurla Complex",
+          "lat": 19.0627,
+          "lng": 72.8679
+        },
+        {
+          "name": "Gateway of India",
+          "lat": 18.922,
+          "lng": 72.8347
+        },
+        {
+          "name": "Andheri East",
+          "lat": 19.1136,
+          "lng": 72.8697
+        },
+        {
+          "name": "Powai",
+          "lat": 19.1334,
+          "lng": 72.9133
+        },
+        {
+          "name": "Thane West",
+          "lat": 19.2183,
+          "lng": 72.9781
+        },
+        {
+          "name": "Worli Sea Link",
+          "lat": 19.0176,
+          "lng": 72.8178
+        },
+        {
+          "name": "Juhu Beach",
+          "lat": 19.098,
+          "lng": 72.8265
+        }
+      ]
+    },
+    {
+      "id": "mumbai_south_08",
+      "description": "South Mumbai dense cluster (8 stops)",
+      "city": "Mumbai",
+      "region": "West India",
+      "pattern": "clustered-south",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "CST",
+          "lat": 18.94,
+          "lng": 72.8353
+        },
+        {
+          "name": "Marine Drive",
+          "lat": 18.943,
+          "lng": 72.8238
+        },
+        {
+          "name": "Haji Ali",
+          "lat": 18.9827,
+          "lng": 72.8089
+        },
+        {
+          "name": "Worli",
+          "lat": 19.0176,
+          "lng": 72.8178
+        },
+        {
+          "name": "Lower Parel",
+          "lat": 19.0057,
+          "lng": 72.8305
+        },
+        {
+          "name": "Bandra West",
+          "lat": 19.0544,
+          "lng": 72.8265
+        },
+        {
+          "name": "Siddhivinayak",
+          "lat": 19.0169,
+          "lng": 72.8303
+        },
+        {
+          "name": "Dadar TT",
+          "lat": 19.0178,
+          "lng": 72.8478
+        }
+      ]
+    },
+    {
+      "id": "mumbai_suburbs_10",
+      "description": "Mumbai suburban ring (10 stops)",
+      "city": "Mumbai",
+      "region": "West India",
+      "pattern": "suburban-ring",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Malad",
+          "lat": 19.186,
+          "lng": 72.8486
+        },
+        {
+          "name": "Goregaon",
+          "lat": 19.1663,
+          "lng": 72.8526
+        },
+        {
+          "name": "Andheri West",
+          "lat": 19.1364,
+          "lng": 72.8296
+        },
+        {
+          "name": "Santacruz",
+          "lat": 19.0843,
+          "lng": 72.836
+        },
+        {
+          "name": "Kurla",
+          "lat": 19.0728,
+          "lng": 72.8826
+        },
+        {
+          "name": "Ghatkopar",
+          "lat": 19.0865,
+          "lng": 72.9089
+        },
+        {
+          "name": "Mulund",
+          "lat": 19.1713,
+          "lng": 72.9565
+        },
+        {
+          "name": "Bhandup",
+          "lat": 19.1406,
+          "lng": 72.936
+        },
+        {
+          "name": "Powai Lake",
+          "lat": 19.1197,
+          "lng": 72.906
+        },
+        {
+          "name": "Vikhroli",
+          "lat": 19.1124,
+          "lng": 72.9389
+        }
+      ]
+    },
+    {
+      "id": "mumbai_airport_09",
+      "description": "Airport\u2013business corridor (9 stops)",
+      "city": "Mumbai",
+      "region": "West India",
+      "pattern": "airport-corridor",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "CSMIA T2",
+          "lat": 19.0997,
+          "lng": 72.875
+        },
+        {
+          "name": "Andheri East Metro",
+          "lat": 19.1136,
+          "lng": 72.8697
+        },
+        {
+          "name": "SEEPZ",
+          "lat": 19.124,
+          "lng": 72.889
+        },
+        {
+          "name": "BKC",
+          "lat": 19.0627,
+          "lng": 72.8679
+        },
+        {
+          "name": "Mahalaxmi",
+          "lat": 19.011,
+          "lng": 72.834
+        },
+        {
+          "name": "Fort",
+          "lat": 18.9322,
+          "lng": 72.8365
+        },
+        {
+          "name": "Chembur",
+          "lat": 19.0522,
+          "lng": 72.8995
+        },
+        {
+          "name": "Vashi",
+          "lat": 19.0712,
+          "lng": 72.9982
+        },
+        {
+          "name": "Nerul",
+          "lat": 19.033,
+          "lng": 73.0197
+        }
+      ]
+    },
+    {
+      "id": "delhi_ncr_07",
+      "description": "Delhi NCR cross-region (7 stops)",
+      "city": "Delhi NCR",
+      "region": "North India",
+      "pattern": "cross-city",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Connaught Place",
+          "lat": 28.6315,
+          "lng": 77.2167
+        },
+        {
+          "name": "India Gate",
+          "lat": 28.6129,
+          "lng": 77.2295
+        },
+        {
+          "name": "Akshardham",
+          "lat": 28.6127,
+          "lng": 77.2773
+        },
+        {
+          "name": "Gurgaon Cyber Hub",
+          "lat": 28.494,
+          "lng": 77.088
+        },
+        {
+          "name": "Noida Sec 18",
+          "lat": 28.5708,
+          "lng": 77.3261
+        },
+        {
+          "name": "Dwarka Sec 21",
+          "lat": 28.5525,
+          "lng": 77.0589
+        },
+        {
+          "name": "Aerocity",
+          "lat": 28.5511,
+          "lng": 77.1225
+        }
+      ]
+    },
+    {
+      "id": "delhi_ring_10",
+      "description": "Delhi inner ring (10 stops)",
+      "city": "Delhi",
+      "region": "North India",
+      "pattern": "ring",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Kashmere Gate",
+          "lat": 28.6692,
+          "lng": 77.2262
+        },
+        {
+          "name": "Rajiv Chowk",
+          "lat": 28.6328,
+          "lng": 77.2197
+        },
+        {
+          "name": "ITO",
+          "lat": 28.6289,
+          "lng": 77.2405
+        },
+        {
+          "name": "Lajpat Nagar",
+          "lat": 28.5677,
+          "lng": 77.2433
+        },
+        {
+          "name": "Saket",
+          "lat": 28.5245,
+          "lng": 77.2066
+        },
+        {
+          "name": "Hauz Khas",
+          "lat": 28.5494,
+          "lng": 77.2001
+        },
+        {
+          "name": "Rohini Sec 18",
+          "lat": 28.7383,
+          "lng": 77.0822
+        },
+        {
+          "name": "Pitampura",
+          "lat": 28.7041,
+          "lng": 77.1315
+        },
+        {
+          "name": "Karol Bagh",
+          "lat": 28.6517,
+          "lng": 77.1909
+        },
+        {
+          "name": "Red Fort",
+          "lat": 28.6562,
+          "lng": 77.241
+        }
+      ]
+    },
+    {
+      "id": "delhi_gurgaon_08",
+      "description": "Gurgaon business belt (8 stops)",
+      "city": "Gurgaon",
+      "region": "North India",
+      "pattern": "business-corridor",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Cyber City",
+          "lat": 28.494,
+          "lng": 77.088
+        },
+        {
+          "name": "Golf Course Road",
+          "lat": 28.4595,
+          "lng": 77.0965
+        },
+        {
+          "name": "MG Road Metro",
+          "lat": 28.4796,
+          "lng": 77.08
+        },
+        {
+          "name": "Sohna Road",
+          "lat": 28.403,
+          "lng": 77.068
+        },
+        {
+          "name": "IFFCO Chowk",
+          "lat": 28.472,
+          "lng": 77.072
+        },
+        {
+          "name": "Udyog Vihar",
+          "lat": 28.501,
+          "lng": 77.075
+        },
+        {
+          "name": "Sector 29",
+          "lat": 28.463,
+          "lng": 77.085
+        },
+        {
+          "name": "DLF Phase 1",
+          "lat": 28.477,
+          "lng": 77.095
+        }
+      ]
+    },
+    {
+      "id": "bangalore_tech_08",
+      "description": "Bangalore tech corridor (8 stops)",
+      "city": "Bangalore",
+      "region": "South India",
+      "pattern": "tech-corridor",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "MG Road",
+          "lat": 12.9756,
+          "lng": 77.6064
+        },
+        {
+          "name": "Koramangala",
+          "lat": 12.9352,
+          "lng": 77.6245
+        },
+        {
+          "name": "Indiranagar",
+          "lat": 12.9784,
+          "lng": 77.6408
+        },
+        {
+          "name": "Whitefield",
+          "lat": 12.9698,
+          "lng": 77.75
+        },
+        {
+          "name": "Electronic City",
+          "lat": 12.8456,
+          "lng": 77.6603
+        },
+        {
+          "name": "Manyata",
+          "lat": 13.043,
+          "lng": 77.62
+        },
+        {
+          "name": "Hebbal",
+          "lat": 13.0358,
+          "lng": 77.597
+        },
+        {
+          "name": "Jayanagar",
+          "lat": 12.9308,
+          "lng": 77.5838
+        }
+      ]
+    },
+    {
+      "id": "bangalore_outer_11",
+      "description": "Bangalore outer ring (11 stops)",
+      "city": "Bangalore",
+      "region": "South India",
+      "pattern": "outer-ring",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Yelahanka",
+          "lat": 13.1007,
+          "lng": 77.5963
+        },
+        {
+          "name": "Hebbal",
+          "lat": 13.0358,
+          "lng": 77.597
+        },
+        {
+          "name": "Malleshwaram",
+          "lat": 13.0035,
+          "lng": 77.57
+        },
+        {
+          "name": "Rajajinagar",
+          "lat": 12.9915,
+          "lng": 77.551
+        },
+        {
+          "name": "Vijayanagar",
+          "lat": 12.971,
+          "lng": 77.537
+        },
+        {
+          "name": "Banashankari",
+          "lat": 12.925,
+          "lng": 77.546
+        },
+        {
+          "name": "BTM Layout",
+          "lat": 12.9166,
+          "lng": 77.6101
+        },
+        {
+          "name": "HSR Layout",
+          "lat": 12.9121,
+          "lng": 77.6446
+        },
+        {
+          "name": "Sarjapur",
+          "lat": 12.901,
+          "lng": 77.695
+        },
+        {
+          "name": "Marathahalli",
+          "lat": 12.9591,
+          "lng": 77.6974
+        },
+        {
+          "name": "KR Puram",
+          "lat": 13.01,
+          "lng": 77.69
+        }
+      ]
+    },
+    {
+      "id": "hyderabad_hitec_08",
+      "description": "Hyderabad HITEC\u2013old city (8 stops)",
+      "city": "Hyderabad",
+      "region": "South India",
+      "pattern": "cross-city",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Charminar",
+          "lat": 17.3616,
+          "lng": 78.4747
+        },
+        {
+          "name": "HITEC City",
+          "lat": 17.4435,
+          "lng": 78.3772
+        },
+        {
+          "name": "Gachibowli",
+          "lat": 17.4401,
+          "lng": 78.3489
+        },
+        {
+          "name": "Secunderabad",
+          "lat": 17.4399,
+          "lng": 78.4983
+        },
+        {
+          "name": "Banjara Hills",
+          "lat": 17.4156,
+          "lng": 78.4347
+        },
+        {
+          "name": "Kondapur",
+          "lat": 17.46,
+          "lng": 78.36
+        },
+        {
+          "name": "Uppal",
+          "lat": 17.401,
+          "lng": 78.558
+        },
+        {
+          "name": "Miyapur",
+          "lat": 17.4967,
+          "lng": 78.3572
+        }
+      ]
+    },
+    {
+      "id": "chennai_coastal_08",
+      "description": "Chennai coastal span (8 stops)",
+      "city": "Chennai",
+      "region": "South India",
+      "pattern": "coastal",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Marina Beach",
+          "lat": 13.05,
+          "lng": 80.2824
+        },
+        {
+          "name": "Central",
+          "lat": 13.0827,
+          "lng": 80.2707
+        },
+        {
+          "name": "T Nagar",
+          "lat": 13.0418,
+          "lng": 80.2341
+        },
+        {
+          "name": "OMR Sholinganallur",
+          "lat": 12.8996,
+          "lng": 80.2209
+        },
+        {
+          "name": "Guindy",
+          "lat": 13.0067,
+          "lng": 80.2206
+        },
+        {
+          "name": "Ambattur",
+          "lat": 13.1143,
+          "lng": 80.1548
+        },
+        {
+          "name": "Tambaram",
+          "lat": 12.9249,
+          "lng": 80.1
+        },
+        {
+          "name": "Ennore",
+          "lat": 13.24,
+          "lng": 80.32
+        }
+      ]
+    },
+    {
+      "id": "kolkata_heritage_07",
+      "description": "Kolkata heritage axis (7 stops)",
+      "city": "Kolkata",
+      "region": "East India",
+      "pattern": "heritage",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Howrah Bridge",
+          "lat": 22.5853,
+          "lng": 88.3468
+        },
+        {
+          "name": "Park Street",
+          "lat": 22.551,
+          "lng": 88.353
+        },
+        {
+          "name": "Victoria Memorial",
+          "lat": 22.5448,
+          "lng": 88.3426
+        },
+        {
+          "name": "Salt Lake Sector V",
+          "lat": 22.5726,
+          "lng": 88.4339
+        },
+        {
+          "name": "New Town",
+          "lat": 22.586,
+          "lng": 88.47
+        },
+        {
+          "name": "Dum Dum Airport",
+          "lat": 22.654,
+          "lng": 88.4467
+        },
+        {
+          "name": "Jadavpur",
+          "lat": 22.498,
+          "lng": 88.371
+        }
+      ]
+    },
+    {
+      "id": "pune_it_08",
+      "description": "Pune IT and old city (8 stops)",
+      "city": "Pune",
+      "region": "West India",
+      "pattern": "it-mixed",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Shivaji Nagar",
+          "lat": 18.53,
+          "lng": 73.8567
+        },
+        {
+          "name": "Hinjewadi Phase 1",
+          "lat": 18.5912,
+          "lng": 73.7389
+        },
+        {
+          "name": "Kothrud",
+          "lat": 18.5074,
+          "lng": 73.8077
+        },
+        {
+          "name": "Hadapsar",
+          "lat": 18.4969,
+          "lng": 73.927
+        },
+        {
+          "name": "Viman Nagar",
+          "lat": 18.5679,
+          "lng": 73.9143
+        },
+        {
+          "name": "Baner",
+          "lat": 18.559,
+          "lng": 73.779
+        },
+        {
+          "name": "Magarpatta",
+          "lat": 18.515,
+          "lng": 73.935
+        },
+        {
+          "name": "Pimpri",
+          "lat": 18.6298,
+          "lng": 73.7997
+        }
+      ]
+    },
+    {
+      "id": "ahmedabad_mixed_07",
+      "description": "Ahmedabad mixed urban (7 stops)",
+      "city": "Ahmedabad",
+      "region": "West India",
+      "pattern": "mixed",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Sabarmati Ashram",
+          "lat": 23.06,
+          "lng": 72.58
+        },
+        {
+          "name": "Law Garden",
+          "lat": 23.03,
+          "lng": 72.56
+        },
+        {
+          "name": "SG Highway Bopal",
+          "lat": 23.03,
+          "lng": 72.47
+        },
+        {
+          "name": "GIFT City",
+          "lat": 23.16,
+          "lng": 72.68
+        },
+        {
+          "name": "Maninagar",
+          "lat": 22.998,
+          "lng": 72.601
+        },
+        {
+          "name": "Navrangpura",
+          "lat": 23.04,
+          "lng": 72.56
+        },
+        {
+          "name": "Vastrapur",
+          "lat": 23.04,
+          "lng": 72.53
+        }
+      ]
+    },
+    {
+      "id": "jaipur_tourist_07",
+      "description": "Jaipur tourist circuit (7 stops)",
+      "city": "Jaipur",
+      "region": "North India",
+      "pattern": "tourist",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Hawa Mahal",
+          "lat": 26.9239,
+          "lng": 75.8267
+        },
+        {
+          "name": "City Palace",
+          "lat": 26.9258,
+          "lng": 75.8236
+        },
+        {
+          "name": "Amer Fort",
+          "lat": 26.9855,
+          "lng": 75.8513
+        },
+        {
+          "name": "JLN Marg",
+          "lat": 26.892,
+          "lng": 75.81
+        },
+        {
+          "name": "Malviya Nagar",
+          "lat": 26.854,
+          "lng": 75.82
+        },
+        {
+          "name": "Sanganer Airport",
+          "lat": 26.8242,
+          "lng": 75.8122
+        },
+        {
+          "name": "Chandpole",
+          "lat": 26.92,
+          "lng": 75.79
+        }
+      ]
+    },
+    {
+      "id": "lucknow_07",
+      "description": "Lucknow urban spread (7 stops)",
+      "city": "Lucknow",
+      "region": "North India",
+      "pattern": "urban",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Hazratganj",
+          "lat": 26.8467,
+          "lng": 80.9462
+        },
+        {
+          "name": "Charbagh",
+          "lat": 26.831,
+          "lng": 80.925
+        },
+        {
+          "name": "Gomti Nagar",
+          "lat": 26.85,
+          "lng": 81.0
+        },
+        {
+          "name": "Aliganj",
+          "lat": 26.89,
+          "lng": 80.95
+        },
+        {
+          "name": "Chinhat",
+          "lat": 26.87,
+          "lng": 81.02
+        },
+        {
+          "name": "Amausi Airport",
+          "lat": 26.7606,
+          "lng": 80.8893
+        },
+        {
+          "name": "Alambagh",
+          "lat": 26.8,
+          "lng": 80.9
+        }
+      ]
+    },
+    {
+      "id": "kochi_coastal_07",
+      "description": "Kochi coastal and mainland (7 stops)",
+      "city": "Kochi",
+      "region": "South India",
+      "pattern": "coastal",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Fort Kochi",
+          "lat": 9.965,
+          "lng": 76.243
+        },
+        {
+          "name": "MG Road Ernakulam",
+          "lat": 9.9816,
+          "lng": 76.283
+        },
+        {
+          "name": "Edappally",
+          "lat": 10.026,
+          "lng": 76.308
+        },
+        {
+          "name": "Kakkanad",
+          "lat": 10.015,
+          "lng": 76.34
+        },
+        {
+          "name": "Aluva",
+          "lat": 10.11,
+          "lng": 76.35
+        },
+        {
+          "name": "Airport Nedumbassery",
+          "lat": 10.152,
+          "lng": 76.401
+        },
+        {
+          "name": "Vyttila",
+          "lat": 9.967,
+          "lng": 76.32
+        }
+      ]
+    },
+    {
+      "id": "chandigarh_tricity_08",
+      "description": "Chandigarh tricity (8 stops)",
+      "city": "Chandigarh",
+      "region": "North India",
+      "pattern": "tricity",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Sector 17",
+          "lat": 30.741,
+          "lng": 76.781
+        },
+        {
+          "name": "Rock Garden",
+          "lat": 30.752,
+          "lng": 76.802
+        },
+        {
+          "name": "PGI",
+          "lat": 30.76,
+          "lng": 76.77
+        },
+        {
+          "name": "Mohali Phase 7",
+          "lat": 30.72,
+          "lng": 76.72
+        },
+        {
+          "name": "Panchkula Sec 5",
+          "lat": 30.69,
+          "lng": 76.86
+        },
+        {
+          "name": "Zirakpur",
+          "lat": 30.64,
+          "lng": 76.82
+        },
+        {
+          "name": "Airport",
+          "lat": 30.6735,
+          "lng": 76.7885
+        },
+        {
+          "name": "IT Park",
+          "lat": 30.73,
+          "lng": 76.74
+        }
+      ]
+    },
+    {
+      "id": "indore_07",
+      "description": "Indore urban (7 stops)",
+      "city": "Indore",
+      "region": "Central India",
+      "pattern": "urban",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Rajwada",
+          "lat": 22.7196,
+          "lng": 75.8577
+        },
+        {
+          "name": "Vijay Nagar",
+          "lat": 22.753,
+          "lng": 75.89
+        },
+        {
+          "name": "Palasia",
+          "lat": 22.724,
+          "lng": 75.88
+        },
+        {
+          "name": "Rau",
+          "lat": 22.64,
+          "lng": 75.82
+        },
+        {
+          "name": "Airport",
+          "lat": 22.7218,
+          "lng": 75.8011
+        },
+        {
+          "name": "AB Road",
+          "lat": 22.73,
+          "lng": 75.87
+        },
+        {
+          "name": "Bhawarkuan",
+          "lat": 22.69,
+          "lng": 75.87
+        }
+      ]
+    },
+    {
+      "id": "nagpur_hub_07",
+      "description": "Nagpur zero-mile hub (7 stops)",
+      "city": "Nagpur",
+      "region": "Central India",
+      "pattern": "hub",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Zero Mile",
+          "lat": 21.1458,
+          "lng": 79.0882
+        },
+        {
+          "name": "Sitabuldi",
+          "lat": 21.152,
+          "lng": 79.086
+        },
+        {
+          "name": "MIHAN",
+          "lat": 21.09,
+          "lng": 79.05
+        },
+        {
+          "name": "Wardha Road",
+          "lat": 21.12,
+          "lng": 79.1
+        },
+        {
+          "name": "Kamtee",
+          "lat": 21.23,
+          "lng": 79.12
+        },
+        {
+          "name": "Airport",
+          "lat": 21.092,
+          "lng": 79.047
+        },
+        {
+          "name": "Hingna",
+          "lat": 21.11,
+          "lng": 79.0
+        }
+      ]
+    },
+    {
+      "id": "goa_coastal_06",
+      "description": "Goa coastal tour (6 stops)",
+      "city": "Goa",
+      "region": "West India",
+      "pattern": "coastal",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Panaji",
+          "lat": 15.4909,
+          "lng": 73.8278
+        },
+        {
+          "name": "Calangute",
+          "lat": 15.5439,
+          "lng": 73.7553
+        },
+        {
+          "name": "Mapusa",
+          "lat": 15.59,
+          "lng": 73.81
+        },
+        {
+          "name": "Margao",
+          "lat": 15.273,
+          "lng": 73.958
+        },
+        {
+          "name": "Vasco",
+          "lat": 15.398,
+          "lng": 73.812
+        },
+        {
+          "name": "Ponda",
+          "lat": 15.4,
+          "lng": 73.88
+        }
+      ]
+    },
+    {
+      "id": "varanasi_ghat_07",
+      "description": "Varanasi ghats and extensions (7 stops)",
+      "city": "Varanasi",
+      "region": "North India",
+      "pattern": "heritage",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Dashashwamedh Ghat",
+          "lat": 25.307,
+          "lng": 83.01
+        },
+        {
+          "name": "BHU",
+          "lat": 25.267,
+          "lng": 82.991
+        },
+        {
+          "name": "Cantt",
+          "lat": 25.34,
+          "lng": 82.97
+        },
+        {
+          "name": "Sarnath",
+          "lat": 25.381,
+          "lng": 83.021
+        },
+        {
+          "name": "Lanka",
+          "lat": 25.28,
+          "lng": 83.0
+        },
+        {
+          "name": "Sigra",
+          "lat": 25.32,
+          "lng": 82.99
+        },
+        {
+          "name": "Airport Babatpur",
+          "lat": 25.452,
+          "lng": 82.859
+        }
+      ]
+    },
+    {
+      "id": "surat_diamond_07",
+      "description": "Surat diamond\u2013textile belt (7 stops)",
+      "city": "Surat",
+      "region": "West India",
+      "pattern": "industrial",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Ring Road",
+          "lat": 21.1702,
+          "lng": 72.8311
+        },
+        {
+          "name": "Adajan",
+          "lat": 21.195,
+          "lng": 72.8
+        },
+        {
+          "name": "Varachha",
+          "lat": 21.2,
+          "lng": 72.87
+        },
+        {
+          "name": "Udhna",
+          "lat": 21.15,
+          "lng": 72.85
+        },
+        {
+          "name": "Airport",
+          "lat": 21.114,
+          "lng": 72.742
+        },
+        {
+          "name": "Athwa",
+          "lat": 21.18,
+          "lng": 72.81
+        },
+        {
+          "name": "Dumas",
+          "lat": 21.12,
+          "lng": 72.78
+        }
+      ]
+    },
+    {
+      "id": "bhopal_lake_07",
+      "description": "Bhopal lake city (7 stops)",
+      "city": "Bhopal",
+      "region": "Central India",
+      "pattern": "lake-city",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "TT Nagar",
+          "lat": 23.2456,
+          "lng": 77.401
+        },
+        {
+          "name": "Upper Lake",
+          "lat": 23.25,
+          "lng": 77.42
+        },
+        {
+          "name": "MP Nagar",
+          "lat": 23.23,
+          "lng": 77.41
+        },
+        {
+          "name": "Bairagarh",
+          "lat": 23.28,
+          "lng": 77.38
+        },
+        {
+          "name": "Airport",
+          "lat": 23.287,
+          "lng": 77.337
+        },
+        {
+          "name": "Habibganj",
+          "lat": 23.22,
+          "lng": 77.44
+        },
+        {
+          "name": "Kolar",
+          "lat": 23.78,
+          "lng": 77.33
+        }
+      ]
+    },
+    {
+      "id": "coimbatore_07",
+      "description": "Coimbatore industrial urban (7 stops)",
+      "city": "Coimbatore",
+      "region": "South India",
+      "pattern": "industrial",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "RS Puram",
+          "lat": 11.005,
+          "lng": 76.945
+        },
+        {
+          "name": "Gandhipuram",
+          "lat": 11.016,
+          "lng": 76.97
+        },
+        {
+          "name": "Peelamedu",
+          "lat": 11.03,
+          "lng": 77.02
+        },
+        {
+          "name": "Singanallur",
+          "lat": 11.01,
+          "lng": 77.03
+        },
+        {
+          "name": "Airport",
+          "lat": 11.03,
+          "lng": 77.04
+        },
+        {
+          "name": "Saibaba Colony",
+          "lat": 11.02,
+          "lng": 76.95
+        },
+        {
+          "name": "Mettupalayam Road",
+          "lat": 11.05,
+          "lng": 76.93
+        }
+      ]
+    },
+    {
+      "id": "vizag_port_07",
+      "description": "Visakhapatnam port city (7 stops)",
+      "city": "Visakhapatnam",
+      "region": "East India",
+      "pattern": "port-city",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "RK Beach",
+          "lat": 17.715,
+          "lng": 83.32
+        },
+        {
+          "name": "Dwaraka Nagar",
+          "lat": 17.73,
+          "lng": 83.3
+        },
+        {
+          "name": "Gajuwaka",
+          "lat": 17.7,
+          "lng": 83.22
+        },
+        {
+          "name": "Madhurawada",
+          "lat": 17.82,
+          "lng": 83.35
+        },
+        {
+          "name": "Airport",
+          "lat": 17.721,
+          "lng": 83.2245
+        },
+        {
+          "name": "Waltair",
+          "lat": 17.71,
+          "lng": 83.31
+        },
+        {
+          "name": "Bheemili",
+          "lat": 17.88,
+          "lng": 83.45
+        }
+      ]
+    },
+    {
+      "id": "mumbai_north_12",
+      "description": "Large north Mumbai tour (12 stops)",
+      "city": "Mumbai",
+      "region": "West India",
+      "pattern": "large-north",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Borivali",
+          "lat": 19.2307,
+          "lng": 72.8567
+        },
+        {
+          "name": "Kandivali",
+          "lat": 19.2038,
+          "lng": 72.8597
+        },
+        {
+          "name": "Malad",
+          "lat": 19.186,
+          "lng": 72.8486
+        },
+        {
+          "name": "Goregaon",
+          "lat": 19.1663,
+          "lng": 72.8526
+        },
+        {
+          "name": "Andheri",
+          "lat": 19.1136,
+          "lng": 72.8697
+        },
+        {
+          "name": "Bandra",
+          "lat": 19.0544,
+          "lng": 72.8265
+        },
+        {
+          "name": "Dadar",
+          "lat": 19.0178,
+          "lng": 72.8478
+        },
+        {
+          "name": "Sion",
+          "lat": 19.0436,
+          "lng": 72.8642
+        },
+        {
+          "name": "Ghatkopar",
+          "lat": 19.0865,
+          "lng": 72.9089
+        },
+        {
+          "name": "Mulund",
+          "lat": 19.1713,
+          "lng": 72.9565
+        },
+        {
+          "name": "Thane",
+          "lat": 19.2183,
+          "lng": 72.9781
+        },
+        {
+          "name": "Kalyan",
+          "lat": 19.2437,
+          "lng": 73.1355
+        }
+      ]
+    },
+    {
+      "id": "delhi_south_north_09",
+      "description": "Delhi north\u2013south axis (9 stops)",
+      "city": "Delhi",
+      "region": "North India",
+      "pattern": "north-south",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Kashmere Gate",
+          "lat": 28.6692,
+          "lng": 77.2262
+        },
+        {
+          "name": "Civil Lines",
+          "lat": 28.68,
+          "lng": 77.23
+        },
+        {
+          "name": "Rajiv Chowk",
+          "lat": 28.6328,
+          "lng": 77.2197
+        },
+        {
+          "name": "AIIMS",
+          "lat": 28.5672,
+          "lng": 77.21
+        },
+        {
+          "name": "Saket",
+          "lat": 28.5245,
+          "lng": 77.2066
+        },
+        {
+          "name": "Mehrauli",
+          "lat": 28.5244,
+          "lng": 77.1855
+        },
+        {
+          "name": "Dwarka",
+          "lat": 28.5921,
+          "lng": 77.046
+        },
+        {
+          "name": "Rohini",
+          "lat": 28.7383,
+          "lng": 77.0822
+        },
+        {
+          "name": "Narela",
+          "lat": 28.85,
+          "lng": 77.09
+        }
+      ]
+    },
+    {
+      "id": "bangalore_peak_09",
+      "description": "Bangalore peak-traffic hotspots (9 stops)",
+      "city": "Bangalore",
+      "region": "South India",
+      "pattern": "peak-traffic",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Silk Board",
+          "lat": 12.9178,
+          "lng": 77.6233
+        },
+        {
+          "name": "Marathahalli",
+          "lat": 12.9591,
+          "lng": 77.6974
+        },
+        {
+          "name": "KR Puram",
+          "lat": 13.01,
+          "lng": 77.69
+        },
+        {
+          "name": "Hebbal Flyover",
+          "lat": 13.0358,
+          "lng": 77.597
+        },
+        {
+          "name": "ORR Mahadevapura",
+          "lat": 12.991,
+          "lng": 77.69
+        },
+        {
+          "name": "Electronic City Toll",
+          "lat": 12.8456,
+          "lng": 77.6603
+        },
+        {
+          "name": "Mysore Road",
+          "lat": 12.914,
+          "lng": 77.52
+        },
+        {
+          "name": "Yeshwanthpur",
+          "lat": 13.028,
+          "lng": 77.54
+        },
+        {
+          "name": "Majestic",
+          "lat": 12.9767,
+          "lng": 77.5713
+        }
+      ]
+    },
+    {
+      "id": "hyderabad_orr_10",
+      "description": "Hyderabad ORR-style span (10 stops)",
+      "city": "Hyderabad",
+      "region": "South India",
+      "pattern": "ring-road",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Gachibowli",
+          "lat": 17.4401,
+          "lng": 78.3489
+        },
+        {
+          "name": "Nanakramguda",
+          "lat": 17.42,
+          "lng": 78.34
+        },
+        {
+          "name": "Financial District",
+          "lat": 17.43,
+          "lng": 78.35
+        },
+        {
+          "name": "Kukatpally",
+          "lat": 17.4948,
+          "lng": 78.3996
+        },
+        {
+          "name": "Miyapur",
+          "lat": 17.4967,
+          "lng": 78.3572
+        },
+        {
+          "name": "LB Nagar",
+          "lat": 17.366,
+          "lng": 78.55
+        },
+        {
+          "name": "Uppal",
+          "lat": 17.401,
+          "lng": 78.558
+        },
+        {
+          "name": "Medchal",
+          "lat": 17.63,
+          "lng": 78.48
+        },
+        {
+          "name": "Shamshabad Airport",
+          "lat": 17.2403,
+          "lng": 78.4294
+        },
+        {
+          "name": "Secunderabad",
+          "lat": 17.4399,
+          "lng": 78.4983
+        }
+      ]
+    },
+    {
+      "id": "chennai_omr_10",
+      "description": "Chennai OMR IT corridor (10 stops)",
+      "city": "Chennai",
+      "region": "South India",
+      "pattern": "omr-corridor",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Adyar",
+          "lat": 13.0067,
+          "lng": 77.25
+        },
+        {
+          "name": "Thiruvanmiyur",
+          "lat": 12.98,
+          "lng": 80.26
+        },
+        {
+          "name": "Taramani",
+          "lat": 12.99,
+          "lng": 80.24
+        },
+        {
+          "name": "Velachery",
+          "lat": 12.975,
+          "lng": 80.22
+        },
+        {
+          "name": "Sholinganallur",
+          "lat": 12.8996,
+          "lng": 80.2209
+        },
+        {
+          "name": "Perungudi",
+          "lat": 12.96,
+          "lng": 80.24
+        },
+        {
+          "name": "Thoraipakkam",
+          "lat": 12.94,
+          "lng": 80.23
+        },
+        {
+          "name": "Siruseri",
+          "lat": 12.83,
+          "lng": 80.22
+        },
+        {
+          "name": "Tambaram",
+          "lat": 12.9249,
+          "lng": 80.1
+        },
+        {
+          "name": "Guindy",
+          "lat": 13.0067,
+          "lng": 80.2206
+        }
+      ]
+    },
+    {
+      "id": "pune_ring_09",
+      "description": "Pune ring tour (9 stops)",
+      "city": "Pune",
+      "region": "West India",
+      "pattern": "ring",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Deccan",
+          "lat": 18.5204,
+          "lng": 73.8567
+        },
+        {
+          "name": "Katraj",
+          "lat": 18.448,
+          "lng": 73.858
+        },
+        {
+          "name": "Swargate",
+          "lat": 18.5018,
+          "lng": 73.8636
+        },
+        {
+          "name": "Kharadi",
+          "lat": 18.55,
+          "lng": 73.94
+        },
+        {
+          "name": "Wagholi",
+          "lat": 18.58,
+          "lng": 74.0
+        },
+        {
+          "name": "Chakan",
+          "lat": 18.75,
+          "lng": 73.86
+        },
+        {
+          "name": "Talegaon",
+          "lat": 18.72,
+          "lng": 73.68
+        },
+        {
+          "name": "Lonavala",
+          "lat": 18.75,
+          "lng": 73.41
+        },
+        {
+          "name": "Hinjewadi",
+          "lat": 18.5912,
+          "lng": 73.7389
+        }
+      ]
+    },
+    {
+      "id": "kolkata_east_west_08",
+      "description": "Kolkata east\u2013west (8 stops)",
+      "city": "Kolkata",
+      "region": "East India",
+      "pattern": "east-west",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Howrah",
+          "lat": 22.5853,
+          "lng": 88.3468
+        },
+        {
+          "name": "Sealdah",
+          "lat": 22.567,
+          "lng": 88.37
+        },
+        {
+          "name": "Park Circus",
+          "lat": 22.545,
+          "lng": 88.37
+        },
+        {
+          "name": "EM Bypass Ruby",
+          "lat": 22.513,
+          "lng": 88.398
+        },
+        {
+          "name": "Salt Lake",
+          "lat": 22.5726,
+          "lng": 88.4339
+        },
+        {
+          "name": "New Town",
+          "lat": 22.586,
+          "lng": 88.47
+        },
+        {
+          "name": "Dum Dum",
+          "lat": 22.654,
+          "lng": 88.4467
+        },
+        {
+          "name": "Barasat",
+          "lat": 22.72,
+          "lng": 88.48
+        }
+      ]
+    },
+    {
+      "id": "ahmedabad_08",
+      "description": "Ahmedabad wide spread (8 stops)",
+      "city": "Ahmedabad",
+      "region": "West India",
+      "pattern": "spread",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Sabarmati",
+          "lat": 23.06,
+          "lng": 72.58
+        },
+        {
+          "name": "Ashram Road",
+          "lat": 23.04,
+          "lng": 72.57
+        },
+        {
+          "name": "Paldi",
+          "lat": 23.01,
+          "lng": 72.56
+        },
+        {
+          "name": "Satellite",
+          "lat": 23.03,
+          "lng": 72.52
+        },
+        {
+          "name": "Bopal",
+          "lat": 23.03,
+          "lng": 72.47
+        },
+        {
+          "name": "Gandhinagar",
+          "lat": 23.215,
+          "lng": 72.6369
+        },
+        {
+          "name": "Naroda",
+          "lat": 23.07,
+          "lng": 72.65
+        },
+        {
+          "name": "Sanand",
+          "lat": 22.99,
+          "lng": 72.38
+        }
+      ]
+    },
+    {
+      "id": "jaipur_outer_08",
+      "description": "Jaipur outer ring (8 stops)",
+      "city": "Jaipur",
+      "region": "North India",
+      "pattern": "outer",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Amer",
+          "lat": 26.9855,
+          "lng": 75.8513
+        },
+        {
+          "name": "Jal Mahal",
+          "lat": 26.953,
+          "lng": 75.846
+        },
+        {
+          "name": "WTP",
+          "lat": 26.9124,
+          "lng": 75.7873
+        },
+        {
+          "name": "Sanganer",
+          "lat": 26.8242,
+          "lng": 75.8122
+        },
+        {
+          "name": "Mansarovar",
+          "lat": 26.85,
+          "lng": 75.77
+        },
+        {
+          "name": "Vidhyadhar Nagar",
+          "lat": 26.95,
+          "lng": 75.78
+        },
+        {
+          "name": "Chomu",
+          "lat": 27.15,
+          "lng": 75.7
+        },
+        {
+          "name": "Bagru",
+          "lat": 26.8,
+          "lng": 75.54
+        }
+      ]
+    },
+    {
+      "id": "lucknow_ring_08",
+      "description": "Lucknow ring (8 stops)",
+      "city": "Lucknow",
+      "region": "North India",
+      "pattern": "ring",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Hazratganj",
+          "lat": 26.8467,
+          "lng": 80.9462
+        },
+        {
+          "name": "Gomti Nagar",
+          "lat": 26.85,
+          "lng": 81.0
+        },
+        {
+          "name": "Indira Nagar",
+          "lat": 26.87,
+          "lng": 80.99
+        },
+        {
+          "name": "Alambagh",
+          "lat": 26.8,
+          "lng": 80.9
+        },
+        {
+          "name": "Aminabad",
+          "lat": 26.85,
+          "lng": 80.92
+        },
+        {
+          "name": "Chowk",
+          "lat": 26.86,
+          "lng": 80.91
+        },
+        {
+          "name": "Mahanagar",
+          "lat": 26.88,
+          "lng": 80.97
+        },
+        {
+          "name": "Airport",
+          "lat": 26.7606,
+          "lng": 80.8893
+        }
+      ]
+    },
+    {
+      "id": "kochi_span_08",
+      "description": "Kochi long span (8 stops)",
+      "city": "Kochi",
+      "region": "South India",
+      "pattern": "span",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Fort Kochi",
+          "lat": 9.965,
+          "lng": 76.243
+        },
+        {
+          "name": "Mattancherry",
+          "lat": 9.958,
+          "lng": 76.255
+        },
+        {
+          "name": "Vyttila",
+          "lat": 9.967,
+          "lng": 76.32
+        },
+        {
+          "name": "Kakkanad",
+          "lat": 10.015,
+          "lng": 76.34
+        },
+        {
+          "name": "InfoPark",
+          "lat": 10.02,
+          "lng": 76.36
+        },
+        {
+          "name": "Aluva",
+          "lat": 10.11,
+          "lng": 76.35
+        },
+        {
+          "name": "Angamaly",
+          "lat": 10.19,
+          "lng": 76.39
+        },
+        {
+          "name": "Airport",
+          "lat": 10.152,
+          "lng": 76.401
+        }
+      ]
+    },
+    {
+      "id": "chandigarh_07",
+      "description": "Chandigarh compact (7 stops)",
+      "city": "Chandigarh",
+      "region": "North India",
+      "pattern": "compact",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Sector 17",
+          "lat": 30.741,
+          "lng": 76.781
+        },
+        {
+          "name": "Sector 22",
+          "lat": 30.735,
+          "lng": 76.79
+        },
+        {
+          "name": "Sector 35",
+          "lat": 30.72,
+          "lng": 76.77
+        },
+        {
+          "name": "Sector 43",
+          "lat": 30.71,
+          "lng": 76.76
+        },
+        {
+          "name": "Mohali Sec 70",
+          "lat": 30.7,
+          "lng": 76.71
+        },
+        {
+          "name": "Panchkula",
+          "lat": 30.69,
+          "lng": 76.86
+        },
+        {
+          "name": "Zirakpur",
+          "lat": 30.64,
+          "lng": 76.82
+        }
+      ]
+    },
+    {
+      "id": "indore_ring_08",
+      "description": "Indore ring (8 stops)",
+      "city": "Indore",
+      "region": "Central India",
+      "pattern": "ring",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Rajwada",
+          "lat": 22.7196,
+          "lng": 75.8577
+        },
+        {
+          "name": "Palasia",
+          "lat": 22.724,
+          "lng": 75.88
+        },
+        {
+          "name": "Vijay Nagar",
+          "lat": 22.753,
+          "lng": 75.89
+        },
+        {
+          "name": "Bhawarkuan",
+          "lat": 22.69,
+          "lng": 75.87
+        },
+        {
+          "name": "Rau",
+          "lat": 22.64,
+          "lng": 75.82
+        },
+        {
+          "name": "Depalpur",
+          "lat": 22.85,
+          "lng": 75.62
+        },
+        {
+          "name": "Mhow",
+          "lat": 22.55,
+          "lng": 75.75
+        },
+        {
+          "name": "Airport",
+          "lat": 22.7218,
+          "lng": 75.8011
+        }
+      ]
+    },
+    {
+      "id": "nagpur_spread_08",
+      "description": "Nagpur wide spread (8 stops)",
+      "city": "Nagpur",
+      "region": "Central India",
+      "pattern": "spread",
+      "mode": "driving-traffic",
+      "round_trip": true,
+      "stops": [
+        {
+          "name": "Zero Mile",
+          "lat": 21.1458,
+          "lng": 79.0882
+        },
+        {
+          "name": "Sitabuldi",
+          "lat": 21.152,
+          "lng": 79.086
+        },
+        {
+          "name": "Civil Lines",
+          "lat": 21.16,
+          "lng": 79.09
+        },
+        {
+          "name": "MIHAN",
+          "lat": 21.09,
+          "lng": 79.05
+        },
+        {
+          "name": "Kamtee",
+          "lat": 21.23,
+          "lng": 79.12
+        },
+        {
+          "name": "Hingna",
+          "lat": 21.11,
+          "lng": 79.0
+        },
+        {
+          "name": "Wardha Road",
+          "lat": 21.12,
+          "lng": 79.1
+        },
+        {
+          "name": "Airport",
+          "lat": 21.092,
+          "lng": 79.047
+        }
+      ]
+    }
+  ]
+}

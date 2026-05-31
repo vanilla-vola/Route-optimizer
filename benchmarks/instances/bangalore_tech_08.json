@@ -1,0 +1,51 @@
+{
+  "id": "bangalore_tech_08",
+  "description": "Bangalore tech corridor (8 stops)",
+  "city": "Bangalore",
+  "region": "South India",
+  "pattern": "tech-corridor",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "MG Road",
+      "lat": 12.9756,
+      "lng": 77.6064
+    },
+    {
+      "name": "Koramangala",
+      "lat": 12.9352,
+      "lng": 77.6245
+    },
+    {
+      "name": "Indiranagar",
+      "lat": 12.9784,
+      "lng": 77.6408
+    },
+    {
+      "name": "Whitefield",
+      "lat": 12.9698,
+      "lng": 77.75
+    },
+    {
+      "name": "Electronic City",
+      "lat": 12.8456,
+      "lng": 77.6603
+    },
+    {
+      "name": "Manyata",
+      "lat": 13.043,
+      "lng": 77.62
+    },
+    {
+      "name": "Hebbal",
+      "lat": 13.0358,
+      "lng": 77.597
+    },
+    {
+      "name": "Jayanagar",
+      "lat": 12.9308,
+      "lng": 77.5838
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "surat_diamond_07",
+  "description": "Surat diamond\u2013textile belt (7 stops)",
+  "city": "Surat",
+  "region": "West India",
+  "pattern": "industrial",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Ring Road",
+      "lat": 21.1702,
+      "lng": 72.8311
+    },
+    {
+      "name": "Adajan",
+      "lat": 21.195,
+      "lng": 72.8
+    },
+    {
+      "name": "Varachha",
+      "lat": 21.2,
+      "lng": 72.87
+    },
+    {
+      "name": "Udhna",
+      "lat": 21.15,
+      "lng": 72.85
+    },
+    {
+      "name": "Airport",
+      "lat": 21.114,
+      "lng": 72.742
+    },
+    {
+      "name": "Athwa",
+      "lat": 21.18,
+      "lng": 72.81
+    },
+    {
+      "name": "Dumas",
+      "lat": 21.12,
+      "lng": 72.78
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "id": "mumbai_south_08",
+  "description": "South Mumbai dense cluster (8 stops)",
+  "city": "Mumbai",
+  "region": "West India",
+  "pattern": "clustered-south",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "CST",
+      "lat": 18.94,
+      "lng": 72.8353
+    },
+    {
+      "name": "Marine Drive",
+      "lat": 18.943,
+      "lng": 72.8238
+    },
+    {
+      "name": "Haji Ali",
+      "lat": 18.9827,
+      "lng": 72.8089
+    },
+    {
+      "name": "Worli",
+      "lat": 19.0176,
+      "lng": 72.8178
+    },
+    {
+      "name": "Lower Parel",
+      "lat": 19.0057,
+      "lng": 72.8305
+    },
+    {
+      "name": "Bandra West",
+      "lat": 19.0544,
+      "lng": 72.8265
+    },
+    {
+      "name": "Siddhivinayak",
+      "lat": 19.0169,
+      "lng": 72.8303
+    },
+    {
+      "name": "Dadar TT",
+      "lat": 19.0178,
+      "lng": 72.8478
+    }
+  ]
+}

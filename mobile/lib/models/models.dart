@@ -232,6 +232,100 @@ class CompareResultDto {
       );
 }
 
+class BenchmarkInstanceSummaryDto {
+  const BenchmarkInstanceSummaryDto({
+    required this.id,
+    required this.description,
+    required this.city,
+    required this.region,
+    required this.pattern,
+    required this.stopCount,
+    required this.mode,
+    required this.roundTrip,
+  });
+
+  final String id;
+  final String description;
+  final String city;
+  final String region;
+  final String pattern;
+  final int stopCount;
+  final String mode;
+  final bool roundTrip;
+
+  factory BenchmarkInstanceSummaryDto.fromJson(Map<String, dynamic> json) =>
+      BenchmarkInstanceSummaryDto(
+        id: json['id'] as String,
+        description: json['description'] as String,
+        city: json['city'] as String,
+        region: json['region'] as String,
+        pattern: json['pattern'] as String,
+        stopCount: json['stop_count'] as int,
+        mode: json['mode'] as String,
+        roundTrip: json['round_trip'] as bool,
+      );
+}
+
+class BenchmarkInstanceDetailDto {
+  const BenchmarkInstanceDetailDto({
+    required this.id,
+    required this.description,
+    required this.city,
+    required this.region,
+    required this.pattern,
+    required this.mode,
+    required this.roundTrip,
+    required this.stops,
+  });
+
+  final String id;
+  final String description;
+  final String city;
+  final String region;
+  final String pattern;
+  final String mode;
+  final bool roundTrip;
+  final List<StopDto> stops;
+
+  factory BenchmarkInstanceDetailDto.fromJson(Map<String, dynamic> json) =>
+      BenchmarkInstanceDetailDto(
+        id: json['id'] as String,
+        description: json['description'] as String,
+        city: json['city'] as String,
+        region: json['region'] as String,
+        pattern: json['pattern'] as String,
+        mode: json['mode'] as String,
+        roundTrip: json['round_trip'] as bool,
+        stops: (json['stops'] as List)
+            .map((e) => StopDto.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
+}
+
+class BenchmarkInstanceListResponseDto {
+  const BenchmarkInstanceListResponseDto({
+    required this.count,
+    required this.instances,
+  });
+
+  final int count;
+  final List<BenchmarkInstanceSummaryDto> instances;
+
+  factory BenchmarkInstanceListResponseDto.fromJson(
+    Map<String, dynamic> json,
+  ) =>
+      BenchmarkInstanceListResponseDto(
+        count: json['count'] as int,
+        instances: (json['instances'] as List)
+            .map(
+              (e) => BenchmarkInstanceSummaryDto.fromJson(
+                e as Map<String, dynamic>,
+              ),
+            )
+            .toList(),
+      );
+}
+
 class CompareResponseDto {
   const CompareResponseDto({
     required this.results,

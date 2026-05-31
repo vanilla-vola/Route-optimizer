@@ -1,0 +1,51 @@
+{
+  "id": "pune_it_08",
+  "description": "Pune IT and old city (8 stops)",
+  "city": "Pune",
+  "region": "West India",
+  "pattern": "it-mixed",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Shivaji Nagar",
+      "lat": 18.53,
+      "lng": 73.8567
+    },
+    {
+      "name": "Hinjewadi Phase 1",
+      "lat": 18.5912,
+      "lng": 73.7389
+    },
+    {
+      "name": "Kothrud",
+      "lat": 18.5074,
+      "lng": 73.8077
+    },
+    {
+      "name": "Hadapsar",
+      "lat": 18.4969,
+      "lng": 73.927
+    },
+    {
+      "name": "Viman Nagar",
+      "lat": 18.5679,
+      "lng": 73.9143
+    },
+    {
+      "name": "Baner",
+      "lat": 18.559,
+      "lng": 73.779
+    },
+    {
+      "name": "Magarpatta",
+      "lat": 18.515,
+      "lng": 73.935
+    },
+    {
+      "name": "Pimpri",
+      "lat": 18.6298,
+      "lng": 73.7997
+    }
+  ]
+}

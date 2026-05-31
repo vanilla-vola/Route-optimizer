@@ -1,0 +1,407 @@
+{
+  "version": 1,
+  "count": 40,
+  "note": "IEEE-oriented urban instances for Mapbox depart-at profile benchmarking.",
+  "instances": [
+    {
+      "id": "mumbai_cross_07",
+      "description": "Mumbai cross-city corridor (7 stops): BKC to Colaba to Thane",
+      "city": "Mumbai",
+      "region": "West India",
+      "pattern": "cross-city",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "mumbai_south_08",
+      "description": "South Mumbai dense cluster (8 stops)",
+      "city": "Mumbai",
+      "region": "West India",
+      "pattern": "clustered-south",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "mumbai_suburbs_10",
+      "description": "Mumbai suburban ring (10 stops)",
+      "city": "Mumbai",
+      "region": "West India",
+      "pattern": "suburban-ring",
+      "stop_count": 10,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "mumbai_airport_09",
+      "description": "Airport\u2013business corridor (9 stops)",
+      "city": "Mumbai",
+      "region": "West India",
+      "pattern": "airport-corridor",
+      "stop_count": 9,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "delhi_ncr_07",
+      "description": "Delhi NCR cross-region (7 stops)",
+      "city": "Delhi NCR",
+      "region": "North India",
+      "pattern": "cross-city",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "delhi_ring_10",
+      "description": "Delhi inner ring (10 stops)",
+      "city": "Delhi",
+      "region": "North India",
+      "pattern": "ring",
+      "stop_count": 10,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "delhi_gurgaon_08",
+      "description": "Gurgaon business belt (8 stops)",
+      "city": "Gurgaon",
+      "region": "North India",
+      "pattern": "business-corridor",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "bangalore_tech_08",
+      "description": "Bangalore tech corridor (8 stops)",
+      "city": "Bangalore",
+      "region": "South India",
+      "pattern": "tech-corridor",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "bangalore_outer_11",
+      "description": "Bangalore outer ring (11 stops)",
+      "city": "Bangalore",
+      "region": "South India",
+      "pattern": "outer-ring",
+      "stop_count": 11,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "hyderabad_hitec_08",
+      "description": "Hyderabad HITEC\u2013old city (8 stops)",
+      "city": "Hyderabad",
+      "region": "South India",
+      "pattern": "cross-city",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "chennai_coastal_08",
+      "description": "Chennai coastal span (8 stops)",
+      "city": "Chennai",
+      "region": "South India",
+      "pattern": "coastal",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "kolkata_heritage_07",
+      "description": "Kolkata heritage axis (7 stops)",
+      "city": "Kolkata",
+      "region": "East India",
+      "pattern": "heritage",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "pune_it_08",
+      "description": "Pune IT and old city (8 stops)",
+      "city": "Pune",
+      "region": "West India",
+      "pattern": "it-mixed",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "ahmedabad_mixed_07",
+      "description": "Ahmedabad mixed urban (7 stops)",
+      "city": "Ahmedabad",
+      "region": "West India",
+      "pattern": "mixed",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "jaipur_tourist_07",
+      "description": "Jaipur tourist circuit (7 stops)",
+      "city": "Jaipur",
+      "region": "North India",
+      "pattern": "tourist",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "lucknow_07",
+      "description": "Lucknow urban spread (7 stops)",
+      "city": "Lucknow",
+      "region": "North India",
+      "pattern": "urban",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "kochi_coastal_07",
+      "description": "Kochi coastal and mainland (7 stops)",
+      "city": "Kochi",
+      "region": "South India",
+      "pattern": "coastal",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "chandigarh_tricity_08",
+      "description": "Chandigarh tricity (8 stops)",
+      "city": "Chandigarh",
+      "region": "North India",
+      "pattern": "tricity",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "indore_07",
+      "description": "Indore urban (7 stops)",
+      "city": "Indore",
+      "region": "Central India",
+      "pattern": "urban",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "nagpur_hub_07",
+      "description": "Nagpur zero-mile hub (7 stops)",
+      "city": "Nagpur",
+      "region": "Central India",
+      "pattern": "hub",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "goa_coastal_06",
+      "description": "Goa coastal tour (6 stops)",
+      "city": "Goa",
+      "region": "West India",
+      "pattern": "coastal",
+      "stop_count": 6,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "varanasi_ghat_07",
+      "description": "Varanasi ghats and extensions (7 stops)",
+      "city": "Varanasi",
+      "region": "North India",
+      "pattern": "heritage",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "surat_diamond_07",
+      "description": "Surat diamond\u2013textile belt (7 stops)",
+      "city": "Surat",
+      "region": "West India",
+      "pattern": "industrial",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "bhopal_lake_07",
+      "description": "Bhopal lake city (7 stops)",
+      "city": "Bhopal",
+      "region": "Central India",
+      "pattern": "lake-city",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "coimbatore_07",
+      "description": "Coimbatore industrial urban (7 stops)",
+      "city": "Coimbatore",
+      "region": "South India",
+      "pattern": "industrial",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "vizag_port_07",
+      "description": "Visakhapatnam port city (7 stops)",
+      "city": "Visakhapatnam",
+      "region": "East India",
+      "pattern": "port-city",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "mumbai_north_12",
+      "description": "Large north Mumbai tour (12 stops)",
+      "city": "Mumbai",
+      "region": "West India",
+      "pattern": "large-north",
+      "stop_count": 12,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "delhi_south_north_09",
+      "description": "Delhi north\u2013south axis (9 stops)",
+      "city": "Delhi",
+      "region": "North India",
+      "pattern": "north-south",
+      "stop_count": 9,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "bangalore_peak_09",
+      "description": "Bangalore peak-traffic hotspots (9 stops)",
+      "city": "Bangalore",
+      "region": "South India",
+      "pattern": "peak-traffic",
+      "stop_count": 9,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "hyderabad_orr_10",
+      "description": "Hyderabad ORR-style span (10 stops)",
+      "city": "Hyderabad",
+      "region": "South India",
+      "pattern": "ring-road",
+      "stop_count": 10,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "chennai_omr_10",
+      "description": "Chennai OMR IT corridor (10 stops)",
+      "city": "Chennai",
+      "region": "South India",
+      "pattern": "omr-corridor",
+      "stop_count": 10,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "pune_ring_09",
+      "description": "Pune ring tour (9 stops)",
+      "city": "Pune",
+      "region": "West India",
+      "pattern": "ring",
+      "stop_count": 9,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "kolkata_east_west_08",
+      "description": "Kolkata east\u2013west (8 stops)",
+      "city": "Kolkata",
+      "region": "East India",
+      "pattern": "east-west",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "ahmedabad_08",
+      "description": "Ahmedabad wide spread (8 stops)",
+      "city": "Ahmedabad",
+      "region": "West India",
+      "pattern": "spread",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "jaipur_outer_08",
+      "description": "Jaipur outer ring (8 stops)",
+      "city": "Jaipur",
+      "region": "North India",
+      "pattern": "outer",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "lucknow_ring_08",
+      "description": "Lucknow ring (8 stops)",
+      "city": "Lucknow",
+      "region": "North India",
+      "pattern": "ring",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "kochi_span_08",
+      "description": "Kochi long span (8 stops)",
+      "city": "Kochi",
+      "region": "South India",
+      "pattern": "span",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "chandigarh_07",
+      "description": "Chandigarh compact (7 stops)",
+      "city": "Chandigarh",
+      "region": "North India",
+      "pattern": "compact",
+      "stop_count": 7,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "indore_ring_08",
+      "description": "Indore ring (8 stops)",
+      "city": "Indore",
+      "region": "Central India",
+      "pattern": "ring",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    },
+    {
+      "id": "nagpur_spread_08",
+      "description": "Nagpur wide spread (8 stops)",
+      "city": "Nagpur",
+      "region": "Central India",
+      "pattern": "spread",
+      "stop_count": 8,
+      "mode": "driving-traffic",
+      "round_trip": true
+    }
+  ]
+}

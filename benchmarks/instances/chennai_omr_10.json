@@ -1,0 +1,61 @@
+{
+  "id": "chennai_omr_10",
+  "description": "Chennai OMR IT corridor (10 stops)",
+  "city": "Chennai",
+  "region": "South India",
+  "pattern": "omr-corridor",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Adyar",
+      "lat": 13.0067,
+      "lng": 77.25
+    },
+    {
+      "name": "Thiruvanmiyur",
+      "lat": 12.98,
+      "lng": 80.26
+    },
+    {
+      "name": "Taramani",
+      "lat": 12.99,
+      "lng": 80.24
+    },
+    {
+      "name": "Velachery",
+      "lat": 12.975,
+      "lng": 80.22
+    },
+    {
+      "name": "Sholinganallur",
+      "lat": 12.8996,
+      "lng": 80.2209
+    },
+    {
+      "name": "Perungudi",
+      "lat": 12.96,
+      "lng": 80.24
+    },
+    {
+      "name": "Thoraipakkam",
+      "lat": 12.94,
+      "lng": 80.23
+    },
+    {
+      "name": "Siruseri",
+      "lat": 12.83,
+      "lng": 80.22
+    },
+    {
+      "name": "Tambaram",
+      "lat": 12.9249,
+      "lng": 80.1
+    },
+    {
+      "name": "Guindy",
+      "lat": 13.0067,
+      "lng": 80.2206
+    }
+  ]
+}

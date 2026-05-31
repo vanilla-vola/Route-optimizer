@@ -1,0 +1,51 @@
+{
+  "id": "nagpur_spread_08",
+  "description": "Nagpur wide spread (8 stops)",
+  "city": "Nagpur",
+  "region": "Central India",
+  "pattern": "spread",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Zero Mile",
+      "lat": 21.1458,
+      "lng": 79.0882
+    },
+    {
+      "name": "Sitabuldi",
+      "lat": 21.152,
+      "lng": 79.086
+    },
+    {
+      "name": "Civil Lines",
+      "lat": 21.16,
+      "lng": 79.09
+    },
+    {
+      "name": "MIHAN",
+      "lat": 21.09,
+      "lng": 79.05
+    },
+    {
+      "name": "Kamtee",
+      "lat": 21.23,
+      "lng": 79.12
+    },
+    {
+      "name": "Hingna",
+      "lat": 21.11,
+      "lng": 79.0
+    },
+    {
+      "name": "Wardha Road",
+      "lat": 21.12,
+      "lng": 79.1
+    },
+    {
+      "name": "Airport",
+      "lat": 21.092,
+      "lng": 79.047
+    }
+  ]
+}

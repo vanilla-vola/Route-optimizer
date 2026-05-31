@@ -89,6 +89,32 @@ class ApiClient {
     return OptimizeResponseDto.fromJson(response.data!);
   }
 
+  Future<BenchmarkInstanceListResponseDto> listBenchmarkInstances() async {
+    final response = await _dio.get<Map<String, dynamic>>('/benchmark-instances');
+    final data = response.data;
+    if (data == null) {
+      throw DioException(
+        requestOptions: response.requestOptions,
+        message: 'Empty benchmark instance list',
+      );
+    }
+    return BenchmarkInstanceListResponseDto.fromJson(data);
+  }
+
+  Future<BenchmarkInstanceDetailDto> fetchBenchmarkInstance(String instanceId) async {
+    final response = await _dio.get<Map<String, dynamic>>(
+      '/benchmark-instances/$instanceId',
+    );
+    final data = response.data;
+    if (data == null) {
+      throw DioException(
+        requestOptions: response.requestOptions,
+        message: 'Empty benchmark instance response',
+      );
+    }
+    return BenchmarkInstanceDetailDto.fromJson(data);
+  }
+
   Future<List<AlgorithmInfoDto>> listAlgorithms() async {
     final response = await _dio.get<List<dynamic>>('/algorithms');
     final data = response.data;

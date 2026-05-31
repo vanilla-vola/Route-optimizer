@@ -1,0 +1,56 @@
+{
+  "id": "delhi_south_north_09",
+  "description": "Delhi north\u2013south axis (9 stops)",
+  "city": "Delhi",
+  "region": "North India",
+  "pattern": "north-south",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Kashmere Gate",
+      "lat": 28.6692,
+      "lng": 77.2262
+    },
+    {
+      "name": "Civil Lines",
+      "lat": 28.68,
+      "lng": 77.23
+    },
+    {
+      "name": "Rajiv Chowk",
+      "lat": 28.6328,
+      "lng": 77.2197
+    },
+    {
+      "name": "AIIMS",
+      "lat": 28.5672,
+      "lng": 77.21
+    },
+    {
+      "name": "Saket",
+      "lat": 28.5245,
+      "lng": 77.2066
+    },
+    {
+      "name": "Mehrauli",
+      "lat": 28.5244,
+      "lng": 77.1855
+    },
+    {
+      "name": "Dwarka",
+      "lat": 28.5921,
+      "lng": 77.046
+    },
+    {
+      "name": "Rohini",
+      "lat": 28.7383,
+      "lng": 77.0822
+    },
+    {
+      "name": "Narela",
+      "lat": 28.85,
+      "lng": 77.09
+    }
+  ]
+}

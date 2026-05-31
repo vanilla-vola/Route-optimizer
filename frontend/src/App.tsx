@@ -7,6 +7,7 @@ import {
 } from "./api/client";
 import { AlgorithmBenchmark } from "./components/AlgorithmBenchmark";
 import { AlgorithmPicker } from "./components/AlgorithmPicker";
+import { InstancePicker } from "./components/InstancePicker";
 import { MapPanel } from "./components/MapPanel";
 import { RouteComparison } from "./components/RouteComparison";
 import { RouteSequence } from "./components/RouteSequence";
@@ -21,7 +22,13 @@ import {
   runSolver,
   type SolverGroup,
 } from "./solvers";
-import type { BenchmarkResponse, CompareResponse, OrderedStop, Stop } from "./types";
+import type {
+  BenchmarkInstanceDetail,
+  BenchmarkResponse,
+  CompareResponse,
+  OrderedStop,
+  Stop,
+} from "./types";
 import type { TransportModeId } from "./transportModes";
 import { TRANSPORT_MODES } from "./transportModes";
 
@@ -49,6 +56,7 @@ export default function App() {
   const [roundTrip, setRoundTrip] = useState(true);
   const [transportMode, setTransportMode] = useState<TransportModeId>("driving-traffic");
   const [mapFocus, setMapFocus] = useState<{ lat: number; lng: number } | null>(null);
+  const [selectedInstanceId, setSelectedInstanceId] = useState<string | null>(null);
 
   useEffect(() => {
     checkHealth().then(setApiOnline);
@@ -211,6 +219,34 @@ export default function App() {
     clearRoute();
   };
 
+  const loadBenchmarkInstance = (instance: BenchmarkInstanceDetail) => {
+    setSelectedInstanceId(instance.id);
+    setStops(
+      instance.stops.map((stop) => ({
+        name: stop.name,
+        lat: stop.lat,
+        lng: stop.lng,
+      })),
+    );
+    const mode = instance.mode;
+    if (
+      mode === "driving-traffic" ||
+      mode === "driving" ||
+      mode === "walking" ||
+      mode === "cycling"
+    ) {
+      setTransportMode(mode);
+    }
+    setRoundTrip(instance.round_trip);
+    clearRoute();
+    setCompareResult(null);
+    setBenchmarkResult(null);
+    setError(null);
+    if (instance.stops.length > 0) {
+      setMapFocus({ lat: instance.stops[0].lat, lng: instance.stops[0].lng });
+    }
+  };
+
   return (
     <div className="app">
       <header className="header">
@@ -218,13 +254,20 @@ export default function App() {
           <h1>Route Optimizer</h1>
           <p>Search for stops or click the map, then optimize.</p>
         </div>
-        <AlgorithmPicker
-          groups={solverGroups}
-          value={selectedSolverId}
-          onChange={onSolverChange}
-          loading={solversLoading}
-          disabled={apiOnline === false}
-        />
+        <div className="header-pickers">
+          <InstancePicker
+            value={selectedInstanceId}
+            onSelect={loadBenchmarkInstance}
+            disabled={apiOnline === false}
+          />
+          <AlgorithmPicker
+            groups={solverGroups}
+            value={selectedSolverId}
+            onChange={onSolverChange}
+            loading={solversLoading}
+            disabled={apiOnline === false}
+          />
+        </div>
       </header>
 
       <TransportModeBar

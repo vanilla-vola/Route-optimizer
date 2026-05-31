@@ -1,0 +1,46 @@
+{
+  "id": "kolkata_heritage_07",
+  "description": "Kolkata heritage axis (7 stops)",
+  "city": "Kolkata",
+  "region": "East India",
+  "pattern": "heritage",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Howrah Bridge",
+      "lat": 22.5853,
+      "lng": 88.3468
+    },
+    {
+      "name": "Park Street",
+      "lat": 22.551,
+      "lng": 88.353
+    },
+    {
+      "name": "Victoria Memorial",
+      "lat": 22.5448,
+      "lng": 88.3426
+    },
+    {
+      "name": "Salt Lake Sector V",
+      "lat": 22.5726,
+      "lng": 88.4339
+    },
+    {
+      "name": "New Town",
+      "lat": 22.586,
+      "lng": 88.47
+    },
+    {
+      "name": "Dum Dum Airport",
+      "lat": 22.654,
+      "lng": 88.4467
+    },
+    {
+      "name": "Jadavpur",
+      "lat": 22.498,
+      "lng": 88.371
+    }
+  ]
+}

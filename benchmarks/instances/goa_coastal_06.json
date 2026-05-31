@@ -1,0 +1,41 @@
+{
+  "id": "goa_coastal_06",
+  "description": "Goa coastal tour (6 stops)",
+  "city": "Goa",
+  "region": "West India",
+  "pattern": "coastal",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Panaji",
+      "lat": 15.4909,
+      "lng": 73.8278
+    },
+    {
+      "name": "Calangute",
+      "lat": 15.5439,
+      "lng": 73.7553
+    },
+    {
+      "name": "Mapusa",
+      "lat": 15.59,
+      "lng": 73.81
+    },
+    {
+      "name": "Margao",
+      "lat": 15.273,
+      "lng": 73.958
+    },
+    {
+      "name": "Vasco",
+      "lat": 15.398,
+      "lng": 73.812
+    },
+    {
+      "name": "Ponda",
+      "lat": 15.4,
+      "lng": 73.88
+    }
+  ]
+}

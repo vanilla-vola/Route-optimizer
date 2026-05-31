@@ -1,0 +1,46 @@
+{
+  "id": "vizag_port_07",
+  "description": "Visakhapatnam port city (7 stops)",
+  "city": "Visakhapatnam",
+  "region": "East India",
+  "pattern": "port-city",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "RK Beach",
+      "lat": 17.715,
+      "lng": 83.32
+    },
+    {
+      "name": "Dwaraka Nagar",
+      "lat": 17.73,
+      "lng": 83.3
+    },
+    {
+      "name": "Gajuwaka",
+      "lat": 17.7,
+      "lng": 83.22
+    },
+    {
+      "name": "Madhurawada",
+      "lat": 17.82,
+      "lng": 83.35
+    },
+    {
+      "name": "Airport",
+      "lat": 17.721,
+      "lng": 83.2245
+    },
+    {
+      "name": "Waltair",
+      "lat": 17.71,
+      "lng": 83.31
+    },
+    {
+      "name": "Bheemili",
+      "lat": 17.88,
+      "lng": 83.45
+    }
+  ]
+}

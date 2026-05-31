@@ -93,6 +93,180 @@ body {
   background: #991b1b;
 }
 
+.header-pickers {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.instance-picker {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  min-width: 14rem;
+  max-width: min(24rem, 40vw);
+}
+
+.instance-picker-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.instance-picker-trigger {
+  width: 100%;
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.instance-picker-trigger:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.instance-picker-panel {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  z-index: 1200;
+  width: min(26rem, 92vw);
+  max-height: min(24rem, 60vh);
+  overflow: auto;
+  background: #fff;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.2);
+}
+
+.instance-picker-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem;
+}
+
+.instance-picker-item {
+  position: relative;
+  border-radius: 8px;
+}
+
+.instance-picker-item.selected {
+  background: #eff6ff;
+}
+
+.instance-picker-item:hover {
+  background: #f8fafc;
+}
+
+.instance-picker-item-main {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 5.5rem 0.55rem 0.65rem;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+}
+
+.instance-picker-item-id {
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.instance-picker-item-meta {
+  display: block;
+  font-size: 0.75rem;
+  color: #475569;
+}
+
+.instance-picker-item-desc {
+  display: block;
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-top: 0.15rem;
+}
+
+.instance-picker-view-stops {
+  position: absolute;
+  right: 0.45rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.2rem 0.45rem;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  font-size: 0.72rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+
+.instance-picker-item:hover .instance-picker-view-stops,
+.instance-picker-view-stops:focus {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.instance-picker-detail {
+  padding: 0.75rem;
+}
+
+.instance-picker-back {
+  border: none;
+  background: transparent;
+  color: #2563eb;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.instance-picker-detail-title {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.instance-picker-detail-desc {
+  margin: 0 0 0.65rem;
+}
+
+.instance-stops-list {
+  margin: 0 0 0.75rem;
+  padding-left: 1.1rem;
+}
+
+.instance-stops-list li {
+  margin-bottom: 0.45rem;
+}
+
+.instance-stops-list strong {
+  display: block;
+}
+
+.instance-stops-list span {
+  font-size: 0.8rem;
+  color: #475569;
+}
+
+.instance-picker-load {
+  width: 100%;
+}
+
 .algorithm-picker {
   display: flex;
   flex-direction: column;

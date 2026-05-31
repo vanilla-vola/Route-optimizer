@@ -1,0 +1,56 @@
+{
+  "id": "mumbai_airport_09",
+  "description": "Airport\u2013business corridor (9 stops)",
+  "city": "Mumbai",
+  "region": "West India",
+  "pattern": "airport-corridor",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "CSMIA T2",
+      "lat": 19.0997,
+      "lng": 72.875
+    },
+    {
+      "name": "Andheri East Metro",
+      "lat": 19.1136,
+      "lng": 72.8697
+    },
+    {
+      "name": "SEEPZ",
+      "lat": 19.124,
+      "lng": 72.889
+    },
+    {
+      "name": "BKC",
+      "lat": 19.0627,
+      "lng": 72.8679
+    },
+    {
+      "name": "Mahalaxmi",
+      "lat": 19.011,
+      "lng": 72.834
+    },
+    {
+      "name": "Fort",
+      "lat": 18.9322,
+      "lng": 72.8365
+    },
+    {
+      "name": "Chembur",
+      "lat": 19.0522,
+      "lng": 72.8995
+    },
+    {
+      "name": "Vashi",
+      "lat": 19.0712,
+      "lng": 72.9982
+    },
+    {
+      "name": "Nerul",
+      "lat": 19.033,
+      "lng": 73.0197
+    }
+  ]
+}

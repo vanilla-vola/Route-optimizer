@@ -1,0 +1,46 @@
+{
+  "id": "mumbai_cross_07",
+  "description": "Mumbai cross-city corridor (7 stops): BKC to Colaba to Thane",
+  "city": "Mumbai",
+  "region": "West India",
+  "pattern": "cross-city",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Bandra Kurla Complex",
+      "lat": 19.0627,
+      "lng": 72.8679
+    },
+    {
+      "name": "Gateway of India",
+      "lat": 18.922,
+      "lng": 72.8347
+    },
+    {
+      "name": "Andheri East",
+      "lat": 19.1136,
+      "lng": 72.8697
+    },
+    {
+      "name": "Powai",
+      "lat": 19.1334,
+      "lng": 72.9133
+    },
+    {
+      "name": "Thane West",
+      "lat": 19.2183,
+      "lng": 72.9781
+    },
+    {
+      "name": "Worli Sea Link",
+      "lat": 19.0176,
+      "lng": 72.8178
+    },
+    {
+      "name": "Juhu Beach",
+      "lat": 19.098,
+      "lng": 72.8265
+    }
+  ]
+}

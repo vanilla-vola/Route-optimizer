@@ -1,0 +1,46 @@
+{
+  "id": "kochi_coastal_07",
+  "description": "Kochi coastal and mainland (7 stops)",
+  "city": "Kochi",
+  "region": "South India",
+  "pattern": "coastal",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Fort Kochi",
+      "lat": 9.965,
+      "lng": 76.243
+    },
+    {
+      "name": "MG Road Ernakulam",
+      "lat": 9.9816,
+      "lng": 76.283
+    },
+    {
+      "name": "Edappally",
+      "lat": 10.026,
+      "lng": 76.308
+    },
+    {
+      "name": "Kakkanad",
+      "lat": 10.015,
+      "lng": 76.34
+    },
+    {
+      "name": "Aluva",
+      "lat": 10.11,
+      "lng": 76.35
+    },
+    {
+      "name": "Airport Nedumbassery",
+      "lat": 10.152,
+      "lng": 76.401
+    },
+    {
+      "name": "Vyttila",
+      "lat": 9.967,
+      "lng": 76.32
+    }
+  ]
+}

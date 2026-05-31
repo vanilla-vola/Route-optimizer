@@ -10,12 +10,14 @@ from . import (
     alns,
     christofides_gls,
     dcir_hybrid,
+    drpt_alns,
     input_order_baseline,
     learning_augmented_insertion,
     multi_start_gls,
     nn_2opt,
     ortools_gls,
     parallel_insertion_gls,
+    pda_alns,
     popmusic_gls,
     regret_2_insertion,
     savings_gls,
@@ -34,7 +36,9 @@ def _register(module) -> None:
 
 
 for _mod in (
+    drpt_alns,
     dcir_hybrid,
+    pda_alns,
     ortools_gls,
     christofides_gls,
     savings_gls,

@@ -1,0 +1,56 @@
+{
+  "id": "pune_ring_09",
+  "description": "Pune ring tour (9 stops)",
+  "city": "Pune",
+  "region": "West India",
+  "pattern": "ring",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Deccan",
+      "lat": 18.5204,
+      "lng": 73.8567
+    },
+    {
+      "name": "Katraj",
+      "lat": 18.448,
+      "lng": 73.858
+    },
+    {
+      "name": "Swargate",
+      "lat": 18.5018,
+      "lng": 73.8636
+    },
+    {
+      "name": "Kharadi",
+      "lat": 18.55,
+      "lng": 73.94
+    },
+    {
+      "name": "Wagholi",
+      "lat": 18.58,
+      "lng": 74.0
+    },
+    {
+      "name": "Chakan",
+      "lat": 18.75,
+      "lng": 73.86
+    },
+    {
+      "name": "Talegaon",
+      "lat": 18.72,
+      "lng": 73.68
+    },
+    {
+      "name": "Lonavala",
+      "lat": 18.75,
+      "lng": 73.41
+    },
+    {
+      "name": "Hinjewadi",
+      "lat": 18.5912,
+      "lng": 73.7389
+    }
+  ]
+}

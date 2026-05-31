@@ -1,5 +1,7 @@
 import type {
   AlgorithmInfo,
+  BenchmarkInstanceDetail,
+  BenchmarkInstanceListResponse,
   BenchmarkResponse,
   CompareProviderInfo,
   CompareResponse,
@@ -58,6 +60,29 @@ async function postJson<T>(path: string, body: unknown): Promise<T> {
   }
 
   return response.json() as Promise<T>;
+}
+
+export async function listBenchmarkInstances(): Promise<BenchmarkInstanceListResponse> {
+  const response = await fetch(`${API_BASE}/benchmark-instances`);
+  if (!response.ok) {
+    throw new Error(`Failed to load benchmark instances (${response.status})`);
+  }
+  return response.json() as Promise<BenchmarkInstanceListResponse>;
+}
+
+export async function fetchBenchmarkInstance(
+  instanceId: string,
+): Promise<BenchmarkInstanceDetail> {
+  const response = await fetch(`${API_BASE}/benchmark-instances/${instanceId}`);
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}));
+    const detail =
+      typeof body.detail === "string"
+        ? body.detail
+        : `Instance not found (${response.status})`;
+    throw new Error(detail);
+  }
+  return response.json() as Promise<BenchmarkInstanceDetail>;
 }
 
 export async function listAlgorithms(): Promise<AlgorithmInfo[]> {

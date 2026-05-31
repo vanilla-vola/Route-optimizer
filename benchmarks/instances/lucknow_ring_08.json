@@ -1,0 +1,51 @@
+{
+  "id": "lucknow_ring_08",
+  "description": "Lucknow ring (8 stops)",
+  "city": "Lucknow",
+  "region": "North India",
+  "pattern": "ring",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Hazratganj",
+      "lat": 26.8467,
+      "lng": 80.9462
+    },
+    {
+      "name": "Gomti Nagar",
+      "lat": 26.85,
+      "lng": 81.0
+    },
+    {
+      "name": "Indira Nagar",
+      "lat": 26.87,
+      "lng": 80.99
+    },
+    {
+      "name": "Alambagh",
+      "lat": 26.8,
+      "lng": 80.9
+    },
+    {
+      "name": "Aminabad",
+      "lat": 26.85,
+      "lng": 80.92
+    },
+    {
+      "name": "Chowk",
+      "lat": 26.86,
+      "lng": 80.91
+    },
+    {
+      "name": "Mahanagar",
+      "lat": 26.88,
+      "lng": 80.97
+    },
+    {
+      "name": "Airport",
+      "lat": 26.7606,
+      "lng": 80.8893
+    }
+  ]
+}

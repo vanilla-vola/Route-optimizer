@@ -1,0 +1,51 @@
+{
+  "id": "kolkata_east_west_08",
+  "description": "Kolkata east\u2013west (8 stops)",
+  "city": "Kolkata",
+  "region": "East India",
+  "pattern": "east-west",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Howrah",
+      "lat": 22.5853,
+      "lng": 88.3468
+    },
+    {
+      "name": "Sealdah",
+      "lat": 22.567,
+      "lng": 88.37
+    },
+    {
+      "name": "Park Circus",
+      "lat": 22.545,
+      "lng": 88.37
+    },
+    {
+      "name": "EM Bypass Ruby",
+      "lat": 22.513,
+      "lng": 88.398
+    },
+    {
+      "name": "Salt Lake",
+      "lat": 22.5726,
+      "lng": 88.4339
+    },
+    {
+      "name": "New Town",
+      "lat": 22.586,
+      "lng": 88.47
+    },
+    {
+      "name": "Dum Dum",
+      "lat": 22.654,
+      "lng": 88.4467
+    },
+    {
+      "name": "Barasat",
+      "lat": 22.72,
+      "lng": 88.48
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "id": "hyderabad_hitec_08",
+  "description": "Hyderabad HITEC\u2013old city (8 stops)",
+  "city": "Hyderabad",
+  "region": "South India",
+  "pattern": "cross-city",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Charminar",
+      "lat": 17.3616,
+      "lng": 78.4747
+    },
+    {
+      "name": "HITEC City",
+      "lat": 17.4435,
+      "lng": 78.3772
+    },
+    {
+      "name": "Gachibowli",
+      "lat": 17.4401,
+      "lng": 78.3489
+    },
+    {
+      "name": "Secunderabad",
+      "lat": 17.4399,
+      "lng": 78.4983
+    },
+    {
+      "name": "Banjara Hills",
+      "lat": 17.4156,
+      "lng": 78.4347
+    },
+    {
+      "name": "Kondapur",
+      "lat": 17.46,
+      "lng": 78.36
+    },
+    {
+      "name": "Uppal",
+      "lat": 17.401,
+      "lng": 78.558
+    },
+    {
+      "name": "Miyapur",
+      "lat": 17.4967,
+      "lng": 78.3572
+    }
+  ]
+}

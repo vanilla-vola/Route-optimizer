@@ -1,0 +1,46 @@
+{
+  "id": "varanasi_ghat_07",
+  "description": "Varanasi ghats and extensions (7 stops)",
+  "city": "Varanasi",
+  "region": "North India",
+  "pattern": "heritage",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Dashashwamedh Ghat",
+      "lat": 25.307,
+      "lng": 83.01
+    },
+    {
+      "name": "BHU",
+      "lat": 25.267,
+      "lng": 82.991
+    },
+    {
+      "name": "Cantt",
+      "lat": 25.34,
+      "lng": 82.97
+    },
+    {
+      "name": "Sarnath",
+      "lat": 25.381,
+      "lng": 83.021
+    },
+    {
+      "name": "Lanka",
+      "lat": 25.28,
+      "lng": 83.0
+    },
+    {
+      "name": "Sigra",
+      "lat": 25.32,
+      "lng": 82.99
+    },
+    {
+      "name": "Airport Babatpur",
+      "lat": 25.452,
+      "lng": 82.859
+    }
+  ]
+}

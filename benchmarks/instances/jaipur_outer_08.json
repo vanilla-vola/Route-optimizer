@@ -1,0 +1,51 @@
+{
+  "id": "jaipur_outer_08",
+  "description": "Jaipur outer ring (8 stops)",
+  "city": "Jaipur",
+  "region": "North India",
+  "pattern": "outer",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Amer",
+      "lat": 26.9855,
+      "lng": 75.8513
+    },
+    {
+      "name": "Jal Mahal",
+      "lat": 26.953,
+      "lng": 75.846
+    },
+    {
+      "name": "WTP",
+      "lat": 26.9124,
+      "lng": 75.7873
+    },
+    {
+      "name": "Sanganer",
+      "lat": 26.8242,
+      "lng": 75.8122
+    },
+    {
+      "name": "Mansarovar",
+      "lat": 26.85,
+      "lng": 75.77
+    },
+    {
+      "name": "Vidhyadhar Nagar",
+      "lat": 26.95,
+      "lng": 75.78
+    },
+    {
+      "name": "Chomu",
+      "lat": 27.15,
+      "lng": 75.7
+    },
+    {
+      "name": "Bagru",
+      "lat": 26.8,
+      "lng": 75.54
+    }
+  ]
+}

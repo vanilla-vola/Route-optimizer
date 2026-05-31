@@ -1,0 +1,61 @@
+{
+  "id": "delhi_ring_10",
+  "description": "Delhi inner ring (10 stops)",
+  "city": "Delhi",
+  "region": "North India",
+  "pattern": "ring",
+  "mode": "driving-traffic",
+  "round_trip": true,
+  "stops": [
+    {
+      "name": "Kashmere Gate",
+      "lat": 28.6692,
+      "lng": 77.2262
+    },
+    {
+      "name": "Rajiv Chowk",
+      "lat": 28.6328,
+      "lng": 77.2197
+    },
+    {
+      "name": "ITO",
+      "lat": 28.6289,
+      "lng": 77.2405
+    },
+    {
+      "name": "Lajpat Nagar",
+      "lat": 28.5677,
+      "lng": 77.2433
+    },
+    {
+      "name": "Saket",
+      "lat": 28.5245,
+      "lng": 77.2066
+    },
+    {
+      "name": "Hauz Khas",
+      "lat": 28.5494,
+      "lng": 77.2001
+    },
+    {
+      "name": "Rohini Sec 18",
+      "lat": 28.7383,
+      "lng": 77.0822
+    },
+    {
+      "name": "Pitampura",
+      "lat": 28.7041,
+      "lng": 77.1315
+    },
+    {
+      "name": "Karol Bagh",
+      "lat": 28.6517,
+      "lng": 77.1909
+    },
+    {
+      "name": "Red Fort",
+      "lat": 28.6562,
+      "lng": 77.241
+    }
+  ]
+}

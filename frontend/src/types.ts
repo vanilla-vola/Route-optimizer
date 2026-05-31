@@ -100,6 +100,33 @@ export interface BenchmarkResultItem {
   error?: string;
 }
 
+export interface BenchmarkInstanceSummary {
+  id: string;
+  description: string;
+  city: string;
+  region: string;
+  pattern: string;
+  stop_count: number;
+  mode: string;
+  round_trip: boolean;
+}
+
+export interface BenchmarkInstanceDetail {
+  id: string;
+  description: string;
+  city: string;
+  region: string;
+  pattern: string;
+  mode: string;
+  round_trip: boolean;
+  stops: Stop[];
+}
+
+export interface BenchmarkInstanceListResponse {
+  count: number;
+  instances: BenchmarkInstanceSummary[];
+}
+
 export interface BenchmarkResponse {
   stop_count: number;
   mode: string;
