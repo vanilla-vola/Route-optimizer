@@ -76,15 +76,16 @@ export default function App() {
     setError(null);
   };
 
-  const handleOptimize = async () => {
+  const handleOptimize = async (modeOverride?: TransportModeId) => {
     if (stops.length < 2) return;
+    const mode = modeOverride ?? transportMode;
     setLoading(true);
     setError(null);
     try {
       const result = await optimizeRoute({
         stops,
         round_trip: roundTrip,
-        mode: transportMode,
+        mode,
       });
       setRouteOrder(result.order);
       setOrderedStops(result.ordered_stops);
@@ -103,8 +104,11 @@ export default function App() {
   };
 
   const onModeChange = (mode: TransportModeId) => {
+    const hadResult = orderedStops !== null && summary !== null;
     setTransportMode(mode);
-    clearRoute();
+    if (hadResult && stops.length >= 2) {
+      void handleOptimize(mode);
+    }
   };
 
   const onRoundTripChange = (value: boolean) => {
@@ -159,7 +163,6 @@ export default function App() {
               totalDistanceM={summary.distance}
               totalDurationS={summary.duration}
               mode={transportMode}
-              roundTrip={roundTrip}
               solver={summary.solver}
               profileSource={summary.profileSource}
             />
@@ -172,7 +175,7 @@ export default function App() {
               type="button"
               className="primary"
               disabled={stops.length < 2 || loading}
-              onClick={handleOptimize}
+              onClick={() => void handleOptimize()}
             >
               {loading ? "Optimizing…" : "Optimize route"}
             </button>

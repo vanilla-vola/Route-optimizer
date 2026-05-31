@@ -6,7 +6,6 @@ interface RouteSequenceProps {
   totalDistanceM: number;
   totalDurationS: number;
   mode: string;
-  roundTrip: boolean;
   solver?: string;
   profileSource?: string | null;
 }
@@ -31,7 +30,6 @@ export function RouteSequence({
   totalDistanceM,
   totalDurationS,
   mode,
-  roundTrip,
   solver,
   profileSource,
 }: RouteSequenceProps) {
@@ -39,10 +37,7 @@ export function RouteSequence({
 
   return (
     <div className="route-sequence">
-      <h2>
-        Best route ({modeLabel}
-        {roundTrip ? ", cyclic" : ", one-way"})
-      </h2>
+      <h2>Best route ({modeLabel})</h2>
       <p className="route-stats">
         {formatDistance(totalDistanceM)} · {formatDuration(totalDurationS)}
       </p>

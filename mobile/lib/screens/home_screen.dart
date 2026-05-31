@@ -90,6 +90,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<String>(transportModeProvider, (previous, next) {
+      if (previous == null || previous == next) return;
+      final ordered = ref.read(orderedStopsProvider);
+      final stops = ref.read(stopsProvider);
+      if (ordered != null && stops.length >= 2) {
+        _optimize();
+      }
+    });
+
     final stops = ref.watch(stopsProvider);
     final roundTrip = ref.watch(roundTripProvider);
     final orderedStops = ref.watch(orderedStopsProvider);
@@ -180,7 +189,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             totalDistanceM: _totalDistanceM!,
                             totalDurationS: _totalDurationS!,
                             mode: mode,
-                            roundTrip: roundTrip,
                           ),
                         ),
                       if (_error != null)

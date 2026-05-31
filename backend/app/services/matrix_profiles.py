@@ -16,11 +16,10 @@ from app.models.transport_modes import TransportMode
 from app.services.matrix import MAPBOX_MATRIX_URL, UNREACHABLE_COST, _sanitize_matrix
 from app.services.profiles import build_profile_matrices
 
-DEPART_AT_PROFILES = frozenset(
-    {TransportMode.DRIVING.value, TransportMode.DRIVING_TRAFFIC.value}
-)
+DEPART_AT_PROFILES = frozenset({TransportMode.DRIVING.value})
 # Mapbox driving-traffic matrix allows at most 10 coordinates.
 DRIVING_TRAFFIC_MATRIX_LIMIT = 10
+MAPBOX_DRIVING_FALLBACK_PROFILE = "driving"
 
 
 @dataclass(frozen=True)
@@ -61,8 +60,8 @@ def next_departure_times(
 
 def matrix_profile_for_depart_at(profile: str, n_stops: int) -> str:
     """Pick a Mapbox profile that supports depart_at for the coordinate count."""
-    if profile == TransportMode.DRIVING_TRAFFIC.value and n_stops > DRIVING_TRAFFIC_MATRIX_LIMIT:
-        return TransportMode.DRIVING.value
+    if profile == TransportMode.DRIVING.value and n_stops > DRIVING_TRAFFIC_MATRIX_LIMIT:
+        return MAPBOX_DRIVING_FALLBACK_PROFILE
     if profile in DEPART_AT_PROFILES:
         return profile
     return TransportMode.DRIVING.value

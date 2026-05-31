@@ -10,14 +10,12 @@ class RouteSequencePanel extends StatelessWidget {
     required this.totalDistanceM,
     required this.totalDurationS,
     required this.mode,
-    required this.roundTrip,
   });
 
   final List<OrderedStopDto> orderedStops;
   final int totalDistanceM;
   final int totalDurationS;
   final String mode;
-  final bool roundTrip;
 
   String _formatDistance(int meters) {
     if (meters >= 1000) {
@@ -47,7 +45,7 @@ class RouteSequencePanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Best route ($modeLabel${roundTrip ? ', cyclic' : ', one-way'})',
+              'Best route ($modeLabel)',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),

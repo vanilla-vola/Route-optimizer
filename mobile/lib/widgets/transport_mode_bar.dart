@@ -24,7 +24,6 @@ class TransportModeBar extends ConsumerWidget {
               colorScheme: colorScheme,
               onTap: () {
                 ref.read(transportModeProvider.notifier).state = mode.id;
-                ref.read(routeOrderProvider.notifier).state = null;
               },
             ),
         ],
