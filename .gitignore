@@ -1,0 +1,59 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage/
+dist/
+build/
+
+# Secrets & local config
+backend/.env
+.env
+.env.local
+*.pem
+*.key
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# Flutter / mobile
+mobile/.dart_tool/
+mobile/build/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/**/*.apk
+mobile/**/*.aab
+mobile/android/key.properties
+mobile/.idea/
+mobile/*.iml
+mobile/android/.gradle/
+mobile/android/local.properties
+mobile/ios/Pods/
+mobile/ios/.symlinks/
+mobile/ios/Flutter/Flutter.podspec
+mobile/ios/Flutter/Generated.xcconfig
+mobile/ios/Flutter/flutter_export_environment.sh
+mobile/ios/Runner/GeneratedPluginRegistrant.*
+
+.idea/
+.vscode/
+.DS_Store
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Docker
+.docker/
