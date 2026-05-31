@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Mapbox Directions Matrix profiles supported by the backend.
+/// Mapbox profiles exposed in the app (car uses driving-traffic for realistic ETAs).
 class TransportModeOption {
   const TransportModeOption({
     required this.id,
@@ -14,14 +14,9 @@ class TransportModeOption {
 
   static const List<TransportModeOption> all = [
     TransportModeOption(
-      id: 'driving',
+      id: 'driving-traffic',
       label: 'Driving',
       icon: Icons.directions_car,
-    ),
-    TransportModeOption(
-      id: 'driving-traffic',
-      label: 'Traffic',
-      icon: Icons.traffic,
     ),
     TransportModeOption(
       id: 'walking',
@@ -36,6 +31,9 @@ class TransportModeOption {
   ];
 
   static TransportModeOption byId(String id) {
+    if (id == 'driving') {
+      return all.first;
+    }
     return all.firstWhere(
       (mode) => mode.id == id,
       orElse: () => all.first,

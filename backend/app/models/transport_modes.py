@@ -4,18 +4,20 @@ from pydantic import BaseModel
 
 
 class TransportMode(str, Enum):
-    """Mapbox Directions Matrix profiles (see Mapbox Matrix API docs)."""
+    """Mapbox Directions Matrix profiles."""
 
-    DRIVING = "driving"
-    DRIVING_TRAFFIC = "driving-traffic"
+    DRIVING = "driving-traffic"
     WALKING = "walking"
     CYCLING = "cycling"
 
 
-# Fallback straight-line speeds when Mapbox / haversine mode is active (km/h).
+# Legacy alias accepted from older clients.
+_MODE_ALIASES = {
+    "driving": TransportMode.DRIVING.value,
+}
+
 HAVERSINE_SPEED_KMH: dict[str, float] = {
-    TransportMode.DRIVING.value: 40.0,
-    TransportMode.DRIVING_TRAFFIC.value: 32.0,
+    TransportMode.DRIVING.value: 35.0,
     TransportMode.WALKING.value: 5.0,
     TransportMode.CYCLING.value: 15.0,
 }
@@ -31,12 +33,7 @@ TRANSPORT_MODE_CATALOG: list[TransportModeInfo] = [
     TransportModeInfo(
         id=TransportMode.DRIVING.value,
         label="Driving",
-        description="Car routing on the road network",
-    ),
-    TransportModeInfo(
-        id=TransportMode.DRIVING_TRAFFIC.value,
-        label="Driving (traffic)",
-        description="Car routing with live traffic estimates",
+        description="Car routing with live traffic-aware travel times",
     ),
     TransportModeInfo(
         id=TransportMode.WALKING.value,
@@ -53,6 +50,7 @@ TRANSPORT_MODE_CATALOG: list[TransportModeInfo] = [
 
 def normalize_mode(value: str) -> str:
     cleaned = value.strip().lower()
+    cleaned = _MODE_ALIASES.get(cleaned, cleaned)
     allowed = {mode.value for mode in TransportMode}
     if cleaned not in allowed:
         allowed_list = ", ".join(sorted(allowed))
@@ -61,4 +59,8 @@ def normalize_mode(value: str) -> str:
 
 
 def haversine_speed_kmh(profile: str) -> float:
-    return HAVERSINE_SPEED_KMH.get(profile, HAVERSINE_SPEED_KMH[TransportMode.DRIVING.value])
+    try:
+        normalized = normalize_mode(profile)
+    except ValueError:
+        normalized = TransportMode.DRIVING.value
+    return HAVERSINE_SPEED_KMH.get(normalized, HAVERSINE_SPEED_KMH[TransportMode.DRIVING.value])

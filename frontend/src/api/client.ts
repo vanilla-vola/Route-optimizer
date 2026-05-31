@@ -13,7 +13,7 @@ export async function optimizeRoute(
       start_fixed: payload.start_fixed ?? false,
       end_fixed: payload.end_fixed ?? false,
       round_trip: payload.round_trip ?? true,
-      mode: payload.mode ?? "driving",
+      mode: payload.mode ?? "driving-traffic",
     }),
   });
 

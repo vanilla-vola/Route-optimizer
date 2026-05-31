@@ -14,7 +14,7 @@ class Settings(BaseSettings):
     )
 
     mapbox_access_token: str = ""
-    matrix_profile: str = "driving"
+    matrix_profile: str = "driving-traffic"
     use_haversine: bool = False
     cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
 

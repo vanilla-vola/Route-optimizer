@@ -22,7 +22,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [apiOnline, setApiOnline] = useState<boolean | null>(null);
   const [roundTrip, setRoundTrip] = useState(true);
-  const [transportMode, setTransportMode] = useState<TransportModeId>("driving");
+  const [transportMode, setTransportMode] = useState<TransportModeId>("driving-traffic");
   const [mapFocus, setMapFocus] = useState<{ lat: number; lng: number } | null>(null);
 
   useEffect(() => {

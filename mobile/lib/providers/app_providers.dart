@@ -41,7 +41,7 @@ final orderedStopsProvider =
 
 final roundTripProvider = StateProvider<bool>((ref) => true);
 
-final transportModeProvider = StateProvider<String>((ref) => 'driving');
+final transportModeProvider = StateProvider<String>((ref) => 'driving-traffic');
 
 final apiOnlineProvider = FutureProvider<bool>((ref) async {
   return ref.read(apiClientProvider).checkHealth();

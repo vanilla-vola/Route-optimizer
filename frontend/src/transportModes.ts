@@ -1,6 +1,5 @@
 export const TRANSPORT_MODES = [
-  { id: "driving", label: "Driving", icon: "🚗" },
-  { id: "driving-traffic", label: "Traffic", icon: "🚦" },
+  { id: "driving-traffic", label: "Driving", icon: "🚗" },
   { id: "walking", label: "Walking", icon: "🚶" },
   { id: "cycling", label: "Cycling", icon: "🚴" },
 ] as const;

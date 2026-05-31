@@ -96,7 +96,7 @@ def _sanitize_matrix(
 def _haversine_matrix(
     coords: Sequence[tuple[float, float]],
     *,
-    profile: str = "driving",
+    profile: str = "driving-traffic",
     source_error: Optional[str] = None,
 ) -> tuple[list[list[int]], list[list[int]]]:
     speed_kmh = haversine_speed_kmh(profile)
