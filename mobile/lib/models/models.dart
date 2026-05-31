@@ -236,10 +236,12 @@ class CompareResponseDto {
   const CompareResponseDto({
     required this.results,
     required this.profileSource,
+    this.metricsNote = '',
   });
 
   final List<CompareResultDto> results;
   final String profileSource;
+  final String metricsNote;
 
   factory CompareResponseDto.fromJson(Map<String, dynamic> json) =>
       CompareResponseDto(
@@ -247,5 +249,6 @@ class CompareResponseDto {
             .map((e) => CompareResultDto.fromJson(e as Map<String, dynamic>))
             .toList(),
         profileSource: json['profile_source'] as String? ?? 'synthetic',
+        metricsNote: json['metrics_note'] as String? ?? '',
       );
 }

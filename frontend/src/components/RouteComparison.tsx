@@ -16,6 +16,9 @@ export function RouteComparison({ data }: RouteComparisonProps) {
         {data.round_trip ? " · round trip" : " · one-way"} ·{" "}
         {formatProfileSource(data.profile_source)}
       </p>
+      {data.metrics_note && (
+        <p className="muted compare-subtitle">{data.metrics_note}</p>
+      )}
 
       {baseline?.total_duration_s != null && (
         <div className="route-metrics route-metrics--compact">

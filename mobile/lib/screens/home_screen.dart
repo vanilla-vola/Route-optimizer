@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../api/api_client.dart';
+import '../models/models.dart';
 import '../models/solver_models.dart';
+import '../models/result_cache.dart';
 import '../providers/app_providers.dart';
 import '../widgets/algorithm_picker.dart';
 import '../widgets/map_panel.dart';
@@ -29,6 +31,40 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   int? _realizedDurationS;
   String? _profileSource;
   String? _solverLabel;
+
+  String _routeFingerprint() {
+    final stops = ref.read(stopsProvider);
+    return routeContextFingerprint(
+      stops,
+      mode: ref.read(transportModeProvider),
+      roundTrip: ref.read(roundTripProvider),
+    );
+  }
+
+  void _invalidateResultCaches() {
+    ref.read(benchmarkCacheProvider.notifier).state = null;
+    ref.read(compareCacheProvider.notifier).state = null;
+  }
+
+  Future<void> _showCachedBenchmark() async {
+    final cache = ref.read(benchmarkCacheProvider);
+    if (cache == null || !mounted) return;
+    await showBenchmarkSheet(
+      context,
+      data: cache.data,
+      onRerun: () => _benchmark(force: true),
+    );
+  }
+
+  Future<void> _showCachedCompare() async {
+    final cache = ref.read(compareCacheProvider);
+    if (cache == null || !mounted) return;
+    await showCompareSheet(
+      context,
+      data: cache.data,
+      onRerun: () => _compare(force: true),
+    );
+  }
 
   Future<void> _optimize() async {
     final stops = ref.read(stopsProvider);
@@ -98,6 +134,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.read(routeOrderProvider.notifier).state = null;
     ref.read(orderedStopsProvider.notifier).state = null;
     ref.read(solverLabelProvider.notifier).state = null;
+    _invalidateResultCaches();
     setState(() {
       _error = null;
       _totalDistanceM = null;
@@ -108,9 +145,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     });
   }
 
-  Future<void> _benchmark() async {
+  Future<void> _benchmark({bool force = false}) async {
     final stops = ref.read(stopsProvider);
     if (stops.length < 2) return;
+
+    final fingerprint = _routeFingerprint();
+    final cache = ref.read(benchmarkCacheProvider);
+
+    if (!force && cache != null && cache.matches(fingerprint)) {
+      await _showCachedBenchmark();
+      return;
+    }
 
     setState(() {
       _benchmarkLoading = true;
@@ -134,8 +179,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             roundTrip: ref.read(roundTripProvider),
             mode: ref.read(transportModeProvider),
           );
+      ref.read(benchmarkCacheProvider.notifier).state = BenchmarkCacheEntry(
+        data: result,
+        fingerprint: fingerprint,
+      );
       if (mounted) {
-        await showBenchmarkSheet(context, data: result);
+        await showBenchmarkSheet(
+          context,
+          data: result,
+          onRerun: () => _benchmark(force: true),
+        );
       }
     } catch (error) {
       setState(() => _error = formatApiError(error));
@@ -144,9 +197,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
   }
 
-  Future<void> _compare() async {
+  Future<void> _compare({bool force = false}) async {
     final stops = ref.read(stopsProvider);
     if (stops.length < 2) return;
+
+    final fingerprint = _routeFingerprint();
+    final cache = ref.read(compareCacheProvider);
+
+    if (!force && cache != null && cache.matches(fingerprint)) {
+      await _showCachedCompare();
+      return;
+    }
 
     setState(() {
       _compareLoading = true;
@@ -159,8 +220,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             roundTrip: ref.read(roundTripProvider),
             mode: ref.read(transportModeProvider),
           );
+      ref.read(compareCacheProvider.notifier).state = CompareCacheEntry(
+        data: result,
+        fingerprint: fingerprint,
+      );
       if (mounted) {
-        await showCompareSheet(context, data: result);
+        await showCompareSheet(
+          context,
+          data: result,
+          onRerun: () => _compare(force: true),
+        );
       }
     } catch (error) {
       setState(() => _error = formatApiError(error));
@@ -173,6 +242,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.read(roundTripProvider.notifier).state = value;
     ref.read(routeOrderProvider.notifier).state = null;
     ref.read(orderedStopsProvider.notifier).state = null;
+    _invalidateResultCaches();
     setState(() {
       _totalDistanceM = null;
       _totalDurationS = null;
@@ -184,8 +254,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<List<StopDto>>(stopsProvider, (previous, next) {
+      if (previous == null) return;
+      if (previous.length != next.length) {
+        _invalidateResultCaches();
+        return;
+      }
+      for (var i = 0; i < previous.length; i++) {
+        if (previous[i].lat != next[i].lat ||
+            previous[i].lng != next[i].lng) {
+          _invalidateResultCaches();
+          return;
+        }
+      }
+    });
+
     ref.listen<String>(transportModeProvider, (previous, next) {
       if (previous == null || previous == next) return;
+      _invalidateResultCaches();
       final ordered = ref.read(orderedStopsProvider);
       final stops = ref.read(stopsProvider);
       if (ordered != null && stops.length >= 2) {
@@ -222,6 +308,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final selectedSolver = findSolverOption(solverGroups, selectedSolverId);
     final availableModes =
         selectedSolver?.supportedModes ?? allTransportModeIds;
+    final fingerprint = routeContextFingerprint(
+      stops,
+      mode: mode,
+      roundTrip: roundTrip,
+    );
+    final benchmarkCache = ref.watch(benchmarkCacheProvider);
+    final compareCache = ref.watch(compareCacheProvider);
+    final hasBenchmarkCache =
+        benchmarkCache != null && benchmarkCache.matches(fingerprint);
+    final hasCompareCache =
+        compareCache != null && compareCache.matches(fingerprint);
     final hasRoute = orderedStops != null &&
         _totalDistanceM != null &&
         _totalDurationS != null;
@@ -282,6 +379,35 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           onChanged: _onRoundTripChanged,
                         ),
                       ),
+                      if (hasBenchmarkCache || hasCompareCache)
+                        SliverPadding(
+                          padding: const EdgeInsets.fromLTRB(12, 0, 12, 4),
+                          sliver: SliverToBoxAdapter(
+                            child: Wrap(
+                              spacing: 8,
+                              runSpacing: 4,
+                              children: [
+                                if (hasBenchmarkCache)
+                                  ActionChip(
+                                    avatar: const Icon(Icons.leaderboard, size: 16),
+                                    label: const Text('View benchmark'),
+                                    onPressed: _benchmarkLoading
+                                        ? null
+                                        : _showCachedBenchmark,
+                                  ),
+                                if (hasCompareCache)
+                                  ActionChip(
+                                    avatar:
+                                        const Icon(Icons.compare_arrows, size: 16),
+                                    label: const Text('View compare'),
+                                    onPressed: _compareLoading
+                                        ? null
+                                        : _showCachedCompare,
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ),
                       if (hasRoute)
                         SliverToBoxAdapter(
                           child: RouteSequencePanel(
@@ -338,7 +464,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                           ),
                                         )
                                       : const Icon(Icons.compare_arrows, size: 18),
-                                  label: const Text('Compare'),
+                                  label: Text(
+                                    hasCompareCache ? 'View compare' : 'Compare',
+                                  ),
                                 ),
                               ),
                               const SizedBox(width: 8),
@@ -361,7 +489,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   label: Text(
                                     _benchmarkLoading
                                         ? 'Benchmarking…'
-                                        : 'Benchmark',
+                                        : hasBenchmarkCache
+                                            ? 'View benchmark'
+                                            : 'Benchmark',
                                   ),
                                 ),
                               ),

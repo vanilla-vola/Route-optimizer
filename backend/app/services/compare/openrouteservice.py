@@ -5,7 +5,6 @@ from __future__ import annotations
 import httpx
 
 from app.config import Settings
-from app.services.algorithms.metrics import leg_totals
 from app.services.compare.base import CompareInput, CompareOutput, ProviderMeta
 
 META = ProviderMeta(
@@ -111,19 +110,8 @@ async def compare(data: CompareInput, settings: Settings) -> CompareOutput:
             )
         order.append(stop_index)
     duration_s = int(route.get("duration", 0))
-    # ORS/VROOM only returns route distance when geometry is requested; otherwise 0.
+    # Distance/duration in the API response are replaced by the shared matrix in runner.
     distance_m = int(route.get("distance") or 0)
-    if distance_m <= 0:
-        step_distance = sum(int(step.get("distance") or 0) for step in steps)
-        if step_distance > 0:
-            distance_m = step_distance
-        elif len(order) >= 2:
-            distance_m, _ = leg_totals(
-                order,
-                data.distance_matrix,
-                data.duration_matrix,
-                round_trip=data.round_trip,
-            )
 
     return CompareOutput(
         provider_id=META.id,
@@ -132,5 +120,5 @@ async def compare(data: CompareInput, settings: Settings) -> CompareOutput:
         order=order,
         total_duration_s=duration_s,
         total_distance_m=distance_m,
-        message="OpenRouteService VROOM optimizer on OpenStreetMap.",
+        message="Visit order from OpenRouteService VROOM (OSM, no live traffic).",
     )

@@ -96,7 +96,7 @@ async def compare_routes_endpoint(
         )
 
     try:
-        results, profile_source = await compare_routes(
+        results, profile_source, metrics_note = await compare_routes(
             request.stops,
             settings=settings,
             mode=request.mode,
@@ -134,6 +134,7 @@ async def compare_routes_endpoint(
         mode=request.mode,
         round_trip=request.round_trip,
         profile_source=profile_source,
+        metrics_note=metrics_note,
         results=items,
     )
 

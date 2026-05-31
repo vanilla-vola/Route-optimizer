@@ -79,6 +79,7 @@ export interface CompareResponse {
   mode: string;
   round_trip: boolean;
   profile_source: string;
+  metrics_note?: string;
   results: CompareResultItem[];
 }
 

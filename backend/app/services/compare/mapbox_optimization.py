@@ -103,5 +103,5 @@ async def compare(data: CompareInput, settings: Settings) -> CompareOutput:
         order=order,
         total_duration_s=int(trip.get("duration", 0)),
         total_distance_m=int(trip.get("distance", 0)),
-        message="Mapbox native TSP optimizer on its own road/traffic model.",
+        message="Visit order from Mapbox Optimization API.",
     )

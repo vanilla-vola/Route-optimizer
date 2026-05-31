@@ -112,6 +112,7 @@ class CompareResponse(BaseModel):
     mode: str
     round_trip: bool
     profile_source: str
+    metrics_note: str = ""
     results: list[CompareResultItem]
 
 

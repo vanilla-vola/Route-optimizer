@@ -8,6 +8,7 @@ from typing import Optional
 from app.config import Settings
 from app.models.schemas import Stop
 from app.services.compare.base import CompareInput, CompareOutput
+from app.services.compare.metrics import METRICS_NOTE, normalize_to_shared_matrix
 from app.services.compare.registry import run_all_providers, run_provider
 from app.services.coordinates import to_mapbox_coords
 from app.services.matrix import build_matrix
@@ -55,7 +56,7 @@ async def compare_routes(
     start_fixed: bool,
     end_fixed: bool,
     provider_ids: Optional[list[str]] = None,
-) -> tuple[list[CompareOutput], str]:
+) -> tuple[list[CompareOutput], str, str]:
     coords = tuple(to_mapbox_coords([{"lat": s.lat, "lng": s.lng} for s in stops]))
 
     distances, durations = await build_matrix(coords, settings=settings, profile=mode)
@@ -87,5 +88,6 @@ async def compare_routes(
     else:
         results = await run_all_providers(compare_input, settings)
 
+    results = normalize_to_shared_matrix(results, compare_input)
     results = _apply_baseline_pct(results)
-    return results, bundle.profile_source
+    return results, bundle.profile_source, METRICS_NOTE

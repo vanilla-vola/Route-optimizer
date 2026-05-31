@@ -4,6 +4,7 @@ import 'package:latlong2/latlong.dart';
 import '../api/api_client.dart';
 import '../models/solver_models.dart';
 import '../models/models.dart';
+import '../models/result_cache.dart';
 
 final apiClientProvider = Provider<ApiClient>((ref) => ApiClient());
 
@@ -63,3 +64,11 @@ final solverLabelProvider = StateProvider<String?>((ref) => null);
 
 /// When set, [MapPanel] pans to this location (e.g. after search selection).
 final mapFocusProvider = StateProvider<LatLng?>((ref) => null);
+
+/// Last benchmark result for the current route context (survives sheet dismiss).
+final benchmarkCacheProvider =
+    StateProvider<BenchmarkCacheEntry?>((ref) => null);
+
+/// Last compare result for the current route context (survives sheet dismiss).
+final compareCacheProvider =
+    StateProvider<CompareCacheEntry?>((ref) => null);
