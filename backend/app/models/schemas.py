@@ -66,6 +66,7 @@ class AlgorithmInfo(BaseModel):
     paper: str
     year: int
     category: str
+    supported_modes: list[str] = Field(default_factory=list)
 
 
 class CompareProviderInfo(BaseModel):
@@ -74,6 +75,7 @@ class CompareProviderInfo(BaseModel):
     kind: str
     max_stops: Optional[int] = None
     requires_key: str = ""
+    supported_modes: list[str] = Field(default_factory=list)
 
 
 class CompareRequest(BaseModel):

@@ -7,6 +7,11 @@ class AlgorithmInfoDto {
     required this.paper,
     required this.year,
     required this.category,
+    this.supportedModes = const [
+      'driving-traffic',
+      'walking',
+      'cycling',
+    ],
   });
 
   final String id;
@@ -14,6 +19,7 @@ class AlgorithmInfoDto {
   final String paper;
   final int year;
   final String category;
+  final List<String> supportedModes;
 
   factory AlgorithmInfoDto.fromJson(Map<String, dynamic> json) =>
       AlgorithmInfoDto(
@@ -22,6 +28,10 @@ class AlgorithmInfoDto {
         paper: json['paper'] as String,
         year: json['year'] as int,
         category: json['category'] as String,
+        supportedModes: (json['supported_modes'] as List<dynamic>?)
+                ?.map((mode) => mode as String)
+                .toList() ??
+            const ['driving-traffic', 'walking', 'cycling'],
       );
 }
 
@@ -32,6 +42,11 @@ class CompareProviderInfoDto {
     required this.kind,
     this.maxStops,
     this.requiresKey = '',
+    this.supportedModes = const [
+      'driving-traffic',
+      'walking',
+      'cycling',
+    ],
   });
 
   final String id;
@@ -39,6 +54,7 @@ class CompareProviderInfoDto {
   final String kind;
   final int? maxStops;
   final String requiresKey;
+  final List<String> supportedModes;
 
   factory CompareProviderInfoDto.fromJson(Map<String, dynamic> json) =>
       CompareProviderInfoDto(
@@ -47,6 +63,10 @@ class CompareProviderInfoDto {
         kind: json['kind'] as String,
         maxStops: json['max_stops'] as int?,
         requiresKey: json['requires_key'] as String? ?? '',
+        supportedModes: (json['supported_modes'] as List<dynamic>?)
+                ?.map((mode) => mode as String)
+                .toList() ??
+            const ['driving-traffic', 'walking', 'cycling'],
       );
 }
 
@@ -57,11 +77,13 @@ class SolverOption {
     required this.id,
     required this.label,
     required this.kind,
+    required this.supportedModes,
   });
 
   final String id;
   final String label;
   final SolverKind kind;
+  final List<String> supportedModes;
 }
 
 class SolverGroup {
@@ -75,6 +97,24 @@ class SolverGroup {
 }
 
 const defaultSolverId = 'route-optimizer';
+
+const allTransportModeIds = ['driving-traffic', 'walking', 'cycling'];
+
+List<String> normalizeSupportedModes(List<String>? modes) {
+  if (modes == null || modes.isEmpty) {
+    return allTransportModeIds;
+  }
+  final filtered =
+      modes.where((mode) => allTransportModeIds.contains(mode)).toList();
+  return filtered.isEmpty ? allTransportModeIds : filtered;
+}
+
+String pickSupportedTransportMode(String current, List<String> supportedModes) {
+  if (supportedModes.contains(current)) {
+    return current;
+  }
+  return supportedModes.first;
+}
 
 List<SolverGroup> buildSolverGroups(
   List<CompareProviderInfoDto> providers,
@@ -110,12 +150,14 @@ List<SolverGroup> buildSolverGroups(
         id: ours.id,
         label: ours.label,
         kind: SolverKind.defaultSolver,
+        supportedModes: normalizeSupportedModes(ours.supportedModes),
       ),
     ...compareApps.map(
       (p) => SolverOption(
         id: p.id,
         label: p.label,
         kind: SolverKind.compare,
+        supportedModes: normalizeSupportedModes(p.supportedModes),
       ),
     ),
     ...compareInternal.map(
@@ -123,6 +165,7 @@ List<SolverGroup> buildSolverGroups(
         id: p.id,
         label: p.label,
         kind: SolverKind.compare,
+        supportedModes: normalizeSupportedModes(p.supportedModes),
       ),
     ),
   ];
@@ -133,6 +176,7 @@ List<SolverGroup> buildSolverGroups(
           id: a.id,
           label: a.label,
           kind: SolverKind.research,
+          supportedModes: normalizeSupportedModes(a.supportedModes),
         ),
       )
       .toList();

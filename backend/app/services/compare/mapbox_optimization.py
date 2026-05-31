@@ -18,12 +18,18 @@ META = ProviderMeta(
 
 MAPBOX_OPT_URL = "https://api.mapbox.com/optimized-trips/v1/mapbox"
 MAX_STOPS = 12
+DRIVING_TRAFFIC_OPT_LIMIT = 10
 
 
-def _mapbox_profile(mode: str) -> str:
-    if mode == TransportMode.DRIVING_TRAFFIC.value and MAX_STOPS <= 10:
-        return TransportMode.DRIVING_TRAFFIC.value
-    return TransportMode.DRIVING.value
+def _mapbox_profile(mode: str, *, stop_count: int) -> str:
+    if mode == TransportMode.WALKING.value:
+        return TransportMode.WALKING.value
+    if mode == TransportMode.CYCLING.value:
+        return TransportMode.CYCLING.value
+    # Mapbox driving-traffic optimization supports at most 10 coordinates.
+    if mode == TransportMode.DRIVING.value and stop_count <= DRIVING_TRAFFIC_OPT_LIMIT:
+        return TransportMode.DRIVING.value
+    return "driving"
 
 
 async def compare(data: CompareInput, settings: Settings) -> CompareOutput:
@@ -44,7 +50,7 @@ async def compare(data: CompareInput, settings: Settings) -> CompareOutput:
         )
 
     coord_str = ";".join(f"{lng},{lat}" for lng, lat in data.coords)
-    profile = _mapbox_profile(data.mode)
+    profile = _mapbox_profile(data.mode, stop_count=n)
     params = [
         f"access_token={settings.mapbox_access_token}",
         "overview=false",

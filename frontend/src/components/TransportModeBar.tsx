@@ -4,12 +4,21 @@ import { TRANSPORT_MODES } from "../transportModes";
 interface TransportModeBarProps {
   value: TransportModeId;
   onChange: (mode: TransportModeId) => void;
+  availableModes?: TransportModeId[];
 }
 
-export function TransportModeBar({ value, onChange }: TransportModeBarProps) {
+export function TransportModeBar({
+  value,
+  onChange,
+  availableModes,
+}: TransportModeBarProps) {
+  const modes = availableModes?.length
+    ? TRANSPORT_MODES.filter((mode) => availableModes.includes(mode.id))
+    : TRANSPORT_MODES;
+
   return (
     <div className="mode-bar" role="toolbar" aria-label="Transport mode">
-      {TRANSPORT_MODES.map((mode) => (
+      {modes.map((mode) => (
         <button
           key={mode.id}
           type="button"

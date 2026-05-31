@@ -43,6 +43,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             id: defaultSolverId,
             label: 'Route Optimizer (DCIR-Hybrid)',
             kind: SolverKind.defaultSolver,
+            supportedModes: allTransportModeIds,
           );
       final result = await ref.read(apiClientProvider).runSolver(
             stops,
@@ -115,6 +116,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     ref.listen<String>(selectedSolverProvider, (previous, next) {
       if (previous == null || previous == next) return;
+      final groups = ref.read(solverGroupsProvider).value ?? const [];
+      final solver = findSolverOption(groups, next);
+      if (solver != null) {
+        final current = ref.read(transportModeProvider);
+        final nextMode =
+            pickSupportedTransportMode(current, solver.supportedModes);
+        if (nextMode != current) {
+          ref.read(transportModeProvider.notifier).state = nextMode;
+          return;
+        }
+      }
       final ordered = ref.read(orderedStopsProvider);
       final stops = ref.read(stopsProvider);
       if (ordered != null && stops.length >= 2) {
@@ -126,6 +138,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final roundTrip = ref.watch(roundTripProvider);
     final orderedStops = ref.watch(orderedStopsProvider);
     final mode = ref.watch(transportModeProvider);
+    final selectedSolverId = ref.watch(selectedSolverProvider);
+    final solverGroups = ref.watch(solverGroupsProvider).value ?? const [];
+    final selectedSolver = findSolverOption(solverGroups, selectedSolverId);
+    final availableModes =
+        selectedSolver?.supportedModes ?? allTransportModeIds;
     final hasRoute = orderedStops != null &&
         _totalDistanceM != null &&
         _totalDurationS != null;
@@ -133,9 +150,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Route Optimizer'),
-        bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(52),
-          child: TransportModeBar(),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(52),
+          child: TransportModeBar(availableModeIds: availableModes),
         ),
         actions: const [
           Padding(

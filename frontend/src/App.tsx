@@ -17,11 +17,13 @@ import {
   DEFAULT_SOLVER_ID,
   fetchSolverGroups,
   findSolverOption,
+  pickSupportedTransportMode,
   runSolver,
   type SolverGroup,
 } from "./solvers";
 import type { BenchmarkResponse, CompareResponse, OrderedStop, Stop } from "./types";
 import type { TransportModeId } from "./transportModes";
+import { TRANSPORT_MODES } from "./transportModes";
 
 export default function App() {
   const [stops, setStops] = useState<Stop[]>([]);
@@ -143,12 +145,27 @@ export default function App() {
   };
 
   const onSolverChange = (solverId: string) => {
+    const solver = findSolverOption(solverGroups, solverId);
     const hadResult = orderedStops !== null && summary !== null;
+    const nextMode = solver
+      ? pickSupportedTransportMode(transportMode, solver.supportedModes)
+      : transportMode;
+    const modeChanged = nextMode !== transportMode;
+
     setSelectedSolverId(solverId);
+    if (modeChanged) {
+      setTransportMode(nextMode);
+    }
+
     if (hadResult && stops.length >= 2) {
-      void handleOptimize();
+      void handleOptimize(modeChanged ? nextMode : undefined);
     }
   };
+
+  const selectedSolver = findSolverOption(solverGroups, selectedSolverId);
+  const availableModes =
+    selectedSolver?.supportedModes ??
+    TRANSPORT_MODES.map((mode) => mode.id);
 
   const handleCompare = async () => {
     if (stops.length < 2) return;
@@ -208,7 +225,11 @@ export default function App() {
         />
       </header>
 
-      <TransportModeBar value={transportMode} onChange={onModeChange} />
+      <TransportModeBar
+        value={transportMode}
+        onChange={onModeChange}
+        availableModes={availableModes}
+      />
 
       <main className="layout">
         <section className="map-section">

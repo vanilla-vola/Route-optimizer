@@ -13,8 +13,12 @@ import type {
   OrderedStop,
   Stop,
 } from "./types";
+import type { TransportModeId } from "./transportModes";
+import { TRANSPORT_MODES } from "./transportModes";
 
 export const DEFAULT_SOLVER_ID = "route-optimizer";
+
+export const ALL_TRANSPORT_MODE_IDS = TRANSPORT_MODES.map((mode) => mode.id);
 
 export type SolverKind = "default" | "compare" | "research";
 
@@ -22,11 +26,23 @@ export interface SolverOption {
   id: string;
   label: string;
   kind: SolverKind;
+  supportedModes: TransportModeId[];
 }
 
 export interface SolverGroup {
   label: string;
   options: SolverOption[];
+}
+
+function normalizeSupportedModes(modes: string[] | undefined): TransportModeId[] {
+  if (!modes?.length) {
+    return [...ALL_TRANSPORT_MODE_IDS];
+  }
+  const allowed = new Set(ALL_TRANSPORT_MODE_IDS);
+  const filtered = modes.filter((mode): mode is TransportModeId =>
+    allowed.has(mode as TransportModeId),
+  );
+  return filtered.length > 0 ? filtered : [...ALL_TRANSPORT_MODE_IDS];
 }
 
 export function buildSolverGroups(
@@ -48,13 +64,19 @@ export function buildSolverGroups(
 
   const compareOptions: SolverOption[] = [];
   if (ours) {
-    compareOptions.push({ id: ours.id, label: ours.label, kind: "default" });
+    compareOptions.push({
+      id: ours.id,
+      label: ours.label,
+      kind: "default",
+      supportedModes: normalizeSupportedModes(ours.supported_modes),
+    });
   }
   for (const provider of [...compareApps, ...compareInternal]) {
     compareOptions.push({
       id: provider.id,
       label: provider.label,
       kind: "compare",
+      supportedModes: normalizeSupportedModes(provider.supported_modes),
     });
   }
 
@@ -62,6 +84,7 @@ export function buildSolverGroups(
     id: algorithm.id,
     label: algorithm.label,
     kind: "research",
+    supportedModes: normalizeSupportedModes(algorithm.supported_modes),
   }));
 
   return [
@@ -162,4 +185,14 @@ export function findSolverOption(
     if (match) return match;
   }
   return undefined;
+}
+
+export function pickSupportedTransportMode(
+  current: TransportModeId,
+  supportedModes: TransportModeId[],
+): TransportModeId {
+  if (supportedModes.includes(current)) {
+    return current;
+  }
+  return supportedModes[0] ?? "driving-traffic";
 }

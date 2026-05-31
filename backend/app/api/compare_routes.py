@@ -23,6 +23,10 @@ from app.models.schemas import (
 from app.services.algorithms.benchmark_runner import benchmark_algorithms
 from app.services.algorithms.registry import list_algorithms
 from app.services.compare.registry import list_providers
+from app.services.solver_modes import (
+    supported_modes_for_algorithm,
+    supported_modes_for_provider,
+)
 from app.services.compare.runner import compare_routes
 from app.services.geocoding import is_generic_stop_name
 
@@ -59,6 +63,7 @@ async def list_algorithms_endpoint() -> list[AlgorithmInfo]:
             paper=m.paper,
             year=m.year,
             category=m.category,
+            supported_modes=supported_modes_for_algorithm(m.id),
         )
         for m in list_algorithms()
     ]
@@ -73,6 +78,7 @@ async def list_compare_providers_endpoint() -> list[CompareProviderInfo]:
             kind=m.kind,
             max_stops=m.max_stops,
             requires_key=m.requires_key,
+            supported_modes=supported_modes_for_provider(m.id),
         )
         for m in list_providers()
     ]

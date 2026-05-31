@@ -47,6 +47,7 @@ export interface AlgorithmInfo {
   paper: string;
   year: number;
   category: string;
+  supported_modes?: string[];
 }
 
 export interface CompareProviderInfo {
@@ -55,6 +56,7 @@ export interface CompareProviderInfo {
   kind: string;
   max_stops?: number | null;
   requires_key?: string;
+  supported_modes?: string[];
 }
 
 export interface CompareResultItem {
