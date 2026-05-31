@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { MapContainer, Marker, Polyline, TileLayer, useMapEvents } from "react-leaflet";
+import { useEffect, useMemo } from "react";
+import { MapContainer, Marker, Polyline, TileLayer, useMap, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import type { Stop } from "../types";
 
@@ -18,9 +18,20 @@ interface MapPanelProps {
   /** Set only after optimization — no edges until then. */
   routeOrder: number[] | null;
   onAddStop: (stop: Stop) => void;
+  focus?: { lat: number; lng: number } | null;
 }
 
-function ClickHandler({ onAddStop, nextIndex }: { onAddStop: (stop: Stop) => void; nextIndex: number }) {
+function MapFlyTo({ focus }: { focus?: { lat: number; lng: number } | null }) {
+  const map = useMap();
+  useEffect(() => {
+    if (focus) {
+      map.flyTo([focus.lat, focus.lng], 14, { duration: 0.8 });
+    }
+  }, [focus, map]);
+  return null;
+}
+
+function ClickHandler({ onAddStop }: { onAddStop: (stop: Stop) => void }) {
   useMapEvents({
     click(event) {
       onAddStop({
@@ -33,7 +44,7 @@ function ClickHandler({ onAddStop, nextIndex }: { onAddStop: (stop: Stop) => voi
   return null;
 }
 
-export function MapPanel({ stops, routeOrder, onAddStop }: MapPanelProps) {
+export function MapPanel({ stops, routeOrder, onAddStop, focus }: MapPanelProps) {
   const center: [number, number] = useMemo(() => {
     if (stops.length === 0) return [19.076, 72.8777];
     const lat = stops.reduce((sum, s) => sum + s.lat, 0) / stops.length;
@@ -52,7 +63,8 @@ export function MapPanel({ stops, routeOrder, onAddStop }: MapPanelProps) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <ClickHandler onAddStop={onAddStop} nextIndex={stops.length + 1} />
+      <MapFlyTo focus={focus} />
+      <ClickHandler onAddStop={onAddStop} />
       {stops.map((stop, index) => (
         <Marker key={`${index}-${stop.lat}-${stop.lng}`} position={[stop.lat, stop.lng]} />
       ))}

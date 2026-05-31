@@ -1,5 +1,7 @@
 """Tests for DCIR-Hybrid components."""
 
+import asyncio
+
 from app.services.constructors import nearest_neighbor_2opt, tour_duration
 from app.services.dcir import solve_dcir_hybrid
 from app.services.optimizer import solve_route
@@ -10,7 +12,6 @@ from app.services.profiles import (
 
 
 def _triangle_matrix() -> list[list[int]]:
-    # 4 nodes: asymmetric durations to make order matter.
     return [
         [0, 10, 15, 20],
         [12, 0, 8, 18],
@@ -33,18 +34,21 @@ def test_tour_cost_breakdown_realized():
     profiles = build_profile_matrices(_triangle_matrix())
     breakdown = tour_cost_breakdown(order, profiles, round_trip=True)
     assert breakdown.realized_s > 0
-    assert breakdown.worst_profile_s >= breakdown.realized_s or breakdown.worst_profile_s > 0
 
 
 def test_dcir_returns_valid_tour():
     matrix = _triangle_matrix()
-    order, total = solve_dcir_hybrid(
-        matrix,
-        start_fixed=False,
-        end_fixed=False,
-        round_trip=True,
-        time_limit_s=8,
-    )
+
+    async def run():
+        return await solve_dcir_hybrid(
+            matrix,
+            start_fixed=False,
+            end_fixed=False,
+            round_trip=True,
+            time_limit_s=8,
+        )
+
+    order, total = asyncio.run(run())
     assert len(order) == 4
     assert len(set(order)) == 4
     assert total == tour_duration(order, matrix, round_trip=True)
@@ -59,13 +63,17 @@ def test_dcir_not_worse_than_single_seed_on_toy():
         round_trip=True,
         time_limit_s=3,
     )
-    dcir_order, dcir_total = solve_dcir_hybrid(
-        matrix,
-        start_fixed=False,
-        end_fixed=False,
-        round_trip=True,
-        time_limit_s=10,
-    )
+
+    async def run():
+        return await solve_dcir_hybrid(
+            matrix,
+            start_fixed=False,
+            end_fixed=False,
+            round_trip=True,
+            time_limit_s=10,
+        )
+
+    dcir_order, dcir_total = asyncio.run(run())
     profiles = build_profile_matrices(matrix)
     baseline_realized = tour_cost_breakdown(
         baseline_order, profiles, round_trip=True

@@ -4,6 +4,13 @@ export interface Stop {
   name: string;
 }
 
+export interface PlaceSuggestion {
+  name: string;
+  lat: number;
+  lng: number;
+  subtitle?: string;
+}
+
 export interface OrderedStop {
   sequence: number;
   index: number;
@@ -12,22 +19,15 @@ export interface OrderedStop {
   lng: number;
 }
 
-export interface Leg {
-  from_index: number;
-  to_index: number;
-  distance_m: number;
-  duration_s: number;
-}
-
 export interface OptimizeResponse {
   order: number[];
   ordered_stops: OrderedStop[];
   total_distance_m: number;
   total_duration_s: number;
-  legs: Leg[];
   mode: string;
   round_trip: boolean;
   solver?: string;
+  profile_source?: string | null;
 }
 
 export interface OptimizeRequest {

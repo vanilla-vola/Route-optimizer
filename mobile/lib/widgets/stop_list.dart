@@ -16,7 +16,7 @@ class StopListSliver extends ConsumerWidget {
         child: Padding(
           padding: EdgeInsets.all(16),
           child: Text(
-            'Tap the map to place stops. No route is drawn until you optimize.',
+            'Search above or tap the map to add stops. No route until you optimize.',
             style: TextStyle(color: Colors.black54),
           ),
         ),

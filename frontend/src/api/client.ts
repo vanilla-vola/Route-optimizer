@@ -1,4 +1,4 @@
-import type { OptimizeRequest, OptimizeResponse } from "../types";
+import type { OptimizeRequest, OptimizeResponse, PlaceSuggestion } from "../types";
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? "/api";
 
@@ -29,6 +29,26 @@ export async function optimizeRoute(
   }
 
   return response.json() as Promise<OptimizeResponse>;
+}
+
+export async function searchPlaces(
+  query: string,
+  options?: { limit?: number; signal?: AbortSignal },
+): Promise<PlaceSuggestion[]> {
+  const params = new URLSearchParams({ q: query });
+  if (options?.limit != null) {
+    params.set("limit", String(options.limit));
+  }
+  const response = await fetch(`${API_BASE}/search-places?${params}`, {
+    signal: options?.signal,
+  });
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}));
+    const detail =
+      typeof body.detail === "string" ? body.detail : `Search failed (${response.status})`;
+    throw new Error(detail);
+  }
+  return response.json() as Promise<PlaceSuggestion[]>;
 }
 
 export async function reverseGeocode(lat: number, lng: number): Promise<string> {

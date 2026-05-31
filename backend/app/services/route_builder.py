@@ -1,3 +1,5 @@
+from typing import Optional
+
 from app.models.schemas import Leg, OptimizeResponse, OrderedStop, Stop
 from app.services.geocoding import is_generic_stop_name
 
@@ -11,6 +13,7 @@ def build_optimize_response(
     round_trip: bool,
     mode: str,
     solver: str = "ortools-gls",
+    profile_source: Optional[str] = None,
 ) -> OptimizeResponse:
     legs, total_distance_m, total_duration_s = _summarize_legs(
         order,
@@ -29,6 +32,7 @@ def build_optimize_response(
         mode=mode,
         round_trip=round_trip,
         solver=solver,
+        profile_source=profile_source,
     )
 
 

@@ -4,13 +4,15 @@ DCIR-Hybrid: Departure-Consistent Iterative Re-optimization with Robust Traffic 
 Phases:
   1. Ensemble construction (OR-Tools seeds + classical constructors)
   2. Robust tour selection across traffic profiles
-  3. Departure-consistent drift patching
+  3. Departure-consistent drift patching (+ optional Mapbox leg refresh)
   4. POPMUSIC-style sliding-window GLS patches
 """
 
 from __future__ import annotations
 
 import time
+from dataclasses import dataclass
+from typing import TYPE_CHECKING, Optional
 
 from app.services.constructors import (
     nearest_neighbor_2opt,
@@ -21,10 +23,14 @@ from app.services.optimizer import FirstSolutionStrategy, solve_route, solve_seg
 from app.services.profiles import (
     TourCostBreakdown,
     build_profile_matrices,
+    profile_index_for_elapsed,
     refreshed_leg_costs,
     robust_score,
     tour_cost_breakdown,
 )
+
+if TYPE_CHECKING:
+    from app.config import Settings
 
 _FS = FirstSolutionStrategy
 
@@ -36,7 +42,16 @@ ENSEMBLE_STRATEGIES: tuple[tuple[int, str], ...] = (
 )
 
 
-def solve_dcir_hybrid(
+@dataclass(frozen=True)
+class LegRefreshConfig:
+    coords: tuple[tuple[float, float], ...]
+    settings: Settings
+    profile: str
+    timezone: str
+    max_refreshes_per_iteration: int = 4
+
+
+async def solve_dcir_hybrid(
     duration_matrix: list[list[int]],
     *,
     start_fixed: bool,
@@ -48,21 +63,24 @@ def solve_dcir_hybrid(
     max_dcir_iterations: int = 4,
     popmusic_window: int = 7,
     popmusic_stride: int = 3,
+    leg_refresh: Optional[LegRefreshConfig] = None,
 ) -> tuple[list[int], int]:
     n = len(duration_matrix)
     if n <= 1:
         return list(range(n)), 0
 
-    profiles = profile_matrices or build_profile_matrices(duration_matrix)
+    profiles = _copy_profile_matrices(
+        profile_matrices or build_profile_matrices(duration_matrix)
+    )
+    working_matrix = [row[:] for row in duration_matrix]
     nominal = profiles[min(1, len(profiles) - 1)]
     deadline = time.monotonic() + time_limit_s
 
     def remaining() -> int:
         return max(1, int(deadline - time.monotonic()))
 
-    # --- Phase 1: ensemble construction ---
     pool = _phase1_ensemble(
-        duration_matrix,
+        working_matrix,
         start_fixed=start_fixed,
         end_fixed=end_fixed,
         round_trip=round_trip,
@@ -70,35 +88,30 @@ def solve_dcir_hybrid(
         per_seed_s=max(1, min(2, time_limit_s // 6)),
     )
 
-    # --- Phase 2: robust selection ---
-    best_order, best_breakdown = _phase2_select(
+    best_order, _best_breakdown = _phase2_select(
         pool,
         profiles,
         round_trip=round_trip,
         robust_lambda=robust_lambda,
     )
 
-    # --- Phase 3: departure-consistent re-optimization ---
     if remaining() > 2 and n >= 4:
-        best_order = _phase3_dcir_loop(
+        best_order = await _phase3_dcir_loop(
             best_order,
-            duration_matrix,
+            working_matrix,
             profiles,
             start_fixed=start_fixed,
             end_fixed=end_fixed,
             round_trip=round_trip,
             max_iterations=max_dcir_iterations,
             budget_s=max(2, int(time_limit_s * 0.35)),
-        )
-        best_breakdown = tour_cost_breakdown(
-            best_order, profiles, round_trip=round_trip
+            leg_refresh=leg_refresh,
         )
 
-    # --- Phase 4: POPMUSIC patches ---
     if remaining() > 1 and n >= popmusic_window:
         best_order = _phase4_popmusic(
             best_order,
-            duration_matrix,
+            working_matrix,
             profiles,
             start_fixed=start_fixed,
             end_fixed=end_fixed,
@@ -108,11 +121,14 @@ def solve_dcir_hybrid(
             budget_s=remaining(),
         )
 
-    final_breakdown = tour_cost_breakdown(best_order, profiles, round_trip=round_trip)
-    # Report total on nominal matrix so API legs match sum(total_duration_s).
     nominal_total = tour_duration(best_order, nominal, round_trip=round_trip)
-    _ = final_breakdown  # used for internal optimization; nominal for response consistency
     return best_order, nominal_total
+
+
+def _copy_profile_matrices(
+    matrices: list[list[list[int]]],
+) -> list[list[list[int]]]:
+    return [[row[:] for row in matrix] for matrix in matrices]
 
 
 def _phase1_ensemble(
@@ -199,7 +215,7 @@ def _phase2_select(
     return best_order, best_breakdown
 
 
-def _phase3_dcir_loop(
+async def _phase3_dcir_loop(
     order: list[int],
     duration_matrix: list[list[int]],
     profile_matrices: list[list[list[int]]],
@@ -209,14 +225,35 @@ def _phase3_dcir_loop(
     round_trip: bool,
     max_iterations: int,
     budget_s: int,
+    leg_refresh: Optional[LegRefreshConfig],
 ) -> list[int]:
+    from app.services.matrix_profiles import next_departure_times, parse_depart_hours
+
     current = list(order)
     deadline = time.monotonic() + budget_s
     per_iter_s = max(1, budget_s // max(1, max_iterations))
 
+    depart_times: list[str] = []
+    if leg_refresh:
+        try:
+            hours = parse_depart_hours(leg_refresh.settings.dcir_depart_hours)
+            depart_times = next_departure_times(hours, timezone=leg_refresh.timezone)
+        except Exception:
+            leg_refresh = None
+
     for _ in range(max_iterations):
         if time.monotonic() >= deadline:
             break
+
+        if leg_refresh and depart_times:
+            await _refresh_drifted_legs(
+                current,
+                duration_matrix,
+                profile_matrices,
+                round_trip=round_trip,
+                leg_refresh=leg_refresh,
+                depart_times=depart_times,
+            )
 
         drifts = refreshed_leg_costs(
             current, profile_matrices, round_trip=round_trip
@@ -261,6 +298,60 @@ def _phase3_dcir_loop(
             current = candidate
 
     return current
+
+
+async def _refresh_drifted_legs(
+    order: list[int],
+    duration_matrix: list[list[int]],
+    profile_matrices: list[list[list[int]]],
+    *,
+    round_trip: bool,
+    leg_refresh: LegRefreshConfig,
+    depart_times: list[str],
+) -> None:
+    from app.services.matrix_profiles import apply_leg_refresh_to_matrix, refresh_leg_duration
+
+    if len(order) < 2:
+        return
+
+    path = list(order)
+    if round_trip:
+        path = path + [path[0]]
+
+    elapsed = 0
+    refreshed = 0
+
+    for leg_pos in range(len(path) - 1):
+        if refreshed >= leg_refresh.max_refreshes_per_iteration:
+            break
+
+        a, b = path[leg_pos], path[leg_pos + 1]
+        profile_idx = profile_index_for_elapsed(elapsed)
+        planned = profile_matrices[min(1, len(profile_matrices) - 1)][a][b]
+        profile_cost = profile_matrices[profile_idx][a][b]
+
+        if abs(profile_cost - planned) / max(planned, 1) <= 0.15:
+            elapsed += profile_cost
+            continue
+
+        depart_at = depart_times[min(profile_idx, len(depart_times) - 1)]
+        duration_s = await refresh_leg_duration(
+            leg_refresh.coords[a],
+            leg_refresh.coords[b],
+            settings=leg_refresh.settings,
+            profile=leg_refresh.profile,
+            depart_at=depart_at,
+        )
+        if duration_s is None:
+            elapsed += profile_cost
+            continue
+
+        apply_leg_refresh_to_matrix(duration_matrix, a, b, duration_s)
+        for matrix in profile_matrices:
+            apply_leg_refresh_to_matrix(matrix, a, b, duration_s)
+
+        refreshed += 1
+        elapsed += duration_s
 
 
 def _phase4_popmusic(

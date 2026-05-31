@@ -120,6 +120,93 @@ body {
   overflow-y: auto;
 }
 
+.stop-search {
+  position: relative;
+}
+
+.stop-search-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #334155;
+}
+
+.stop-search-input {
+  width: 100%;
+  font: inherit;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+
+.stop-search-input:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+  border-color: #2563eb;
+}
+
+.stop-search-hint {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+}
+
+.stop-search-error {
+  margin: 0.35rem 0 0;
+  color: #b91c1c;
+  font-size: 0.85rem;
+}
+
+.stop-search-results {
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.25rem);
+  margin: 0;
+  padding: 0.25rem 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.stop-search-results li {
+  margin: 0;
+}
+
+.stop-search-results button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0.55rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.stop-search-results button:hover,
+.stop-search-results button.active {
+  background: #eff6ff;
+}
+
+.stop-search-result-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+.stop-search-result-sub {
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.3;
+}
+
 .stop-list h2 {
   margin: 0 0 0.5rem;
   font-size: 1.1rem;

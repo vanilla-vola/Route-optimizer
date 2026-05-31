@@ -3,6 +3,7 @@ import { checkHealth, optimizeRoute, reverseGeocode } from "./api/client";
 import { MapPanel } from "./components/MapPanel";
 import { RouteSequence } from "./components/RouteSequence";
 import { StopList } from "./components/StopList";
+import { StopSearchBar } from "./components/StopSearchBar";
 import { TransportModeBar } from "./components/TransportModeBar";
 import type { OrderedStop, Stop } from "./types";
 import type { TransportModeId } from "./transportModes";
@@ -11,12 +12,18 @@ export default function App() {
   const [stops, setStops] = useState<Stop[]>([]);
   const [routeOrder, setRouteOrder] = useState<number[] | null>(null);
   const [orderedStops, setOrderedStops] = useState<OrderedStop[] | null>(null);
-  const [summary, setSummary] = useState<{ distance: number; duration: number } | null>(null);
+  const [summary, setSummary] = useState<{
+    distance: number;
+    duration: number;
+    solver?: string;
+    profileSource?: string | null;
+  } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [apiOnline, setApiOnline] = useState<boolean | null>(null);
   const [roundTrip, setRoundTrip] = useState(true);
   const [transportMode, setTransportMode] = useState<TransportModeId>("driving");
+  const [mapFocus, setMapFocus] = useState<{ lat: number; lng: number } | null>(null);
 
   useEffect(() => {
     checkHealth().then(setApiOnline);
@@ -29,10 +36,19 @@ export default function App() {
   };
 
   const addStop = (stop: Stop) => {
+    const hasName = stop.name.trim().length > 0;
     const index = stops.length;
-    setStops((prev) => [...prev, { ...stop, name: "Finding place…" }]);
+    setStops((prev) => [
+      ...prev,
+      { ...stop, name: hasName ? stop.name.trim() : "Finding place…" },
+    ]);
     clearRoute();
     setError(null);
+
+    if (hasName) {
+      setMapFocus({ lat: stop.lat, lng: stop.lng });
+      return;
+    }
 
     reverseGeocode(stop.lat, stop.lng).then((name) => {
       setStops((prev) => {
@@ -75,6 +91,8 @@ export default function App() {
       setSummary({
         distance: result.total_distance_m,
         duration: result.total_duration_s,
+        solver: result.solver,
+        profileSource: result.profile_source,
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Optimization failed");
@@ -99,7 +117,7 @@ export default function App() {
       <header className="header">
         <div>
           <h1>Route Optimizer</h1>
-          <p>Place stops on the map, choose transport, then optimize.</p>
+          <p>Search for stops or click the map, then optimize.</p>
         </div>
         <div className={`status ${apiOnline ? "online" : "offline"}`}>
           API {apiOnline === null ? "checking…" : apiOnline ? "online" : "offline"}
@@ -110,10 +128,16 @@ export default function App() {
 
       <main className="layout">
         <section className="map-section">
-          <MapPanel stops={stops} routeOrder={routeOrder} onAddStop={addStop} />
+          <MapPanel
+            stops={stops}
+            routeOrder={routeOrder}
+            onAddStop={addStop}
+            focus={mapFocus}
+          />
         </section>
 
         <aside className="sidebar">
+          <StopSearchBar onSelectStop={addStop} disabled={apiOnline === false} />
           <StopList stops={stops} onRemove={removeStop} onRename={renameStop} />
 
           <label className="toggle">
@@ -136,6 +160,8 @@ export default function App() {
               totalDurationS={summary.duration}
               mode={transportMode}
               roundTrip={roundTrip}
+              solver={summary.solver}
+              profileSource={summary.profileSource}
             />
           )}
 

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../api/api_client.dart';
 import '../models/models.dart';
@@ -45,3 +46,6 @@ final transportModeProvider = StateProvider<String>((ref) => 'driving');
 final apiOnlineProvider = FutureProvider<bool>((ref) async {
   return ref.read(apiClientProvider).checkHealth();
 });
+
+/// When set, [MapPanel] pans to this location (e.g. after search selection).
+final mapFocusProvider = StateProvider<LatLng?>((ref) => null);

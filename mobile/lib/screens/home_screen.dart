@@ -6,6 +6,7 @@ import '../providers/app_providers.dart';
 import '../widgets/map_panel.dart';
 import '../widgets/route_sequence_panel.dart';
 import '../widgets/stop_list.dart';
+import '../widgets/stop_search_bar.dart';
 import '../widgets/transport_mode_bar.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -141,8 +142,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 Expanded(
                   child: CustomScrollView(
                     slivers: [
+                      const SliverPadding(
+                        padding: EdgeInsets.fromLTRB(16, 10, 16, 8),
+                        sliver: SliverToBoxAdapter(child: StopSearchBar()),
+                      ),
                       SliverPadding(
-                        padding: const EdgeInsets.fromLTRB(16, 10, 16, 4),
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
                         sliver: SliverToBoxAdapter(
                           child: Text(
                             'Selected spots (${stops.length})',

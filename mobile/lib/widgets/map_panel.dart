@@ -35,6 +35,15 @@ class _MapPanelState extends ConsumerState<MapPanel> {
     final stops = ref.watch(stopsProvider);
     final routeOrder = ref.watch(routeOrderProvider);
 
+    ref.listen<LatLng?>(mapFocusProvider, (previous, next) {
+      if (next != null) {
+        _mapController.move(next, 14);
+        Future.microtask(() {
+          ref.read(mapFocusProvider.notifier).state = null;
+        });
+      }
+    });
+
     final center = stops.isEmpty
         ? const LatLng(19.076, 72.8777)
         : LatLng(

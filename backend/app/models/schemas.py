@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel, Field, field_validator
 
 from app.models.transport_modes import TransportMode, normalize_mode
@@ -7,6 +9,13 @@ class Stop(BaseModel):
     lat: float = Field(..., ge=-90, le=90)
     lng: float = Field(..., ge=-180, le=180)
     name: str = Field(default="", max_length=120)
+
+
+class PlaceSuggestion(BaseModel):
+    name: str = Field(..., max_length=120)
+    lat: float = Field(..., ge=-90, le=90)
+    lng: float = Field(..., ge=-180, le=180)
+    subtitle: str = Field(default="", max_length=200)
 
 
 class OptimizeRequest(BaseModel):
@@ -48,3 +57,4 @@ class OptimizeResponse(BaseModel):
     mode: str
     round_trip: bool
     solver: str = "ortools-gls"
+    profile_source: Optional[str] = None

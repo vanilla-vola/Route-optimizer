@@ -1,15 +1,17 @@
+from typing import Optional
+
 from fastapi import APIRouter, Depends, HTTPException
 
 from app.config import Settings, get_settings
 from app.core.exceptions import MatrixError, OptimizationError
-from app.models.schemas import OptimizeRequest, OptimizeResponse
+from app.models.schemas import OptimizeRequest, OptimizeResponse, PlaceSuggestion
 from app.models.transport_modes import TRANSPORT_MODE_CATALOG
 from app.services.coordinates import to_mapbox_coords
 from app.services.matrix import build_matrix
-from app.services.dcir import solve_dcir_hybrid
+from app.services.dcir import LegRefreshConfig, solve_dcir_hybrid
+from app.services.matrix_profiles import build_matrix_bundle
 from app.services.optimizer import solve_route
-from app.services.profiles import build_profile_matrices
-from app.services.geocoding import enrich_stop_names, reverse_geocode
+from app.services.geocoding import enrich_stop_names, reverse_geocode, search_places
 from app.services.route_builder import build_optimize_response
 
 router = APIRouter()
@@ -24,6 +26,16 @@ async def health() -> dict[str, str]:
 async def transport_modes() -> list[dict]:
     """Mapbox-supported matrix profiles exposed to clients."""
     return [mode.model_dump() for mode in TRANSPORT_MODE_CATALOG]
+
+
+@router.get("/search-places", response_model=list[PlaceSuggestion])
+async def search_places_endpoint(
+    q: str,
+    limit: int = 6,
+    settings: Settings = Depends(get_settings),
+) -> list[PlaceSuggestion]:
+    """Search places by name or address (Mapbox, then free Nominatim fallback)."""
+    return await search_places(q, settings=settings, limit=limit)
 
 
 @router.get("/reverse-geocode")
@@ -53,6 +65,7 @@ async def optimize_route(
     )
     profile = request.mode or settings.matrix_profile
 
+    profile_source: Optional[str] = None
     try:
         distances, durations = await build_matrix(
             coords,
@@ -60,15 +73,35 @@ async def optimize_route(
             profile=profile,
         )
         if settings.use_dcir:
-            profiles = build_profile_matrices(durations)
-            order, _ = solve_dcir_hybrid(
+            bundle = await build_matrix_bundle(
+                coords,
+                settings=settings,
+                profile=profile,
+                base_distances=distances,
+                base_durations=durations,
+            )
+            distances = bundle.distances
+            durations = bundle.durations
+            profile_source = bundle.profile_source
+
+            leg_refresh = None
+            if settings.dcir_refresh_legs and settings.mapbox_access_token:
+                leg_refresh = LegRefreshConfig(
+                    coords=tuple(coords),
+                    settings=settings,
+                    profile=profile,
+                    timezone=settings.dcir_timezone,
+                )
+
+            order, _ = await solve_dcir_hybrid(
                 durations,
-                profile_matrices=profiles,
+                profile_matrices=bundle.profile_matrices,
                 start_fixed=request.start_fixed,
                 end_fixed=request.end_fixed,
                 round_trip=request.round_trip,
                 time_limit_s=settings.dcir_time_limit_s,
                 robust_lambda=settings.dcir_robust_lambda,
+                leg_refresh=leg_refresh,
             )
             solver_name = "dcir-hybrid"
         else:
@@ -95,4 +128,5 @@ async def optimize_route(
         round_trip=request.round_trip,
         mode=profile,
         solver=solver_name,
+        profile_source=profile_source if settings.use_dcir else None,
     )

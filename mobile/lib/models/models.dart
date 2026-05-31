@@ -1,3 +1,25 @@
+class PlaceSuggestionDto {
+  const PlaceSuggestionDto({
+    required this.name,
+    required this.lat,
+    required this.lng,
+    this.subtitle = '',
+  });
+
+  final String name;
+  final double lat;
+  final double lng;
+  final String subtitle;
+
+  factory PlaceSuggestionDto.fromJson(Map<String, dynamic> json) =>
+      PlaceSuggestionDto(
+        name: json['name'] as String,
+        lat: (json['lat'] as num).toDouble(),
+        lng: (json['lng'] as num).toDouble(),
+        subtitle: json['subtitle'] as String? ?? '',
+      );
+}
+
 class StopDto {
   const StopDto({
     required this.lat,

@@ -26,6 +26,10 @@ class Settings(BaseSettings):
     use_dcir: bool = True
     dcir_time_limit_s: int = 12
     dcir_robust_lambda: float = 0.3
+    dcir_mapbox_profiles: bool = True
+    dcir_timezone: str = "Asia/Kolkata"
+    dcir_depart_hours: str = "8,13,18"
+    dcir_refresh_legs: bool = False
     host: str = "0.0.0.0"
     port: int = 8000
 

@@ -17,6 +17,21 @@ class ApiClient {
 
   final Dio _dio;
 
+  Future<List<PlaceSuggestionDto>> searchPlaces(
+    String query, {
+    int limit = 6,
+  }) async {
+    final response = await _dio.get<List<dynamic>>(
+      '/search-places',
+      queryParameters: {'q': query, 'limit': limit},
+    );
+    final data = response.data;
+    if (data == null) return const [];
+    return data
+        .map((e) => PlaceSuggestionDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
   Future<String> reverseGeocode(double lat, double lng) async {
     final response = await _dio.get<Map<String, dynamic>>(
       '/reverse-geocode',

@@ -11,7 +11,9 @@ export function StopList({ stops, onRemove, onRename }: StopListProps) {
     <div className="stop-list">
       <h2>Selected spots ({stops.length})</h2>
       {stops.length === 0 ? (
-        <p className="muted">Click the map to place stops. No route line until you optimize.</p>
+        <p className="muted">
+          Search above or click the map to add stops. No route line until you optimize.
+        </p>
       ) : (
         <ul className="spots-list">
           {stops.map((stop, index) => (
