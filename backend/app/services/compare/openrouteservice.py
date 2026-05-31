@@ -5,6 +5,7 @@ from __future__ import annotations
 import httpx
 
 from app.config import Settings
+from app.services.algorithms.metrics import leg_totals
 from app.services.compare.base import CompareInput, CompareOutput, ProviderMeta
 
 META = ProviderMeta(
@@ -39,9 +40,11 @@ async def compare(data: CompareInput, settings: Settings) -> CompareOutput:
 
     coords = data.coords
     start = coords[0]
+    # Job id == stop index so ORS step["job"] maps directly into our stops list.
+    job_id_to_stop = {i: i for i in range(1, len(coords))}
     jobs = [
-        {"id": i + 1, "location": [coords[i][0], coords[i][1]]}
-        for i in range(1, len(coords))
+        {"id": stop_index, "location": [coords[stop_index][0], coords[stop_index][1]]}
+        for stop_index in job_id_to_stop
     ]
 
     vehicle: dict = {
@@ -91,14 +94,36 @@ async def compare(data: CompareInput, settings: Settings) -> CompareOutput:
             message="ORS returned no routes.",
         )
 
-    order: list[int] = []
+    route = routes[0]
+    steps = route.get("steps") or []
+    order: list[int] = [0]
     for step in steps:
-        if step.get("type") == "job":
-            order.append(int(step["job"]))
-    if order and order[0] != 0:
-        order.insert(0, 0)
-    duration_s = int(routes[0].get("duration", 0))
-    distance_m = int(routes[0].get("distance", 0))
+        if step.get("type") != "job":
+            continue
+        job_id = int(step["job"])
+        stop_index = job_id_to_stop.get(job_id)
+        if stop_index is None:
+            return CompareOutput(
+                provider_id=META.id,
+                provider_label=META.label,
+                status="error",
+                message=f"Unexpected ORS job id {job_id} in route response.",
+            )
+        order.append(stop_index)
+    duration_s = int(route.get("duration", 0))
+    # ORS/VROOM only returns route distance when geometry is requested; otherwise 0.
+    distance_m = int(route.get("distance") or 0)
+    if distance_m <= 0:
+        step_distance = sum(int(step.get("distance") or 0) for step in steps)
+        if step_distance > 0:
+            distance_m = step_distance
+        elif len(order) >= 2:
+            distance_m, _ = leg_totals(
+                order,
+                data.distance_matrix,
+                data.duration_matrix,
+                round_trip=data.round_trip,
+            )
 
     return CompareOutput(
         provider_id=META.id,
