@@ -36,6 +36,12 @@ class StopDto {
         'lng': lng,
         'name': name,
       };
+
+  factory StopDto.fromJson(Map<String, dynamic> json) => StopDto(
+        lat: (json['lat'] as num).toDouble(),
+        lng: (json['lng'] as num).toDouble(),
+        name: json['name'] as String? ?? '',
+      );
 }
 
 class OrderedStopDto {
